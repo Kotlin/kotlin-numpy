@@ -1,0 +1,8 @@
+.idea
+*.iml
+.gradle
+.gradletasknamecashe
+build
+out
+target
+.DS_Store

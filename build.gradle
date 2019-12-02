@@ -1,0 +1,149 @@
+import org.gradle.internal.jvm.Jvm
+
+import java.nio.file.Files
+
+/*
+ * Kotlin library
+ */
+
+plugins {
+    // Apply the Kotlin JVM plugin to add support for Kotlin.
+    id 'org.jetbrains.kotlin.jvm' version '1.3.60'
+
+    // Apply the C plugin to add support for JNI.
+    id 'c'
+
+    // Apply the java-library plugin for API and implementation separation.
+    id 'java-library'
+
+    // Fat jar
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+group 'org.jetbrains'
+version '0.1.0'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // Use the Kotlin JDK 8 standard library.
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    // Use the Kotlin test library.
+    testImplementation "org.jetbrains.kotlin:kotlin-test"
+
+    // Use the Kotlin JUnit integration.
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+
+model {
+
+    buildTypes {
+        debug
+        release
+    }
+
+    components {
+
+        def tempFile = Files.createTempFile("pythonPaths", '.txt').toFile()
+        tempFile.deleteOnExit()
+        new ProcessBuilder("python3", 'get_args_for_gradle.py')
+                .directory(file('buildScr/python'))
+                .redirectOutput(tempFile)
+                .start()
+                .waitFor()
+        def paths = tempFile.getText().split(' ')
+        ext.includePythonDir = paths[0]
+        ext.includNumpyDir = paths[1]
+        ext.pathLibPython = paths[2]
+        ext.libPython = paths[3].trim()
+
+        ktnumpy(NativeLibrarySpec) {
+            sources {
+                c {
+                    source {
+                        srcDir "src/main/ktnumpy/jni/source"
+                        include "*.c", "**/*.c"
+                    }
+                    exportedHeaders {
+                        srcDirs "src/main/ktnumpy/jni/include"
+                    }
+                }
+            }
+
+
+            binaries.all {
+                if (buildType == buildTypes.debug) {
+                    cCompiler.args '-g'
+                }
+                cCompiler.args '-O3'
+                cCompiler.args '-fPIC'
+                cCompiler.args '-std=gnu99'
+                cCompiler.args '-I', "${Jvm.current().javaHome}/include"
+
+                // Macos
+                if (targetPlatform.operatingSystem.macOsX) {
+                    cCompiler.args '-I', "${Jvm.current().javaHome}/include/darwin"
+                    cCompiler.args '-I', ext.includePythonDir
+                    cCompiler.args '-I', ext.includNumpyDir
+                    linker.args '-L', ext.pathLibPython
+                } else if (targetPlatform.operatingSystem.linux) { // linux
+                    cCompiler.args '-I', "${Jvm.current().javaHome}/include/linux"
+                    cCompiler.args '-I', ext.includePythonDir
+                    cCompiler.args '-I', ext.includNumpyDir
+                    cCompiler.args '-L', ext.libPython
+                } else { // win
+                    cCompiler.args '-I', "${Jvm.current().javaHome}/include/win32"
+                }
+                linker.args '-l', ext.libPython
+            }
+        }
+    }
+}
+
+
+jar {
+    dependsOn shadowJar
+    enabled = false
+}
+
+shadowJar {
+    classifier = null
+
+    configurations = [project.configurations.compile]
+
+    metaInf {
+        def operationSystem = System.properties['os.name']
+        if (operationSystem == 'Mac OS X') {
+            for (p in file("$buildDir/objs/ktnumpy/shared/release/ktnumpyC/").listFiles()) {
+                from p.absolutePath into 'Native/macos/objs' include "*.o"
+            }
+        } else if (operationSystem == 'Linux') {
+            for (p in file("$buildDir/objs/ktnumpy/shared/release/ktnumpyC/").listFiles()) {
+                from p.absolutePath into 'Native/linux/objs' include "*.o"
+            }
+        } else {
+            for (p in file("$buildDir/objs/ktnumpy/shared/release/ktnumpyC/").listFiles()) {
+                from p.absolutePath into 'Native/win/objs' include "*.o"
+            }
+        }
+    }
+
+    metaInf {
+        from 'buildScr/python' into 'Native/build' include('*.py')
+    }
+}
+
+test {
+    systemProperty "java.library.path", file("${buildDir}/libs/ktnumpy/shared/release").absolutePath
+}
