@@ -1,8 +1,10 @@
-![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)
+[![JetBrains incubator project](https://jb.gg/badges/incubator.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
+[ ![Download](https://api.bintray.com/packages/kotlin/kotlin-numpy/kotlin-numpy/images/download.svg) ](https://bintray.com/kotlin/kotlin-numpy/kotlin-numpy/_latestVersion)
+[![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
 # Kotlin bindings for NumPy
 
-This project is a Kotlin library, which is a statically typed wrapper for the NumPy library.
+This project is a Kotlin library, which is a statically typed wrapper for the [NumPy](https://numpy.org/) library.
 
 ## Features
 
@@ -12,6 +14,30 @@ This project is a Kotlin library, which is a statically typed wrapper for the Nu
 * Python allocates memory for arrays and frees memory when JVM GC collects unnecessary arrays
 * Direct access to array data using DirectBuffer 
     * Increased performance working with array's data compared to python
+    
+## Install
+
+Groovy
+```groovy
+repositories {
+    maven { url "https://kotlin.bintray.com/kotlin-numpy" }
+}
+
+dependencies {
+    implementation 'org.jetbrains:kotlin-numpy:0.1.0'
+}
+```
+
+Kotlin
+```kotlin
+repositories {
+    maven("https://dl.bintray.com/kotlin/kotlin-numpy")
+}
+
+dependencies {
+    implementation("org.jetbrains:kotlin-numpy:0.1.0")
+}
+```
     
 ## Usage
 
