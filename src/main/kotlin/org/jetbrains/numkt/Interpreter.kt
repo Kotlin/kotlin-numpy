@@ -30,7 +30,9 @@ internal class Interpreter private constructor() {
                         field = Interpreter()
                         field!!.initialize()
                     } catch (e: Error) {
-                        field!!.close()
+                        try {
+                            field!!.close()
+                        } catch (ignore: Error) { }
                         throw e
                     }
                 } else if (field!!.error != null) {
@@ -43,19 +45,19 @@ internal class Interpreter private constructor() {
     private var error: Throwable? = null
 
     private fun initialize() {
-        try {
-            loadLibrary("ktnumpy")
-        } catch (e: UnsatisfiedLinkError) {
-            e.printStackTrace() // test
-        }
 
-        initializePython()
+        LibraryLoader.loadLibraries()
+
+        initializePython(
+            LibraryLoader.pythonConf.pythonHome,
+            LibraryLoader.pythonConf.pythonLibPath
+        )
         if (error != null) {
             throw Error(error)
         }
     }
 
-    private external fun initializePython()
+    private external fun initializePython(pythonHome: String, ldLib: String)
 
     fun close() {
         closePython()
