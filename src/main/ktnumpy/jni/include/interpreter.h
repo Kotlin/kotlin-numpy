@@ -10,10 +10,10 @@ extern "C" {
 /*
  * Class:     org_jetbrains_numkt_Interpreter
  * Method:    initializePython
- * Signature: ()V
+ * Signature: (Ljava/lang/String;Ljava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_org_jetbrains_numkt_Interpreter_initializePython
-    (JNIEnv *, jobject);
+    (JNIEnv *, jobject, jstring, jstring);
 
 /*
  * Class:     org_jetbrains_numkt_Interpreter
