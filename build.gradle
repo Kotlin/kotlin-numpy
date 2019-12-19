@@ -16,6 +16,10 @@ plugins {
 
     // Fat jar
     id 'com.github.johnrengelman.shadow' version '5.2.0'
+
+    id 'maven-publish'
+
+    id "com.jfrog.bintray" version "1.8.4"
 }
 
 group 'org.jetbrains'
@@ -151,4 +155,44 @@ shadowJar {
 
 test {
     systemProperty "java.library.path", file("${buildDir}/libs/ktnumpy/shared/release").absolutePath
+}
+
+task sourceJar(type: Jar, dependsOn: classes) {
+    classifier 'sources'
+    from sourceSets.main.allSource
+}
+
+publishing {
+    publications {
+        mavenProject(MavenPublication) {
+            from components.java
+            groupId project.group
+            artifactId "kotlin-numpy"
+            version project.version
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    publications = ['mavenProject']
+    pkg {
+        repo = 'kotlin-numpy'
+        name = 'kotlin-numpy'
+        userOrg = 'kotlin'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/Kotlin/kotlin-numpy'
+        websiteUrl = 'https://github.com/Kotlin/kotlin-numpy'
+        issueTrackerUrl = 'https://github.com/Kotlin/kotlin-numpy/issues'
+
+        githubRepo = 'Kotlin/kotlin-numpy'
+        version {
+            name = project.version
+        }
+    }
 }
