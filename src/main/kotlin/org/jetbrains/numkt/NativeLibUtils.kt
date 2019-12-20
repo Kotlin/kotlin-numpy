@@ -20,7 +20,7 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.nio.file.Files
 
-private const val namePythonScript = "utils"
+private const val pythonScriptName = "utils"
 private const val baseNameNativeLib = "ktnumpy"
 
 enum class OSType {
@@ -31,20 +31,20 @@ data class PythonConf(val osType: OSType, val pythonHome: String, val pythonLibP
 
 object LibraryLoader {
     private val nameNativeLib = System.mapLibraryName(baseNameNativeLib)
-    private val tmpDir: File //= Files.createTempDirectory("nativeKtNumPy").toFile().apply { deleteOnExit() }
+    private val tmpDir: File
     val pythonConf by lazy {
         val osType = getOS()
-        val pythonHome = System.getenv("PYTHONHOME") ?: getPythonEnv(namePythonScript, "get_python_home")
+        val pythonHome = System.getenv("PYTHONHOME") ?: getPythonEnv(pythonScriptName, "get_python_home")
         PythonConf(
             osType = osType,
             pythonHome = pythonHome,
             pythonLibPath = if (osType == OSType.WINDOWS) buildString {
                 append(pythonHome)
                 append('\\')
-                append(getPythonEnv(namePythonScript, "get_pylib"))
+                append(getPythonEnv(pythonScriptName, "get_pylib"))
                 append(".dll")
             } else getPythonEnv(
-                namePythonScript,
+                pythonScriptName,
                 "get_pylib_path"
             )
         )
@@ -55,11 +55,11 @@ object LibraryLoader {
         if (dirScr.exists()) {
             tmpDir = dirScr
         } else {
-            tmpDir = Files.createTempDirectory("nativeKtNumPy").toFile().apply { deleteOnExit() }
+            tmpDir = Files.createTempDirectory("nativeKtNumPy").toFile().apply(File::deleteOnExit)
 
             //extract py script and native lib from jar
             mapOf(
-                "/META-INF/pythonScript/$namePythonScript.py" to "$namePythonScript.py",
+                "/META-INF/pythonScript/$pythonScriptName.py" to "$pythonScriptName.py",
                 "/META-INF/Native/$nameNativeLib" to nameNativeLib
             ).forEach {
                 extractFileFromJar(it.key, it.value)
@@ -100,7 +100,7 @@ object LibraryLoader {
 
     private fun extractFileFromJar(path: String, nameFile: String) {
         this::class.java.getResourceAsStream(path)
-            .use { Files.copy(it, File(tmpDir, nameFile).apply { deleteOnExit() }.toPath()) }
+            .use { Files.copy(it, File(tmpDir, nameFile).apply(File::deleteOnExit).toPath()) }
     }
 
     private fun getPythonEnv(pythonFile: String, methodName: String): String =
