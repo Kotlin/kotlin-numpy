@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     application
-    kotlin("jvm") version "1.3.60"
+    kotlin("jvm") version "1.3.61"
 }
 
 application {
@@ -11,7 +11,7 @@ application {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.jetbrains:kotlin-numpy:0.1.0")
+    implementation("org.jetbrains:kotlin-numpy:0.1.1")
 }
 
 repositories {
