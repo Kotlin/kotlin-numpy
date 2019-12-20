@@ -1,3 +1,4 @@
+import groovy.json.JsonSlurper
 import org.gradle.internal.jvm.Jvm
 
 /*
@@ -77,11 +78,11 @@ model {
             throw new Exception(errStream.join("\n"))
         }
 
-        def paths = process.inputStream.readLines()
-        ext.includePythonDir = paths[0]
-        ext.includeNumpyDir = paths[1]
-        ext.pathLibPython = paths[2]
-        ext.libPython = paths[3]
+        def paths = new JsonSlurper().parseText(process.inputStream.text)
+        ext.includePythonDir = paths.inc_python
+        ext.includeNumpyDir = paths.inc_numpy
+        ext.pathLibPython = paths.libdir
+        ext.libPython = paths.pylib
 
         ktnumpy(NativeLibrarySpec) {
 
