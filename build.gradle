@@ -109,24 +109,25 @@ model {
                 cCompiler.args '-std=gnu99'
                 cCompiler.args '-I', "${Jvm.current().javaHome}/include"
 
-                // Macos
                 if (targetPlatform.operatingSystem.macOsX) {
                     cCompiler.args '-fPIC'
                     cCompiler.args '-I', "${Jvm.current().javaHome}/include/darwin"
                     cCompiler.args '-I', ext.includePythonDir
                     cCompiler.args '-I', ext.includeNumpyDir
                     linker.args '-L', ext.pathLibPython
-                } else if (targetPlatform.operatingSystem.linux) { // linux
+                } else if (targetPlatform.operatingSystem.linux) {
                     cCompiler.args '-fPIC'
                     cCompiler.args '-I', "${Jvm.current().javaHome}/include/linux"
                     cCompiler.args '-I', ext.includePythonDir
                     cCompiler.args '-I', ext.includeNumpyDir
                     linker.args '-L', ext.pathLibPython
-                } else { // win
+                } else if (targetPlatform.operatingSystem.windows) {
                     cCompiler.args '-I', "${Jvm.current().javaHome}/include/win32"
                     cCompiler.args '-I', ext.includePythonDir
                     cCompiler.args '-I', ext.includeNumpyDir
                     linker.args '-L', ext.pathLibPython
+                } else {
+                    throw new Exception("${targetPlatform.operatingSystem} not supported")
                 }
                 linker.args '-l', ext.libPython
             }
@@ -168,7 +169,7 @@ publishing {
         mavenProject(MavenPublication) {
             from components.java
             groupId project.group
-            artifactId "kotlin-numpy"
+            artifactId project.name
             version project.version
 
             artifact sourceJar {
@@ -179,19 +180,19 @@ publishing {
 }
 
 bintray {
-    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    user = project.findProperty('bintrayUser') ?: System.getenv('BINTRAY_USER')
+    key = project.findProperty('bintrayApiKey') ?: System.getenv('BINTRAY_API_KEY')
     publications = ['mavenProject']
     pkg {
-        repo = 'kotlin-numpy'
-        name = 'kotlin-numpy'
+        repo = project.name
+        name = project.name
         userOrg = 'kotlin'
         licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/Kotlin/kotlin-numpy'
-        websiteUrl = 'https://github.com/Kotlin/kotlin-numpy'
-        issueTrackerUrl = 'https://github.com/Kotlin/kotlin-numpy/issues'
+        vcsUrl = "https://github.com/Kotlin/${project.name}"
+        websiteUrl = "https://github.com/Kotlin/${project.name}"
+        issueTrackerUrl = "https://github.com/Kotlin/${project.name}/issues"
 
-        githubRepo = 'Kotlin/kotlin-numpy'
+        githubRepo = "Kotlin/${project.name}"
         version {
             name = project.version
         }
