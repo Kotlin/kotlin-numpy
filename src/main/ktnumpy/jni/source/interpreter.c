@@ -32,6 +32,7 @@ JNIEXPORT void JNICALL Java_org_jetbrains_numkt_Interpreter_initializePython
 {
 
 #ifdef _DLFCN_H
+  // https://github.com/numpy/numpy/issues/13717
   const char *ldlib = (*env)->GetStringUTFChars (env, ldpython_lib, NULL);
   void *dlres = dlopen (ldlib, RTLD_LAZY | RTLD_GLOBAL);
   if (dlres)
