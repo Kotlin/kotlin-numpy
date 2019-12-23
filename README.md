@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.jetbrains:kotlin-numpy:0.1.0'
+    implementation 'org.jetbrains:kotlin-numpy:0.1.1'
 }
 ```
 
@@ -35,7 +35,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains:kotlin-numpy:0.1.0")
+    implementation("org.jetbrains:kotlin-numpy:0.1.1")
 }
 ```
     
@@ -160,9 +160,8 @@ Matrix operations:
 Override assigment operations, 
 act in place to modify an existing array rather than create a new one.
 
->Note: Be careful when importing operations, kotlin extends the operation. E.g. a += b, 
->kotlin generate code a = a + b. To avoid this, explicitly specify imports, or import all:
->org.jetbrains.numkt.math.*
+>Note: Be careful when importing operations, kotlin extends the operation. E.g., if a is var, then with a += b, 
+>kotlin try to generate code a = a + b. To avoid this, explicitly specify imports.
 ```kotlin
     val a = ones<Int>(2, 3)
     val b = Random.random(2, 3)
@@ -508,14 +507,26 @@ for (i in 0..14) {
 
 
 ## Requirements
-To build and run library you need:
+To run library you need:
+* Java >= 8
 * Python >= 3.5
 * NumPy >= 1.7
-* Clang or Gcc
+
+>Note: Make sure you use the correct python environment.
+>This is necessary to use the correct version of Python and NumPy.
+>
+>For the convenience of installing Python, NumPy and setting the environment,
+>it's recommended to use [Anaconda](https://www.anaconda.com/).
 
 
 ## Building
+
+The build you need Gcc or Clang.
+
 This library is built with Gradle. You must first build the native library: run `./gradlew ktnumpyReleaseSharedLibrary`. 
-The library will be in `./build/libs/shared/release`
+The library will be in `./build/libs/ktnumpy/shared/release`. 
+
+Run for debug: `./gradlew ktnumpyDebugSharedLibrary`.
+Accordingly, the library will be in `./build/libs/ktnumpy/shared/debug`.
 
 After building the native library, to run `./gradlew build`
