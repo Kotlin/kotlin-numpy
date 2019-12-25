@@ -28,14 +28,14 @@ inline fun <reified T : Any> empty(vararg shape: Int, order: Order = Order.C): K
 inline fun <reified T : Any> emptyLike(
     prototype: KtNDArray<T>,
     order: Order = Order.K,
-    sudok: Boolean = true,
+    subok: Boolean = true,
     shape: IntArray? = null
 ): KtNDArray<T> =
     callFunc(
         nameMethod = arrayOf("empty_like"),
         args = arrayOf(prototype, T::class.javaObjectType),
         order = order,
-        subok = sudok,
+        subok = subok,
         shape = shape
     )
 
@@ -56,13 +56,13 @@ inline fun <reified T : Any> ones(vararg shape: Int, order: Order = Order.C): Kt
 inline fun <reified T : Any> onesLike(
     prototype: KtNDArray<T>,
     order: Order = Order.K,
-    sudok: Boolean = true,
+    subok: Boolean = true,
     shape: IntArray? = null
 ): KtNDArray<T> =
     callFunc(
         nameMethod = arrayOf("ones_like"), args = arrayOf(prototype, T::class.javaObjectType),
         order = order,
-        subok = sudok,
+        subok = subok,
         shape = shape
     )
 
@@ -74,13 +74,13 @@ inline fun <reified T : Any> zeros(vararg shape: Int, order: Order = Order.C): K
 inline fun <reified T : Any> zerosLike(
     prototype: KtNDArray<T>,
     order: Order = Order.K,
-    sudok: Boolean = true,
+    subok: Boolean = true,
     shape: IntArray? = null
 ): KtNDArray<T> =
     callFunc(
         nameMethod = arrayOf("zeros_like"), args = arrayOf(prototype, T::class.javaObjectType),
         order = order,
-        subok = sudok,
+        subok = subok,
         shape = shape
     )
 
@@ -92,27 +92,27 @@ inline fun <reified T : Any> full(shape: IntArray, fillValue: T, order: Order = 
 inline fun <reified T : Any> fullLike(
     prototype: KtNDArray<T>, fillValue: T,
     order: Order = Order.K,
-    sudok: Boolean = true,
+    subok: Boolean = true,
     shape: IntArray? = null
 ): KtNDArray<T> =
     callFunc(
         nameMethod = arrayOf("full_like"), args = arrayOf(prototype, fillValue, T::class.javaObjectType),
         order = order,
-        subok = sudok,
+        subok = subok,
         shape = shape
     )
 
 inline fun <reified T : Any> array(
     arr: Array<T>,
     order: Order = Order.K,
-    sudok: Boolean = false,
+    subok: Boolean = false,
     ndmin: Int = 0
 ): KtNDArray<T> =
     callFunc(
         nameMethod = arrayOf("array"),
         args = arrayOf(arr, T::class.javaObjectType),
         order = order,
-        subok = sudok,
+        subok = subok,
         ndmin = ndmin
     )
 
@@ -121,14 +121,14 @@ inline fun <reified T : Any> array(
 inline fun <reified T : Any> array(
     arr: List<Any>,
     order: Order = Order.K,
-    sudok: Boolean = false,
+    subok: Boolean = false,
     ndmin: Int = 0
 ): KtNDArray<T> =
     callFunc(
         nameMethod = arrayOf("array"),
         args = arrayOf(arr, T::class.javaObjectType),
         order = order,
-        subok = sudok,
+        subok = subok,
         ndmin = ndmin
     )
 
