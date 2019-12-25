@@ -75,6 +75,7 @@ Kotlin
 ```kotlin
 import org.jetbrains.numkt.core.*
 import org.jetbrains.numkt.math.*
+import org.jetbrains.numkt.*
 
 fun main() {
     val a = arange(15).reshape(3, 5) // KtNDArray<Int>([[ 0,  1,  2,  3,  4],
