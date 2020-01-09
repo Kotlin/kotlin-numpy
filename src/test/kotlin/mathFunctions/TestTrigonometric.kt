@@ -13,7 +13,7 @@ class TestTrigonometric {
     @Test
     fun testSin() {
         val a = array(arrayOf(PI / 2))
-        assertEquals(sin(a)[0], 1.0)
+        assertEquals(sin(a)[0].scalar, 1.0)
 
         val check = array(arrayOf(0.0, 0.49999999999999994, 0.7071067811865475, 0.8660254037844386, 1.0))
         val b = array(arrayOf(0.0, 30.0, 45.0, 60.0, 90.0))
@@ -143,12 +143,12 @@ class TestTrigonometric {
     @Test
     fun testDeg2rad() {
         val a = array(arrayOf(180))
-        assertEquals(deg2rad(a)[0], PI)
+        assertEquals(deg2rad(a)[0].scalar, PI)
     }
 
     @Test
     fun testRad2deg() {
         val a = array(arrayOf(PI / 2))
-        assertEquals(rad2deg(a)[0], 90.0)
+        assertEquals(rad2deg(a)[0].scalar, 90.0)
     }
 }

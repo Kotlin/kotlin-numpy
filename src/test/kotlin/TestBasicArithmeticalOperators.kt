@@ -30,7 +30,7 @@ class TestBasicArithmeticalOperators {
 
         println(c1.dtype)
 
-        assertEquals(38.0, c[2])
+        assertEquals(38.0, c[2].scalar)
 
         println(power(b, 2f))
 
@@ -70,7 +70,7 @@ class TestBasicArithmeticalOperators {
 
         val c = a + b
 
-        assertEquals(2.5707963267948966, c[1])
+        assertEquals(2.5707963267948966, c[1].scalar)
         println(c)
         assertEquals(Double::class.javaObjectType, c.dtype)
     }
@@ -95,9 +95,9 @@ class TestBasicArithmeticalOperators {
 
         println(b)
 
-        assertEquals(15, (b.sum(0))[1])
+        assertEquals(15, (b.sum(0))[1].scalar)
 
-        assertEquals(8, (b.min(1))[2])
+        assertEquals(8, (b.min(1))[2].scalar)
 
         println(b.cumSum(axis = 1))
     }
