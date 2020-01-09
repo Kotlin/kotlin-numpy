@@ -321,6 +321,11 @@ PyObject *jlist_AsPyList (JNIEnv *env, jobject jlist, jclass jcl)
 
 PyObject *ktarray_AsPyObject (JNIEnv *env, jobject jobj)
 {
+  jobject scalar = numkt_core_KtNDArray_getScalar (env, jobj);
+  if (scalar)
+    {
+      return jobject_to_pyobject (env, scalar);
+    }
   PyObject *res = (PyObject *) numkt_core_KtNDArray_getPointer (env, jobj);
   Py_XINCREF (res);
   return res;

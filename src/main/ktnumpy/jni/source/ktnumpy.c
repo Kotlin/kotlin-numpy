@@ -421,66 +421,89 @@ PyObject *get_dtype (JNIEnv *env, jclass clazz)
   return PyObject_CallFunctionObjArgs (dtypeFunc, nptype, NULL);
 }
 
-jobject get_value (JNIEnv *env, PyObject *ndarray, jlongArray jlong_array)
+jobject get_value (JNIEnv *env, PyArrayObject *ndarray, jlongArray jlong_array)
 {
   jobject result = NULL;
-  jlong *ind = (*env)->GetLongArrayElements (env, jlong_array, 0);
+  jsize ind_length = (*env)->GetArrayLength (env, jlong_array);
 
-  int t = PyArray_TYPE ((PyArrayObject *) ndarray);
-  switch (t)
+  if (PyArray_NDIM (ndarray) == ind_length)
     {
-  case NPY_BYTE:
-    {
-      npy_int8 b = *(npy_int8 *) PyArray_GetPtr ((PyArrayObject *) ndarray, (const npy_intp *) ind);
-      result = java_lang_Byte_new (env, (jbyte) b);
-      break;
-    }
-  case NPY_SHORT:
-    {
-      npy_int16 s = *(npy_int16 *) PyArray_GetPtr ((PyArrayObject *) ndarray, (const npy_intp *) ind);
-      result = java_lang_Short_new (env, (jshort) s);
-      break;
-    }
-  case NPY_INT:
-    {
-      npy_int32 i = *(npy_int32 *) PyArray_GetPtr ((PyArrayObject *) ndarray, (const npy_intp *) ind);
-      result = java_lang_Integer_new (env, (jint) i);
-      break;
-    }
-  case NPY_LONG:
-    {
-      npy_int64 j = *(npy_int64 *) PyArray_GetPtr ((PyArrayObject *) ndarray, (const npy_intp *) ind);
-      result = java_lang_Long_new (env, (jlong) j);
-      break;
-    }
-  case NPY_FLOAT:
-    {
-      npy_float32 f = *(npy_float32 *) PyArray_GetPtr ((PyArrayObject *) ndarray, (const npy_intp *) ind);
-      result = java_lang_Float_new (env, (jfloat) f);
-      break;
-    }
-  case NPY_DOUBLE:
-    {
-      npy_float64 d = *(npy_float64 *) PyArray_GetPtr ((PyArrayObject *) ndarray, (const npy_intp *) ind);
-      result = java_lang_Double_new (env, (jdouble) d);
-      break;
-    }
-  case NPY_BOOL:
-    {
-      npy_bool z = *(npy_bool *) PyArray_GetPtr ((PyArrayObject *) ndarray, (const npy_intp *) ind);
-      result = java_lang_Boolean_new (env, (jboolean) z);
-      break;
-    }
-  case NPY_UNICODE:
-    {
-      npy_char c = *(npy_char *) PyArray_GetPtr ((PyArrayObject *) ndarray, (const npy_intp *) ind);
-      result = java_lang_Character_new (env, (jchar) c);
-      break;
-    }
-  default: printf ("Get value: Unknown type!\n");
-    }
+      jlong *ind = (*env)->GetLongArrayElements (env, jlong_array, 0);
+      npy_intp *py_ind = PyArray_DIMS (ndarray);
+      for (int i = 0; i < ind_length; ++i)
+        {
+          if (ind[i] < 0 || ind[i] >= py_ind[i])
+            {
+              (*env)->ThrowNew (env, NUMKTEXCEPTION_TYPE, "Index is out of bounds.");
+              return NULL;
+            }
+        }
 
-  (*env)->ReleaseLongArrayElements (env, jlong_array, ind, JNI_ABORT);
+
+      jobject res = NULL;
+      int t = PyArray_TYPE (ndarray);
+      void *tmp = PyArray_GetPtr (ndarray, ind);
+
+      switch (t)
+        {
+      case NPY_BYTE:
+        {
+          res = java_lang_Byte_new (env, *(jbyte *) tmp);
+          break;
+        }
+      case NPY_SHORT:
+        {
+          res = java_lang_Short_new (env, *(jshort *) tmp);
+          break;
+        }
+      case NPY_INT:
+        {
+          res = java_lang_Integer_new (env, *(jint *) tmp);
+          break;
+        }
+      case NPY_LONG:
+        {
+          res = java_lang_Long_new (env, *(jlong *) tmp);
+          break;
+        }
+      case NPY_FLOAT:
+        {
+          res = java_lang_Float_new (env, *(jfloat *) tmp);
+          break;
+        }
+      case NPY_DOUBLE:
+        {
+          res = java_lang_Double_new (env, *(jdouble *) tmp);
+          break;
+        }
+      case NPY_BOOL:
+        {
+          res = java_lang_Boolean_new (env, *(jboolean *) tmp);
+          break;
+        }
+      case NPY_UNICODE:
+        {
+          res = java_lang_Character_new (env, *(jchar *) tmp);
+          break;
+        }
+      default: printf ("Get value: Unknown type!\n");
+        }
+      result = new_ktndarray (env, NULL, res);
+      (*env)->ReleaseLongArrayElements (env, jlong_array, ind, JNI_ABORT);
+    }
+  else
+    {
+      PyObject *py_tuple = jobject_to_pyobject (env, jlong_array);
+      PyObject *py_res = PyObject_GetItem ((PyObject *) ndarray, py_tuple);
+      if (python_exception (env) || py_res == NULL)
+        {
+          Py_XDECREF (py_tuple);
+          return NULL;
+        }
+
+      result = new_ktndarray (env, (PyArrayObject *) py_res, NULL);
+      Py_XDECREF (py_tuple);
+    }
 
   return result;
 }
@@ -516,7 +539,7 @@ jobject get_ndvalue (JNIEnv *env, PyObject *ndarray, jobjectArray jobject_array)
   py_res = PyObject_GetItem (ndarray, py_tuple);
   if (!python_exception (env) && py_res != NULL)
     {
-      result = new_ktndarray (env, (PyArrayObject *) py_res);
+      result = new_ktndarray (env, (PyArrayObject *) py_res, NULL);
     }
 
   Py_XDECREF (py_tuple);
@@ -601,7 +624,7 @@ invoke_call_function
     (JNIEnv *env, jobjectArray arr_names_func, jobjectArray args, jobject kwargs)
 {
   py_Func = NULL;
-  PyArrayObject *nparray = NULL;
+  PyObject *nparray = NULL;
   PyObject *tmpModule = npModule;
   PyObject *name_func = NULL;
   PyObject *name_mod = NULL;
@@ -702,13 +725,20 @@ invoke_call_function
     }
 
   //call func
-  nparray = (PyArrayObject *) PyObject_Call (py_Func, py_args, py_kwargs);
+  nparray = PyObject_Call (py_Func, py_args, py_kwargs);
   if (python_exception (env) || nparray == NULL)
     {
       goto OUT;
     }
 
-  result = new_ktndarray (env, nparray);
+  if (NpyArray_Check (nparray))
+    {
+      result = new_ktndarray (env, (PyArrayObject *) nparray, NULL);
+    }
+  else
+    {
+      result = new_ktndarray (env, NULL, pyobject_to_jobject (env, nparray, OBJECT_TYPE));
+    }
 
   // goto for exit
   OUT:

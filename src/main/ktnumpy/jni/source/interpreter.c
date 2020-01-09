@@ -155,7 +155,7 @@ JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_getField_00024kot
 JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_getValue_00024kotlin_1numpy__J_3J
     (JNIEnv *env, jobject jobj, jlong pointer, jlongArray jlong_array)
 {
-  return get_value (env, (PyObject *) pointer, jlong_array);
+  return get_value (env, (PyArrayObject *) pointer, jlong_array);
 }
 
 /*

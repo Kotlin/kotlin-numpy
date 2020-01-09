@@ -37,7 +37,7 @@ jobject get_jdtype (JNIEnv *, PyArrayObject *);
 
 PyObject *get_dtype (JNIEnv *, jclass);
 
-jobject get_value (JNIEnv *, PyObject *, jlongArray);
+jobject get_value (JNIEnv *, PyArrayObject *, jlongArray);
 jobject get_ndvalue (JNIEnv *, PyObject *, jobjectArray);
 
 void set_value (JNIEnv *, PyObject *, jlongArray, jobject);
