@@ -19,6 +19,15 @@ package org.jetbrains.numkt.core
 import org.jetbrains.numkt.NumKtException
 import java.nio.ByteBuffer
 
+class ArrayIterator<T : Any>(private val ndArray: KtNDArray<T>, private val size: Int) : Iterator<KtNDArray<T>> {
+    private var index = 0
+
+    override fun hasNext(): Boolean = index < size
+
+    override fun next(): KtNDArray<T> =
+        ndArray[index++]
+}
+
 class KtNDArrayIterator<T : Any>(
     private val data: ByteBuffer,
     private val ndim: Int,

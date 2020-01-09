@@ -39,7 +39,7 @@ fun <T : Any> KtNDArray<T>.all(vararg axis: Int): KtNDArray<Boolean> =
  * Using buffer.
  */
 inline fun <T : Any> KtNDArray<T>.all(predicate: (T) -> Boolean): Boolean {
-    for (element in this) if (!predicate(element)) return false
+    for (element in this.flatIter()) if (!predicate(element)) return false
     return true
 }
 
@@ -60,7 +60,7 @@ fun <T : Any> KtNDArray<T>.any(vararg axis: Int): KtNDArray<Boolean> =
 
 /** Returns 'true' if any element satisfy the predicate. */
 inline fun <T : Any> KtNDArray<T>.any(predicate: (T) -> Boolean): Boolean {
-    for (element in this) if (predicate(element)) return true
+    for (element in this.flatIter()) if (predicate(element)) return true
     return false
 }
 
@@ -245,8 +245,8 @@ fun <T : Any> KtNDArray<T>.cumSum(axis: Int? = null): KtNDArray<T> =
 
 /** Return specified diagonals.
  *
- * @param offset of the digonal from the org.jetbrains.numkt.main diagonal. Can be positive or negative.
- * Defaults to org.jetbrains.numkt.main diagonal, offset is 0.
+ * @param offset of the digonal from the main diagonal. Can be positive or negative.
+ * Defaults to main diagonal, offset is 0.
  *
  * @param axis1 to be used as the first axis of the 2D subarrays from which the diagonals should be taken.
  * Defaults to first axis is 0.
