@@ -38,15 +38,7 @@ object LibraryLoader {
         PythonConf(
             osType = osType,
             pythonHome = pythonHome,
-            pythonLibPath = if (osType == OSType.WINDOWS) buildString {
-                append(pythonHome)
-                append('\\')
-                append(getPythonEnv(pythonScriptName, "get_pylib"))
-                append(".dll")
-            } else getPythonEnv(
-                pythonScriptName,
-                "get_pylib_path"
-            )
+            pythonLibPath =  getPythonEnv(pythonScriptName, "get_pylib_path")
         )
     }
 

@@ -1,3 +1,4 @@
+import sys
 from distutils import sysconfig
 
 
@@ -15,7 +16,15 @@ def get_ldlib():
 
 
 def get_pylib_path():
-    return sysconfig.get_config_var('LIBDIR') + '/' + get_ldlib()
+    if sys.platform.startswith("win32"):
+        stdlib = get_python_home() + '\\' + get_pylib() + '.dll'
+    elif sys.platform.startswith('darwin'):
+        stdlib = sysconfig.get_config_var('LIBDIR') + '/lib' + get_pylib() + '.dylib'
+    elif sys.platform.startswith('linux'):
+        stdlib = sysconfig.get_config_var('LIBDIR') + '/lib' + get_pylib() + '.so'
+    else:
+        raise RuntimeError('Unknown platform.')
+    return stdlib
 
 
 def get_python_home():
