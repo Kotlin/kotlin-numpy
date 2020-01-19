@@ -24,7 +24,7 @@ plugins {
 }
 
 group 'org.jetbrains'
-version '0.1.2'
+version project.findProperty('version')
 
 repositories {
     jcenter()
