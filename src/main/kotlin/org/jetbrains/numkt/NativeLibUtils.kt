@@ -31,43 +31,49 @@ data class PythonConf(val osType: OSType, val pythonHome: String, val pythonLibP
 
 object LibraryLoader {
     private val nameNativeLib = System.mapLibraryName(baseNameNativeLib)
-    private val tmpDir: File
+    private val tmpDir: File = Files.createTempDirectory("nativeKtNumPy").toFile().apply(File::deleteOnExit)
     val pythonConf by lazy {
         val osType = getOS()
         val pythonHome = System.getenv("PYTHONHOME") ?: getPythonEnv(pythonScriptName, "get_python_home")
         PythonConf(
             osType = osType,
             pythonHome = pythonHome,
-            pythonLibPath =  getPythonEnv(pythonScriptName, "get_pylib_path")
+            pythonLibPath = getPythonEnv(pythonScriptName, "get_pylib_path")
         )
     }
 
-    init {
-        val dirScr = File("buildScr/python")
-        if (dirScr.exists()) {
-            tmpDir = dirScr
-        } else {
-            tmpDir = Files.createTempDirectory("nativeKtNumPy").toFile().apply(File::deleteOnExit)
-
-            //extract py script and native lib from jar
-            mapOf(
-                "/META-INF/pythonScript/$pythonScriptName.py" to "$pythonScriptName.py",
-                "/META-INF/Native/$nameNativeLib" to nameNativeLib
-            ).forEach {
-                extractFileFromJar(it.key, it.value)
-            }
-        }
-    }
-
     fun loadLibraries() {
-
-        //load python lib
-        if (!File(pythonConf.pythonLibPath).exists()) {
-            throw FileNotFoundException(pythonConf.pythonLibPath)
-        }
-        System.load(pythonConf.pythonLibPath)
+        val locationLib: String
 
         val exceptionMessage = StringBuilder()
+
+        //extract py script from jar
+        extractFileFromJar("/META-INF/pythonScript/$pythonScriptName.py", "$pythonScriptName.py")
+
+        if (pythonConf.osType == OSType.WINDOWS) {
+            //extract dll from jar
+            extractFileFromJar("/META-INF/Native/$nameNativeLib", nameNativeLib)
+
+            //load python lib
+            if (!File(pythonConf.pythonLibPath).exists()) {
+                throw FileNotFoundException(pythonConf.pythonLibPath)
+            }
+            System.load(pythonConf.pythonLibPath)
+
+            locationLib = "${tmpDir.absolutePath}/$nameNativeLib"
+        } else {
+            var pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
+
+            if (pipOut.isEmpty() || "Package(s) not found" in pipOut) {
+                execCommand("python", "-m", "pip", "install", "ktnumpy")
+                pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
+            }
+
+            locationLib = buildString {
+                append(pipOut.substringAfter("Location: ").substringBefore("\n"))
+                append("/ktnumpy/$nameNativeLib")
+            }
+        }
 
         //load ktnumpy from java.library.path
         try {
@@ -81,13 +87,30 @@ object LibraryLoader {
 
         try {
             // load native lib
-            System.load("${tmpDir.absolutePath}/$nameNativeLib")
+            System.load(locationLib)
         } catch (e: UnsatisfiedLinkError) {
             exceptionMessage
                 .append(e.message)
                 .append("\n")
             throw UnsatisfiedLinkError(exceptionMessage.toString())
         }
+    }
+
+    private fun execCommand(vararg commands: String): String {
+        val errStr: String
+        val inStr: String
+        ProcessBuilder(*commands)
+            .start()
+            .apply {
+                waitFor()
+                errStr = errorStream.bufferedReader().readText()
+                inStr = inputStream.bufferedReader().readText()
+            }
+        if (errStr.isNotEmpty()) {
+            throw Exception("\"$errStr\" when executing the command: ${commands.joinToString(" ")}")
+        }
+
+        return inStr
     }
 
     private fun extractFileFromJar(path: String, nameFile: String) {
