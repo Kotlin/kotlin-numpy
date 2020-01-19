@@ -1,0 +1,5 @@
+recursive-include src *.c *.h
+recursive-include buildScr *.py
+include gradle.properties
+include LICENSE
+include README.md

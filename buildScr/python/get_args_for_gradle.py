@@ -1,10 +1,9 @@
 from distutils import sysconfig
-import numpy
 import os
 import sys
 import json
 
-from utils import get_pylib
+from utils import get_pylib, get_numpy_include
 
 if __name__ == '__main__':
     args = {}
@@ -14,11 +13,7 @@ if __name__ == '__main__':
 
     args['inc_python'] = sysconfig.get_python_inc()
 
-    inc_numpy = os.path.join(numpy.__path__[0], 'core', 'include')
-    if os.path.exists(inc_numpy):
-        args['inc_numpy'] = inc_numpy
-    else:
-        raise RuntimeError("numpy include package not found in: {0}".format(inc_numpy))
+    args['inc_numpy'] = get_numpy_include()
 
     if 'win32' not in sys.platform:
         args['libdir'] = sysconfig.get_config_var('LIBDIR')
