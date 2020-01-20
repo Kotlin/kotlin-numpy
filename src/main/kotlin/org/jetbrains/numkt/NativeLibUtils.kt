@@ -31,7 +31,7 @@ data class PythonConf(val osType: OSType, val pythonHome: String, val pythonLibP
 
 object LibraryLoader {
     private val nameNativeLib = System.mapLibraryName(baseNameNativeLib)
-    private val tmpDir: File = Files.createTempDirectory("nativeKtNumPy").toFile().apply(File::deleteOnExit)
+    private val tmpDir: File
     val pythonConf by lazy {
         val osType = getOS()
         val pythonHome = System.getenv("PYTHONHOME") ?: getPythonEnv(pythonScriptName, "get_python_home")
@@ -42,13 +42,22 @@ object LibraryLoader {
         )
     }
 
+    init {
+        val dirScr = File("buildScr/python")
+        if (dirScr.exists()) {
+            tmpDir = dirScr
+        } else {
+            tmpDir = Files.createTempDirectory("nativeKtNumPy").toFile().apply(File::deleteOnExit)
+
+            //extract py script from jar
+            extractFileFromJar("/META-INF/pythonScript/$pythonScriptName.py", "$pythonScriptName.py")
+        }
+    }
+
     fun loadLibraries() {
         val locationLib: String
 
         val exceptionMessage = StringBuilder()
-
-        //extract py script from jar
-        extractFileFromJar("/META-INF/pythonScript/$pythonScriptName.py", "$pythonScriptName.py")
 
         if (pythonConf.osType == OSType.WINDOWS) {
             //extract dll from jar
@@ -106,11 +115,11 @@ object LibraryLoader {
                 errStr = errorStream.bufferedReader().readText()
                 inStr = inputStream.bufferedReader().readText()
             }
-        if (errStr.isNotEmpty()) {
-            throw Exception("\"$errStr\" when executing the command: ${commands.joinToString(" ")}")
+        return when {
+            errStr.isEmpty() -> inStr
+            "WARNING" in errStr -> errStr
+            else -> throw Exception("\"${errStr.trim()}\" when executing the command: ${commands.joinToString(" ")}")
         }
-
-        return inStr
     }
 
     private fun extractFileFromJar(path: String, nameFile: String) {
