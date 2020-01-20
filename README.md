@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.jetbrains:kotlin-numpy:0.1.2'
+    implementation 'org.jetbrains:kotlin-numpy:0.1.3'
 }
 ```
 
@@ -35,7 +35,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains:kotlin-numpy:0.1.2")
+    implementation("org.jetbrains:kotlin-numpy:0.1.3")
 }
 ```
     
