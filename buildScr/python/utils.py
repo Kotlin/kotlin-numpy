@@ -35,14 +35,15 @@ def get_ldlib() -> str:
 
 def get_python_lib_dir() -> str:
     if is_windows():
-        get_python_home()
+        return get_python_home()
     return sysconfig.get_config_var('LIBDIR')
 
 
-def get_python_lib_link() -> str:
+def get_python_lib_link() -> list:
     if is_windows():
-        return ''
-    return '-L{0}'.format(get_python_lib_dir())
+        return []
+    lib_dir = get_python_lib_dir()
+    return ['-Wl,-rpath,{0}'.format(lib_dir), '-L{0}'.format(lib_dir)]
 
 
 def get_pylib_path() -> str:
