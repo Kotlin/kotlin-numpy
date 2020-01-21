@@ -146,6 +146,12 @@ shadowJar {
 
     configurations = [project.configurations.compile]
 
+    manifest.attributes(
+            'Implementation-Title': project.name,
+            'Implementation-Version': version
+    )
+
+
     metaInf {
         from "$buildDir/libs/ktnumpy/shared/release/" into 'Native'
     }
