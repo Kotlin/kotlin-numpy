@@ -7,8 +7,7 @@ import os.path
 from setuptools import setup, Extension, find_packages
 
 from buildScr.python.build_lib import build_ktlib
-from buildScr.python.utils import get_pylib, get_python_lib_link, get_python_lib_dir, get_java_includes, \
-    get_numpy_include
+from buildScr.python.utils import get_pylib, get_python_lib_link, get_java_includes, get_numpy_include
 
 CLASSIFIERS = """\
 Development Status :: 3 - Alpha
@@ -55,8 +54,6 @@ if __name__ == '__main__':
           url='https://github.com/Kotlin/kotlin-numpy',
           license='Apache 2.0',
           packages=find_packages(),
-          # packages=['ktnumpy'],
-          # package_dir={'': 'src/main'},
           classifiers=[_f for _f in CLASSIFIERS.split('\n') if _f],
           platforms=["Windows", "Linux", "Mac OS-X"],
           install_requires=["numpy>=1.15"],
@@ -65,10 +62,8 @@ if __name__ == '__main__':
                   name='ktnumpy',
                   sources=get_src(),
                   libraries=[get_pylib()],
-                  extra_link_args=['-Wl,-rpath,{0}'.format(get_python_lib_dir()), get_python_lib_link()],
-                  include_dirs=get_java_includes() + ['src/main/ktnumpy/jni/include',
-                                                      'src/main/ktnumpy/jni/include/java_classes',
-                                                      get_numpy_include()]
+                  extra_link_args=get_python_lib_link(),
+                  include_dirs=get_java_includes() + ['src/main/ktnumpy/jni/include', get_numpy_include()]
               )
           ],
           cmdclass={
