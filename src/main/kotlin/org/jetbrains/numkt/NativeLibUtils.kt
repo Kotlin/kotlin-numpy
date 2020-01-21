@@ -17,7 +17,6 @@
 package org.jetbrains.numkt
 
 import java.io.File
-import java.io.FileNotFoundException
 import java.nio.file.Files
 
 private const val pythonScriptName = "utils"
@@ -30,6 +29,7 @@ enum class OSType {
 data class PythonConf(val osType: OSType, val pythonHome: String, val pythonLibPath: String)
 
 object LibraryLoader {
+    private val version: String = this::class.java.`package`.implementationVersion
     private val nameNativeLib = System.mapLibraryName(baseNameNativeLib)
     private val tmpDir: File
     val pythonConf by lazy {
@@ -59,26 +59,25 @@ object LibraryLoader {
 
         val exceptionMessage = StringBuilder()
 
-        if (pythonConf.osType == OSType.WINDOWS) {
-            //extract dll from jar
-            extractFileFromJar("/META-INF/Native/$nameNativeLib", nameNativeLib)
+        // pip
+        var pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
 
-            //load python lib
-            if (!File(pythonConf.pythonLibPath).exists()) {
-                throw FileNotFoundException(pythonConf.pythonLibPath)
+        if (pipOut.isEmpty() || "Package(s) not found" in pipOut) {
+            execCommand("python", "-m", "pip", "install", "ktnumpy")
+            pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
+        }
+
+        if (pipOut.substringAfter("Version: ").substringBefore("\n") != version) {
+            execCommand("python", "-m", "pip", "install", "--upgrade", "ktnumpy")
+        }
+
+        locationLib = if (pythonConf.osType == OSType.WINDOWS) {
+            buildString {
+                append(pythonConf.pythonHome)
+                append("\\Lib\\site-packages\\ktnumpy\\$nameNativeLib")
             }
-            System.load(pythonConf.pythonLibPath)
-
-            locationLib = "${tmpDir.absolutePath}/$nameNativeLib"
         } else {
-            var pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
-
-            if (pipOut.isEmpty() || "Package(s) not found" in pipOut) {
-                execCommand("python", "-m", "pip", "install", "ktnumpy")
-                pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
-            }
-
-            locationLib = buildString {
+            buildString {
                 append(pipOut.substringAfter("Location: ").substringBefore("\n"))
                 append("/ktnumpy/$nameNativeLib")
             }
