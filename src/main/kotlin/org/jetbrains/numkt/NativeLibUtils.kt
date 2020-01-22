@@ -29,7 +29,7 @@ enum class OSType {
 data class PythonConf(val osType: OSType, val pythonHome: String, val pythonLibPath: String)
 
 object LibraryLoader {
-    private val version: String = this::class.java.`package`.implementationVersion
+    private var version: String? = null
     private val nameNativeLib = System.mapLibraryName(baseNameNativeLib)
     private val tmpDir: File
     val pythonConf by lazy {
@@ -48,6 +48,7 @@ object LibraryLoader {
             tmpDir = dirScr
         } else {
             tmpDir = Files.createTempDirectory("nativeKtNumPy").toFile().apply(File::deleteOnExit)
+            version = this::class.java.`package`.implementationVersion
 
             //extract py script from jar
             extractFileFromJar("/META-INF/pythonScript/$pythonScriptName.py", "$pythonScriptName.py")
@@ -59,6 +60,16 @@ object LibraryLoader {
 
         val exceptionMessage = StringBuilder()
 
+        //load ktnumpy from java.library.path
+        try {
+            System.loadLibrary(baseNameNativeLib)
+            return
+        } catch (e: UnsatisfiedLinkError) {
+            exceptionMessage
+                .append(e.message)
+                .append("\n")
+        }
+
         // pip
         var pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
 
@@ -67,7 +78,7 @@ object LibraryLoader {
             pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
         }
 
-        if (pipOut.substringAfter("Version: ").substringBefore("\n") != version) {
+        if (version != null && pipOut.substringAfter("Version: ").substringBefore("\n") != version) {
             execCommand("python", "-m", "pip", "install", "--upgrade", "ktnumpy")
         }
 
@@ -81,16 +92,6 @@ object LibraryLoader {
                 append(pipOut.substringAfter("Location: ").substringBefore("\n"))
                 append("/ktnumpy/$nameNativeLib")
             }
-        }
-
-        //load ktnumpy from java.library.path
-        try {
-            System.loadLibrary(baseNameNativeLib)
-            return
-        } catch (e: UnsatisfiedLinkError) {
-            exceptionMessage
-                .append(e.message)
-                .append("\n")
         }
 
         try {
