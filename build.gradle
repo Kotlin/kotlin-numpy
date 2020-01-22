@@ -151,11 +151,6 @@ shadowJar {
             'Implementation-Version': version
     )
 
-
-    metaInf {
-        from "$buildDir/libs/ktnumpy/shared/release/" into 'Native'
-    }
-
     metaInf {
         from 'buildScr/python' into 'pythonScript' include('*.py')
     }
