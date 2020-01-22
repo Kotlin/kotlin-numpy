@@ -694,10 +694,10 @@ invoke_call_function
           PyObject *dtype = jobject_to_pyobject (env, java_util_Map_get (env, kwargs, (*env)->NewStringUTF (env, "dtype")));
           PyDict_SetItemString (py_kwargs, "dtype", dtype);
         }
-      if (java_util_Map_containsKey (env, kwargs, (*env)->NewStringUTF (env, "sudok")))
+      if (java_util_Map_containsKey (env, kwargs, (*env)->NewStringUTF (env, "subok")))
         {
-          PyObject *sudok = jobject_to_pyobject (env, java_util_Map_get (env, kwargs, (*env)->NewStringUTF (env, "sudok")));
-          PyDict_SetItemString (py_kwargs, "sudok", sudok);
+          PyObject *subok = jobject_to_pyobject (env, java_util_Map_get (env, kwargs, (*env)->NewStringUTF (env, "subok")));
+          PyDict_SetItemString (py_kwargs, "subok", subok);
         }
     }
 
@@ -817,10 +817,10 @@ invoke_call_function_with_class
           PyObject *dtype = jobject_to_pyobject (env, java_util_Map_get (env, kwargs, (*env)->NewStringUTF (env, "dtype")));
           PyDict_SetItemString (py_kwargs, "dtype", dtype);
         }
-      if (java_util_Map_containsKey (env, kwargs, (*env)->NewStringUTF (env, "sudok")))
+      if (java_util_Map_containsKey (env, kwargs, (*env)->NewStringUTF (env, "subok")))
         {
-          PyObject *sudok = jobject_to_pyobject (env, java_util_Map_get (env, kwargs, (*env)->NewStringUTF (env, "sudok")));
-          PyDict_SetItemString (py_kwargs, "sudok", sudok);
+          PyObject *subok = jobject_to_pyobject (env, java_util_Map_get (env, kwargs, (*env)->NewStringUTF (env, "subok")));
+          PyDict_SetItemString (py_kwargs, "subok", subok);
         }
     }
 

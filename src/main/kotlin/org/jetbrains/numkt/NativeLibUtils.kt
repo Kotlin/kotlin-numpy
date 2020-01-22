@@ -16,141 +16,126 @@
 
 package org.jetbrains.numkt
 
-import java.io.BufferedReader
 import java.io.File
-import java.io.FileNotFoundException
-import java.io.InputStreamReader
 import java.nio.file.Files
-import java.util.jar.JarFile
+
+private const val pythonScriptName = "utils"
+private const val baseNameNativeLib = "ktnumpy"
 
 enum class OSType {
     MACOS, LINUX, WINDOWS, UNKNOWN
 }
 
-enum class ArchType {
-    X86_64, ARM, UNKNOWN
-}
+data class PythonConf(val osType: OSType, val pythonHome: String, val pythonLibPath: String)
 
-fun loadLibrary(baseName: String) {
-
-    val exception: Throwable
-    try {
-        System.loadLibrary(baseName)
-        return
-    } catch (e: Throwable) {
-        exception = e
+object LibraryLoader {
+    private var version: String? = null
+    private val nameNativeLib = System.mapLibraryName(baseNameNativeLib)
+    private val tmpDir: File
+    val pythonConf by lazy {
+        val osType = getOS()
+        val pythonHome = System.getenv("PYTHONHOME") ?: getPythonEnv(pythonScriptName, "get_python_home")
+        PythonConf(
+            osType = osType,
+            pythonHome = pythonHome,
+            pythonLibPath = getPythonEnv(pythonScriptName, "get_pylib_path")
+        )
     }
 
-    try {
-        load(baseName)
-    } catch (e: Throwable) {
-        e.printStackTrace()
-        exception.printStackTrace()
-    }
-}
+    init {
+        val dirScr = File("buildScr/python")
+        if (dirScr.exists()) {
+            tmpDir = dirScr
+        } else {
+            tmpDir = Files.createTempDirectory("nativeKtNumPy").toFile().apply(File::deleteOnExit)
+            version = this::class.java.`package`.implementationVersion
 
-fun load(baseName: String) {
-    val libName = System.mapLibraryName(baseName)
-    val osName = getOS()
-
-    val libDest = File(
-        when (osName) {
-            OSType.MACOS -> "/usr/local/lib/$libName"
-            OSType.LINUX -> "/usr/local/lib/$libName"
-            OSType.WINDOWS -> "C:\\System32\\$libName"
-            else -> "unknown"
+            //extract py script from jar
+            extractFileFromJar("/META-INF/pythonScript/$pythonScriptName.py", "$pythonScriptName.py")
         }
-    )
-
-    if (libDest.exists()) {
-        System.load(libDest.absolutePath)
-        return
     }
 
-    val nativeLibraryPath = buildString {
-        append("META-INF/Native/")
-        when (osName) {
-            OSType.MACOS -> append("macos")
-            OSType.LINUX -> append("linux")
-            OSType.WINDOWS -> append("win")
-            else -> {
+    fun loadLibraries() {
+        val locationLib: String
+
+        val exceptionMessage = StringBuilder()
+
+        //load ktnumpy from java.library.path
+        try {
+            System.loadLibrary(baseNameNativeLib)
+            return
+        } catch (e: UnsatisfiedLinkError) {
+            exceptionMessage
+                .append(e.message)
+                .append("\n")
+        }
+
+        // pip
+        var pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
+
+        if (pipOut.isEmpty() || "Package(s) not found" in pipOut) {
+            execCommand("python", "-m", "pip", "install", "ktnumpy")
+            pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
+        }
+
+        if (version != null && pipOut.substringAfter("Version: ").substringBefore("\n") != version) {
+            execCommand("python", "-m", "pip", "install", "--upgrade", "ktnumpy")
+        }
+
+        locationLib = if (pythonConf.osType == OSType.WINDOWS) {
+            buildString {
+                append(pythonConf.pythonHome)
+                append("\\Lib\\site-packages\\ktnumpy\\$nameNativeLib")
+            }
+        } else {
+            buildString {
+                append(pipOut.substringAfter("Location: ").substringBefore("\n"))
+                append("/ktnumpy/$nameNativeLib")
             }
         }
-        append("/objs")
-    }
 
-    if (Interpreter::class.java.getResource("/$nativeLibraryPath") == null) {
-        throw Exception("Error loading native library: $libName, missing objs from $nativeLibraryPath")
-    }
-
-    // create temp dir for uploading objs there
-    // and delete it upon completion work vm
-    val tempNativeFolder = Files.createTempDirectory("nativeKtnumpy").toFile()
-    tempNativeFolder.deleteOnExit()
-
-    // extract objs, script and install lib to PATH
-    extractAndCompl(nativeLibraryPath, tempNativeFolder)
-
-    // load library from PATH
-    System.load(libDest.absolutePath)
-}
-
-
-fun extractAndCompl(nativeLibraryPath: String, tempNativeFolder: File) {
-
-    // extract objs from jar
-    // get jar
-    val jarFile = File(Interpreter::class.java.protectionDomain.codeSource.location.path.replace("%20", " "))
-
-    var pythonTmpScript: File? = null
-    val namePythonScript = "buildKtNumPy.py"
-
-    if (jarFile.isFile) {
-        val jar = JarFile(jarFile)
-        val entries = jar.entries()
-        while (entries.hasMoreElements()) {
-            val element = entries.nextElement()
-
-            if (element.name.contains(namePythonScript)) {
-                if (element.name.substringAfterLast("/") == "")
-                    continue
-                pythonTmpScript = File(tempNativeFolder, namePythonScript)
-                pythonTmpScript.deleteOnExit()
-                Interpreter::class.java.getResourceAsStream("/${element.name}")
-                    .use { `in` -> Files.copy(`in`, pythonTmpScript.toPath()) }
-                continue
-            }
-
-            // get obj or get python script
-            if (element.name.startsWith("$nativeLibraryPath/")) {
-                val nameObj = element.name.substringAfterLast("/")
-                if (nameObj == "")
-                    continue
-
-                // copy obj to tmp folder
-                val nativeTmpObj = File(tempNativeFolder, nameObj)
-                nativeTmpObj.deleteOnExit()
-                Interpreter::class.java.getResourceAsStream("/$nativeLibraryPath/$nameObj")
-                    .use { `in` -> Files.copy(`in`, nativeTmpObj.toPath()) }
-            }
+        try {
+            // load native lib
+            System.load(locationLib)
+        } catch (e: UnsatisfiedLinkError) {
+            exceptionMessage
+                .append(e.message)
+                .append("\n")
+            throw UnsatisfiedLinkError(exceptionMessage.toString())
         }
-        jar.close()
-    } else {
-        throw FileNotFoundException("Not found jar: ${jarFile.absolutePath}")
     }
 
-    // Run python script
-    if (pythonTmpScript == null)
-        throw FileNotFoundException("Python script not found: $namePythonScript")
+    private fun execCommand(vararg commands: String): String {
+        val errStr: String
+        val inStr: String
+        ProcessBuilder(*commands)
+            .start()
+            .apply {
+                waitFor()
+                errStr = errorStream.bufferedReader().readText()
+                inStr = inputStream.bufferedReader().readText()
+            }
+        return when {
+            errStr.isEmpty() -> inStr
+            "WARNING" in errStr -> errStr
+            else -> throw Exception("\"${errStr.trim()}\" when executing the command: ${commands.joinToString(" ")}")
+        }
+    }
 
+    private fun extractFileFromJar(path: String, nameFile: String) {
+        this::class.java.getResourceAsStream(path)
+            .use { Files.copy(it, File(tmpDir, nameFile).apply(File::deleteOnExit).toPath()) }
+    }
 
-    val builder = ProcessBuilder("python3", pythonTmpScript.absolutePath)
-    builder.directory(tempNativeFolder)
-    builder.redirectErrorStream()
-    val p = builder.start().apply { waitFor() }
-    val errorScript = BufferedReader(InputStreamReader(p.errorStream)).readLines()
-    if (errorScript.isNotEmpty())
-        throw Exception(errorScript.joinToString("\n"))
+    private fun getPythonEnv(pythonFile: String, methodName: String): String =
+        ProcessBuilder("python", "-c", "from $pythonFile import $methodName; print($methodName())")
+            .directory(tmpDir)
+            .redirectError(ProcessBuilder.Redirect.INHERIT)
+            .start()
+            .apply { waitFor() }
+            .inputStream
+            .bufferedReader()
+            .readLine()
 }
 
 fun getOS(): OSType {

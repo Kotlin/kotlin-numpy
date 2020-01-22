@@ -16,16 +16,42 @@
 
 #include "ktnumpy_includes.h"
 
+#ifdef __unix__
+#include <dlfcn.h>
+#endif
 
 static PyThreadState *mainThreadState = NULL;
+
 /*
  * Class:     org_jetbrains_numkt_Interpreter
  * Method:    initializePython
- * Signature: ()V
+ * Signature: (Ljava/lang/String;Ljava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_org_jetbrains_numkt_Interpreter_initializePython
-    (JNIEnv *env, jobject jobj)
+    (JNIEnv *env, jobject jobj, jstring pythonHome, jstring ldpython_lib)
 {
+
+#ifdef _DLFCN_H
+  // https://github.com/numpy/numpy/issues/13717
+  const char *ldlib = (*env)->GetStringUTFChars (env, ldpython_lib, NULL);
+  void *dlres = dlopen (ldlib, RTLD_LAZY | RTLD_GLOBAL);
+  if (dlres)
+    {
+      dlclose (dlres);
+    }
+  else
+    {
+      dlerror ();
+      fprintf (stderr, "Error linked ldpython_lib.\n");
+    }
+  (*env)->ReleaseStringUTFChars (env, ldpython_lib, ldlib);
+#endif
+
+  const char *home = (*env)->GetStringUTFChars (env, pythonHome, NULL);
+  wchar_t *PYTHONHOME = Py_DecodeLocale (home, NULL);
+  (*env)->ReleaseStringUTFChars (env, pythonHome, home);
+
+  Py_SetPythonHome (PYTHONHOME);
 
   Py_SetProgramName (L"ktnumpy");
   Py_Initialize ();

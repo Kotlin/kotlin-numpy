@@ -1,6 +1,5 @@
+import groovy.json.JsonSlurper
 import org.gradle.internal.jvm.Jvm
-
-import java.nio.file.Files
 
 /*
  * Kotlin library
@@ -8,7 +7,7 @@ import java.nio.file.Files
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    id 'org.jetbrains.kotlin.jvm' version '1.3.60'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.61'
 
     // Apply the C plugin to add support for JNI.
     id 'c'
@@ -18,10 +17,14 @@ plugins {
 
     // Fat jar
     id 'com.github.johnrengelman.shadow' version '5.2.0'
+
+    id 'maven-publish'
+
+    id "com.jfrog.bintray" version "1.8.4"
 }
 
 group 'org.jetbrains'
-version '0.1.0'
+version project.findProperty('version')
 
 repositories {
     jcenter()
@@ -53,22 +56,38 @@ model {
         release
     }
 
+    platforms {
+        x64 {
+            architecture "x86_64"
+        }
+    }
+
+    toolChains {
+        gcc(Gcc)
+        clang(Clang)
+    }
+
     components {
 
-        def tempFile = Files.createTempFile("pythonPaths", '.txt').toFile()
-        tempFile.deleteOnExit()
-        new ProcessBuilder("python3", 'get_args_for_gradle.py')
+        def process = new ProcessBuilder("python", "get_args_for_gradle.py")
                 .directory(file('buildScr/python'))
-                .redirectOutput(tempFile)
                 .start()
-                .waitFor()
-        def paths = tempFile.getText().split(' ')
-        ext.includePythonDir = paths[0]
-        ext.includNumpyDir = paths[1]
-        ext.pathLibPython = paths[2]
-        ext.libPython = paths[3].trim()
+
+        def errStream = process.errorStream.readLines()
+        if (!errStream.empty) {
+            throw new Exception(errStream.join("\n"))
+        }
+
+        def paths = new JsonSlurper().parseText(process.inputStream.text)
+        ext.includePythonDir = paths.inc_python
+        ext.includeNumpyDir = paths.inc_numpy
+        ext.pathLibPython = paths.libdir
+        ext.libPython = paths.pylib
 
         ktnumpy(NativeLibrarySpec) {
+
+            targetPlatform("x64")
+
             sources {
                 c {
                     source {
@@ -87,23 +106,28 @@ model {
                     cCompiler.args '-g'
                 }
                 cCompiler.args '-O3'
-                cCompiler.args '-fPIC'
                 cCompiler.args '-std=gnu99'
                 cCompiler.args '-I', "${Jvm.current().javaHome}/include"
 
-                // Macos
                 if (targetPlatform.operatingSystem.macOsX) {
+                    cCompiler.args '-fPIC'
                     cCompiler.args '-I', "${Jvm.current().javaHome}/include/darwin"
                     cCompiler.args '-I', ext.includePythonDir
-                    cCompiler.args '-I', ext.includNumpyDir
+                    cCompiler.args '-I', ext.includeNumpyDir
                     linker.args '-L', ext.pathLibPython
-                } else if (targetPlatform.operatingSystem.linux) { // linux
+                } else if (targetPlatform.operatingSystem.linux) {
+                    cCompiler.args '-fPIC'
                     cCompiler.args '-I', "${Jvm.current().javaHome}/include/linux"
                     cCompiler.args '-I', ext.includePythonDir
-                    cCompiler.args '-I', ext.includNumpyDir
-                    cCompiler.args '-L', ext.libPython
-                } else { // win
+                    cCompiler.args '-I', ext.includeNumpyDir
+                    linker.args '-L', ext.pathLibPython
+                } else if (targetPlatform.operatingSystem.windows) {
                     cCompiler.args '-I', "${Jvm.current().javaHome}/include/win32"
+                    cCompiler.args '-I', ext.includePythonDir
+                    cCompiler.args '-I', ext.includeNumpyDir
+                    linker.args '-L', ext.pathLibPython
+                } else {
+                    throw new Exception("${targetPlatform.operatingSystem} not supported")
                 }
                 linker.args '-l', ext.libPython
             }
@@ -122,28 +146,56 @@ shadowJar {
 
     configurations = [project.configurations.compile]
 
-    metaInf {
-        def operationSystem = System.properties['os.name']
-        if (operationSystem == 'Mac OS X') {
-            for (p in file("$buildDir/objs/ktnumpy/shared/release/ktnumpyC/").listFiles()) {
-                from p.absolutePath into 'Native/macos/objs' include "*.o"
-            }
-        } else if (operationSystem == 'Linux') {
-            for (p in file("$buildDir/objs/ktnumpy/shared/release/ktnumpyC/").listFiles()) {
-                from p.absolutePath into 'Native/linux/objs' include "*.o"
-            }
-        } else {
-            for (p in file("$buildDir/objs/ktnumpy/shared/release/ktnumpyC/").listFiles()) {
-                from p.absolutePath into 'Native/win/objs' include "*.o"
-            }
-        }
-    }
+    manifest.attributes(
+            'Implementation-Title': project.name,
+            'Implementation-Version': version
+    )
 
     metaInf {
-        from 'buildScr/python' into 'Native/build' include('*.py')
+        from 'buildScr/python' into 'pythonScript' include('*.py')
     }
 }
 
 test {
     systemProperty "java.library.path", file("${buildDir}/libs/ktnumpy/shared/release").absolutePath
+}
+
+task sourceJar(type: Jar, dependsOn: classes) {
+    classifier 'sources'
+    from sourceSets.main.allSource
+}
+
+publishing {
+    publications {
+        mavenProject(MavenPublication) {
+            from components.java
+            groupId project.group
+            artifactId project.name
+            version project.version
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+}
+
+bintray {
+    user = project.findProperty('bintrayUser') ?: System.getenv('BINTRAY_USER')
+    key = project.findProperty('bintrayApiKey') ?: System.getenv('BINTRAY_API_KEY')
+    publications = ['mavenProject']
+    pkg {
+        repo = project.name
+        name = project.name
+        userOrg = 'kotlin'
+        licenses = ['Apache-2.0']
+        vcsUrl = "https://github.com/Kotlin/${project.name}"
+        websiteUrl = "https://github.com/Kotlin/${project.name}"
+        issueTrackerUrl = "https://github.com/Kotlin/${project.name}/issues"
+
+        githubRepo = "Kotlin/${project.name}"
+        version {
+            name = project.version
+        }
+    }
 }
