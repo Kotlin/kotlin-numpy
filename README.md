@@ -172,14 +172,12 @@ Matrix operations:
     //  [3 4]]
 ```
 
-Augmented assigment operations modify an existing array instead of creating a new one.
+Augmented assigment (or override assigment) operations modify an existing array instead of creating a new one.
 
 >Note: When using augmented assignments, don't forget to import them explicitly (or import the entire package 
->`org.jetbrains.numkt.math.*`. Otherwise, kotlin extends the operation. For example, the line `a += b`, 
+>`org.jetbrains.numkt.math.*`. Otherwise, kotlin tries to extend the operation. For example, the line `a += b`, 
 >is extended to `a = a + b`.
 
->Note: Be careful when importing operations, kotlin extends the operation. E.g., if a is var, then with a += b, 
->kotlin try to generate code a = a + b. To avoid this, explicitly specify imports.
 ```kotlin
     val a = ones<Int>(2, 3)
     val b = Random.random(2, 3)
@@ -541,11 +539,11 @@ for (i in 0..14) {
 ## Requirements
 To build and run the KNumPy library, you will need:
 To run library you need:
-* Java >= 8
-* Python >= 3.5
-* NumPy >= 1.7
+* Java 8 or above
+* Python 3.5 or above
+* NumPy 1.7 or above.
 
->Note: Make sure you use the correct python environment.
+>Note: Make sure you use the correct Python environment.
 >This is necessary to use the correct version of Python and NumPy.
 >
 >For the convenience of installing Python, NumPy and setting the environment,
@@ -554,12 +552,14 @@ To run library you need:
 
 ## Building
 
-The build you need Gcc or Clang.
+To build , you will need Gcc or Clang.
 
-This library is built with Gradle. You must first build the native library: run `./gradlew ktnumpyReleaseSharedLibrary`. 
-The library will be in `./build/libs/ktnumpy/shared/release`. 
+KNumPy uses Gradle for building. 
 
-Run for debug: `./gradlew ktnumpyDebugSharedLibrary`.
-Accordingly, the library will be in `./build/libs/ktnumpy/shared/debug`.
+First, you should build the native library: run `./gradlew ktnumpyReleaseSharedLibrary`. 
+The library will appear in `./build/libs/ktnumpy/shared/release`. 
+
+For the debug version, run: `./gradlew ktnumpyDebugSharedLibrary`.
+Accordingly, the library will appear in `./build/libs/ktnumpy/shared/debug`.
 
 After building the native library, run `./gradlew build`
