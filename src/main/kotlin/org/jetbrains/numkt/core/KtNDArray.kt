@@ -25,16 +25,11 @@ import java.nio.ByteOrder
 
 /**
  */
-class KtNDArray<T : Any> { // private constructor(pointer: Long, dataBuffer: ByteBuffer) {
+class KtNDArray<T : Any> private constructor(private val pointer: Long, dataBuffer: ByteBuffer?, scalar: T?) {
 
     private val interp: Interpreter = Interpreter.interpreter!!
 
-    private var pointer: Long//= pointer
-//        get() = field
-
-    private fun getPointer(): Long = if (isNotScalar()) pointer else throw NumKtException("KtNDArray is scalar.") // ???
-
-    val data: ByteBuffer? //= dataBuffer.order(ByteOrder.nativeOrder())
+    val data: ByteBuffer? = dataBuffer?.order(ByteOrder.nativeOrder())
 
     // IntArray of array dimensions.
     val shape: IntArray
@@ -71,14 +66,10 @@ class KtNDArray<T : Any> { // private constructor(pointer: Long, dataBuffer: Byt
     var base: KtNDArray<*>? = null
         private set
 
-    var scalar: T?
+    var scalar: T? = scalar
         private set
 
-    private constructor(pointer: Long, dataBuffer: ByteBuffer?, scalar: T?) {
-        this.pointer = pointer
-        this.data = dataBuffer?.order(ByteOrder.nativeOrder())
-        this.scalar = scalar
-    }
+    private fun getPointer(): Long = if (isNotScalar()) pointer else throw NumKtException("KtNDArray is scalar.")
 
     fun isScalar(): Boolean = !isNotScalar()
 
@@ -104,7 +95,7 @@ class KtNDArray<T : Any> { // private constructor(pointer: Long, dataBuffer: Byt
     }
 
     fun flatIter(): Iterator<T> {
-        return KtNDArrayIterator(
+        return FlatIterator(
             this.data ?: throw NumKtException("KtNDArray is scalar."),
             this.ndim,
             this.strides,
@@ -120,17 +111,7 @@ class KtNDArray<T : Any> { // private constructor(pointer: Long, dataBuffer: Byt
      * Iteration takes place on the direct buffer indexes obtained from the nditer.
      * This iterator is equivalent to ndarray.flat or nditer with order 'C'.
      */
-//    operator fun iterator(): Iterator<T> {
-//        return KtNDArrayIterator(
-//            this.data ?: throw NumKtException("KtNDArray is scalar."),
-//            this.ndim,
-//            this.strides,
-//            this.itemsize,
-//            this.shape,
-//            this.dtype
-//        )
-//    }
-    operator fun iterator(): Iterator<KtNDArray<T>> = ArrayIterator(this, shape.first())
+    operator fun iterator(): Iterator<KtNDArray<T>> = NDIterator(this, shape.first())
 
     override fun equals(other: Any?): Boolean {
         if (other !is KtNDArray<*>)

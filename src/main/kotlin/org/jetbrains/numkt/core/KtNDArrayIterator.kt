@@ -19,7 +19,7 @@ package org.jetbrains.numkt.core
 import org.jetbrains.numkt.NumKtException
 import java.nio.ByteBuffer
 
-class ArrayIterator<T : Any>(private val ndArray: KtNDArray<T>, private val size: Int) : Iterator<KtNDArray<T>> {
+class NDIterator<T : Any>(private val ndArray: KtNDArray<T>, private val size: Int) : Iterator<KtNDArray<T>> {
     private var index = 0
 
     override fun hasNext(): Boolean = index < size
@@ -28,7 +28,7 @@ class ArrayIterator<T : Any>(private val ndArray: KtNDArray<T>, private val size
         ndArray[index++]
 }
 
-class KtNDArrayIterator<T : Any>(
+class FlatIterator<T : Any>(
     private val data: ByteBuffer,
     private val ndim: Int,
     private val strides: IntArray,
