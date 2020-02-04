@@ -17,6 +17,8 @@
 #include "ktnumpy_includes.h"
 
 static jmethodID newPairID = 0;
+static jmethodID getFirstID = 0;
+static jmethodID getSecondID = 0;
 
 jobject kotlin_Pair_new (JNIEnv *env, jobject f, jobject s)
 {
@@ -25,4 +27,22 @@ jobject kotlin_Pair_new (JNIEnv *env, jobject f, jobject s)
       return NULL;
     }
   return (*env)->NewObject (env, PAIR_TYPE, newPairID, f, s);
+}
+
+jobject kotlin_Pair_getFirst (JNIEnv *env, jobject this)
+{
+  if (!JNI_METHOD (getFirstID, env, PAIR_TYPE, "getFirst", "()Ljava/lang/Object;"))
+    {
+      return NULL;
+    }
+  return (*env)->CallObjectMethod (env, this, getFirstID);
+}
+
+jobject kotlin_Pair_getSecond (JNIEnv *env, jobject this)
+{
+  if (!JNI_METHOD (getSecondID, env, PAIR_TYPE, "getSecond", "()Ljava/lang/Object;"))
+    {
+      return NULL;
+    }
+  return (*env)->CallObjectMethod (env, this, getSecondID);
 }

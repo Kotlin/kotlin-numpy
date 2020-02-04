@@ -321,6 +321,7 @@ jintArray get_shape (JNIEnv *env, PyArrayObject *ndarray)
     }
 
   (*env)->SetIntArrayRegion (env, jArray, 0, size, buf);
+  free (buf);
   return jArray;
 }
 
@@ -386,6 +387,7 @@ jintArray get_strides (JNIEnv *env, PyArrayObject *ndarray)
     }
 
   (*env)->SetIntArrayRegion (env, jArray, 0, size, buf);
+  free (buf);
   return jArray;
 }
 

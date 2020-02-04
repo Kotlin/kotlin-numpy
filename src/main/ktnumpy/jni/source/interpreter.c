@@ -20,7 +20,7 @@
 #include <dlfcn.h>
 #endif
 
-static PyThreadState *mainThreadState = NULL;
+PyThreadState *mainThreadState = NULL;
 
 /*
  * Class:     org_jetbrains_numkt_Interpreter

@@ -7,6 +7,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+extern PyThreadState *mainThreadState;
+
 /*
  * Class:     org_jetbrains_numkt_Interpreter
  * Method:    initializePython
