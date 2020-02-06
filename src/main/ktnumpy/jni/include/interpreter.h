@@ -71,10 +71,10 @@ JNIEXPORT void JNICALL Java_org_jetbrains_numkt_Interpreter_setValue_00024kotlin
 /*
  * Class:     org_jetbrains_numkt_Interpreter
  * Method:    setValue_00024kotlin_numpy
- * Signature: (J[Lorg/jetbrains/numkt/core/Slice;Ljava/lang/Object;)V
+ * Signature: (J[Ljava/lang/Object;Ljava/lang/Object;)V
  */
 JNIEXPORT void JNICALL
-Java_org_jetbrains_numkt_Interpreter_setValue_00024kotlin_1numpy__J_3Lorg_jetbrains_numkt_core_Slice_2Ljava_lang_Object_2
+Java_org_jetbrains_numkt_Interpreter_setValue_00024kotlin_1numpy__J_3Ljava_lang_Object_2Ljava_lang_Object_2
     (JNIEnv *, jobject, jlong, jobjectArray, jobject);
 
 /*

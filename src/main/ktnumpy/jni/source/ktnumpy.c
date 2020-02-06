@@ -577,10 +577,7 @@ void set_value (JNIEnv *env, PyObject *ndarray, jlongArray jlong_array, jobject 
 void set_ndvalue (JNIEnv *env, PyObject *ndarray, jobjectArray jobject_array, jobject element)
 {
   PyObject *py_tuple = NULL;
-  PyObject *py_slice = NULL;
-  PyObject *py_start = NULL;
-  PyObject *py_stop = NULL;
-  PyObject *py_step = NULL;
+  PyObject *py_ind = NULL;
   PyObject *py_val = NULL;
   jsize arr_length = 0;
 
@@ -589,16 +586,13 @@ void set_ndvalue (JNIEnv *env, PyObject *ndarray, jobjectArray jobject_array, jo
 
   for (int i = 0; i < arr_length; ++i)
     {
-      jobject jslice = (*env)->GetObjectArrayElement (env, jobject_array, i);
-      py_start = jobject_to_pyobject (env, numkt_core_Slice_getStart (env, jslice));
-      py_stop = jobject_to_pyobject (env, numkt_core_Slice_getStop (env, jslice));
-      py_step = jobject_to_pyobject (env, numkt_core_Slice_getStep (env, jslice));
+      jobject jindex = (*env)->GetObjectArrayElement (env, jobject_array, i);
 
-      py_slice = PySlice_New (py_start, py_stop, py_step);
+      py_ind = jobject_to_pyobject (env, jindex);
 
-      PyTuple_SetItem (py_tuple, i, py_slice);
+      PyTuple_SetItem (py_tuple, i, py_ind);
 
-      (*env)->DeleteLocalRef (env, jslice);
+      (*env)->DeleteLocalRef (env, jindex);
     }
 
   py_val = jobject_to_pyobject (env, element);
@@ -609,10 +603,7 @@ void set_ndvalue (JNIEnv *env, PyObject *ndarray, jobjectArray jobject_array, jo
     }
 
   Py_XDECREF (py_tuple);
-  Py_XDECREF (py_slice);
-  Py_XDECREF (py_start);
-  Py_XDECREF (py_stop);
-  Py_XDECREF (py_step);
+  Py_XDECREF (py_ind);
 }
 
 jobject

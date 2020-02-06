@@ -17,7 +17,6 @@
 package org.jetbrains.numkt
 
 import org.jetbrains.numkt.core.KtNDArray
-import org.jetbrains.numkt.core.Slice
 import java.nio.Buffer
 
 
@@ -32,7 +31,8 @@ internal class Interpreter private constructor() {
                     } catch (e: Error) {
                         try {
                             field!!.close()
-                        } catch (ignore: Error) { }
+                        } catch (ignore: Error) {
+                        }
                         throw e
                     }
                 } else if (field!!.error != null) {
@@ -84,11 +84,11 @@ internal class Interpreter private constructor() {
 
     internal external fun <T : Any> getValue(pointer: Long, index: LongArray): T
 
-    internal external fun <T: Any> getValue(pointer: Long, indexes: Array<out Any>): KtNDArray<T>
+    internal external fun <T : Any> getValue(pointer: Long, indexes: Array<out Any>): KtNDArray<T>
 
     internal external fun <T : Any> setValue(pointer: Long, index: LongArray, element: T)
 
-    internal external fun <T : Any> setValue(pointer: Long, slices: Array<out Slice>, element: T)
+    internal external fun <T : Any> setValue(pointer: Long, indexes: Array<out Any>, element: T)
 
     internal external fun freeArray(pointer: Long, data: Buffer): Int
 
