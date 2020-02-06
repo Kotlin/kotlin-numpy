@@ -399,23 +399,23 @@ JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_core_KtNDIter_nextC
     (JNIEnv *env, jobject jobj, jlong ptr)
 {
   KtNpyArrayIterObject *this = (KtNpyArrayIterObject *) ptr;
-  jobject ret = NULL;
 
   if (this->iter == NULL || this->iternext == NULL || this->finished)
     {
-      (*env)->ThrowNew (env, NUMKTEXCEPTION_TYPE, "Iterator is null or past the end");
       return NULL;
     }
 
-  ret = Java_org_jetbrains_numkt_core_KtNDIter_valueGet (env, jobj, ptr);
-
-  if (!this->iternext (this->iter))
+  if (this->started)
     {
-      this->started = 1;
-      this->finished = 1;
+      if (!this->iternext (this->iter))
+        {
+          this->finished = 1;
+          return NULL;
+        }
     }
+  this->started = 1;
 
-  return ret;
+  return Java_org_jetbrains_numkt_core_KtNDIter_valueGet (env, jobj, ptr);
 }
 
 /*

@@ -434,13 +434,16 @@ jobject get_value (JNIEnv *env, PyArrayObject *ndarray, jlongArray jlong_array)
       npy_intp *py_ind = PyArray_DIMS (ndarray);
       for (int i = 0; i < ind_length; ++i)
         {
-          if (ind[i] < 0 || ind[i] >= py_ind[i])
+          if (ind[i] < 0)
+            {
+              ind[i] += py_ind[i];
+            }
+          if (ind[i] >= py_ind[i])
             {
               (*env)->ThrowNew (env, NUMKTEXCEPTION_TYPE, "Index is out of bounds.");
               return NULL;
             }
         }
-
 
       jobject res = NULL;
       int t = PyArray_TYPE (ndarray);
@@ -513,10 +516,7 @@ jobject get_value (JNIEnv *env, PyArrayObject *ndarray, jlongArray jlong_array)
 jobject get_ndvalue (JNIEnv *env, PyObject *ndarray, jobjectArray jobject_array)
 {
   PyObject *py_tuple = NULL;
-  PyObject *py_slice = NULL;
-  PyObject *py_start = NULL;
-  PyObject *py_stop = NULL;
-  PyObject *py_step = NULL;
+  PyObject *py_ind = NULL;
   PyObject *py_res = NULL;
   jsize arr_length = 0;
   jobject result = NULL;
@@ -526,16 +526,13 @@ jobject get_ndvalue (JNIEnv *env, PyObject *ndarray, jobjectArray jobject_array)
 
   for (int i = 0; i < arr_length; ++i)
     {
-      jobject jslice = (*env)->GetObjectArrayElement (env, jobject_array, i);
-      py_start = jobject_to_pyobject (env, numkt_core_Slice_getStart (env, jslice));
-      py_stop = jobject_to_pyobject (env, numkt_core_Slice_getStop (env, jslice));
-      py_step = jobject_to_pyobject (env, numkt_core_Slice_getStep (env, jslice));
+      jobject jindex = (*env)->GetObjectArrayElement (env, jobject_array, i);
 
-      py_slice = PySlice_New (py_start, py_stop, py_step);
+      py_ind = jobject_to_pyobject (env, jindex);
 
-      PyTuple_SetItem (py_tuple, i, py_slice);
+      PyTuple_SetItem (py_tuple, i, py_ind);
 
-      (*env)->DeleteLocalRef (env, jslice);
+      (*env)->DeleteLocalRef (env, jindex);
     }
 
   py_res = PyObject_GetItem (ndarray, py_tuple);
@@ -545,10 +542,7 @@ jobject get_ndvalue (JNIEnv *env, PyObject *ndarray, jobjectArray jobject_array)
     }
 
   Py_XDECREF (py_tuple);
-  Py_XDECREF (py_slice);
-  Py_XDECREF (py_start);
-  Py_XDECREF (py_stop);
-  Py_XDECREF (py_step);
+  Py_XDECREF (py_ind);
 
   return result;
 }

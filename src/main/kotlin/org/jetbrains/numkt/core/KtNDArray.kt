@@ -79,13 +79,28 @@ class KtNDArray<T : Any> private constructor(private val pointer: Long, dataBuff
     operator fun get(vararg index: Int): KtNDArray<T> =
         interp.getValue(getPointer(), index.map { it.toLong() }.toLongArray())
 
-    operator fun get(vararg index: Long): T = interp.getValue(getPointer(), index)
+    operator fun get(vararg index: Long): KtNDArray<T> = interp.getValue(getPointer(), index)
 
     operator fun get(vararg slices: Slice): KtNDArray<T> = interp.getValue(getPointer(), slices)
 
     operator fun get(intRange: IntRange): KtNDArray<T> =
         this[intRange.toSlice()]
 
+    //experimental
+    operator fun get(vararg indexes: Any): KtNDArray<T>
+    {
+        return if (indexes.size == 1) {
+            when (val ind = indexes[0]) {
+                is IntArray -> get(*ind)
+                is LongArray -> get(*ind)
+                else -> interp.getValue(getPointer(), indexes)
+            }
+        } else {
+            interp.getValue(getPointer(), indexes)
+        }
+    }
+
+    @JvmName("setVarArg")
     operator fun set(vararg index: Int, element: T) {
         interp.setValue(getPointer(), index.map { it.toLong() }.toLongArray(), element)
     }

@@ -55,10 +55,9 @@ JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_getValue_00024kot
 /*
  * Class:     org_jetbrains_numkt_Interpreter
  * Method:    getValue_00024kotlin_numpy
- * Signature: (J[Lorg/jetbrains/numkt/core/Slice;)Lorg/jetbrains/numkt/core/KtNDArray;
+ * Signature: (J[Ljava/lang/Object;)Lorg/jetbrains/numkt/core/KtNDArray;
  */
-JNIEXPORT jobject JNICALL
-Java_org_jetbrains_numkt_Interpreter_getValue_00024kotlin_1numpy__J_3Lorg_jetbrains_numkt_core_Slice_2
+JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_getValue_00024kotlin_1numpy__J_3Ljava_lang_Object_2
     (JNIEnv *, jobject, jlong, jobjectArray);
 
 /*

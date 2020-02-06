@@ -2,7 +2,7 @@ package org.jetbrains.numkt.core
 
 import org.jetbrains.numkt.Casting
 
-enum class IterFlags {
+enum class IterFlag {
     NPY_ITER_DONT_NEGATE_STRIDES,
     NPY_ITER_REFS_OK, NPY_ITER_ZEROSIZE_OK,
     NPY_ITER_BUFFERED, NPY_ITER_DELAY_BUFALLOC
@@ -10,7 +10,7 @@ enum class IterFlags {
 
 class KtNDIter<T : Any> constructor(
     op: KtNDArray<T>,
-    vararg val flags: IterFlags,
+    vararg val flags: IterFlag,
     private val casting: Casting = Casting.SAFE
 ) : AutoCloseable {
 
@@ -99,7 +99,7 @@ class KtNDIter<T : Any> constructor(
     private external fun dealloc(ptr: Long)
 
     fun next() = nextC(pointer)
-    private external fun nextC(ptr: Long): T
+    private external fun nextC(ptr: Long): T?
 
     override fun close() = iterClose(pointer)
     private external fun iterClose(ptr: Long)
@@ -125,11 +125,14 @@ class KtNDIter<T : Any> constructor(
     private external fun iterReset(ptr: Long): Boolean
 
     operator fun iterator(): Iterator<T> = object : Iterator<T> {
-        override fun hasNext(): Boolean = !finished
+        var ret: T? = null
+        override fun hasNext(): Boolean {
+            ret = nextC(pointer)
+            return ret != null
+        }
 
         override fun next(): T {
-            val v = nextC(pointer)
-            return v
+            return ret!!
         }
     }
 

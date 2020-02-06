@@ -84,7 +84,7 @@ internal class Interpreter private constructor() {
 
     internal external fun <T : Any> getValue(pointer: Long, index: LongArray): T
 
-    internal external fun <T : Any> getValue(pointer: Long, slices: Array<out Slice>): KtNDArray<T>
+    internal external fun <T: Any> getValue(pointer: Long, indexes: Array<out Any>): KtNDArray<T>
 
     internal external fun <T : Any> setValue(pointer: Long, index: LongArray, element: T)
 

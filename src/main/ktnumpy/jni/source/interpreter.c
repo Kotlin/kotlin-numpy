@@ -172,6 +172,17 @@ Java_org_jetbrains_numkt_Interpreter_getValue_00024kotlin_1numpy__J_3Lorg_jetbra
 
 /*
  * Class:     org_jetbrains_numkt_Interpreter
+ * Method:    getValue_00024kotlin_numpy
+ * Signature: (J[Ljava/lang/Object;)Lorg/jetbrains/numkt/core/KtNDArray;
+ */
+JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_getValue_00024kotlin_1numpy__J_3Ljava_lang_Object_2
+    (JNIEnv *env, jobject jobj, jlong pointer, jobjectArray jobject_array)
+{
+  return get_ndvalue (env, (PyObject *) pointer, jobject_array);
+}
+
+/*
+ * Class:     org_jetbrains_numkt_Interpreter
  * Method:    setValue_00024kotlin_numpy
  * Signature: (J[JLjava/lang/Object;)V
  */
