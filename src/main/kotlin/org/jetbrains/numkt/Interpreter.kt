@@ -82,13 +82,19 @@ internal class Interpreter private constructor() {
 
     internal external fun <T : Any> getField(field: String, pointer: Long, jClass: Class<in T>): T
 
-    internal external fun <T : Any> getValue(pointer: Long, index: LongArray): T
+    internal external fun <T : Any> getValue(pointer: Long, index: LongArray): KtNDArray<T>
 
     internal external fun <T : Any> getValue(pointer: Long, indexes: Array<out Any>): KtNDArray<T>
 
     internal external fun <T : Any> setValue(pointer: Long, index: LongArray, element: T)
 
     internal external fun <T : Any> setValue(pointer: Long, indexes: Array<out Any>, element: T)
+
+    internal external fun getIter(pointer: Long): Long
+
+    internal external fun <T : Any> iterNext(ptrIter: Long): KtNDArray<T>
+
+    internal external fun iterDealloc(ptrIter: Long)
 
     internal external fun freeArray(pointer: Long, data: Buffer): Int
 

@@ -18,6 +18,7 @@ package org.jetbrains.numkt.core
 
 import org.jetbrains.numkt.Interpreter
 import org.jetbrains.numkt.NumKtException
+import org.jetbrains.numkt.callFunc
 import org.jetbrains.numkt.logic.arrayEqual
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -25,7 +26,12 @@ import java.nio.ByteOrder
 
 /**
  */
-class KtNDArray<T : Any> private constructor(private val pointer: Long, dataBuffer: ByteBuffer?, scalar: T?) {
+class KtNDArray<T : Any> private constructor(
+    private val pointer: Long,
+    dataBuffer: ByteBuffer?,
+    scalar: T?,
+    private val p: Long
+) {
 
     private val interp: Interpreter = Interpreter.interpreter!!
 
@@ -45,8 +51,9 @@ class KtNDArray<T : Any> private constructor(private val pointer: Long, dataBuff
     }
 
     // Number of elements in the array.
-    val size: Int
-        get() = interp.getField("size", getPointer(), Int::class.javaObjectType)
+    val size: Int by lazy {
+        interp.getField("size", getPointer(), Int::class.javaObjectType)
+    }
 
     // strides - array int of bytes to step in each dimension when traversing an array.
     // may changed
@@ -83,8 +90,7 @@ class KtNDArray<T : Any> private constructor(private val pointer: Long, dataBuff
 
     operator fun get(vararg slices: Slice): KtNDArray<T> = interp.getValue(getPointer(), slices)
 
-    operator fun get(intRange: IntRange): KtNDArray<T> =
-        this[intRange.toSlice()]
+    operator fun get(intRange: IntRange): KtNDArray<T> = this[intRange.toSlice()]
 
     //experimental
     operator fun get(vararg indexes: Any): KtNDArray<T> {
@@ -92,10 +98,13 @@ class KtNDArray<T : Any> private constructor(private val pointer: Long, dataBuff
             when (val ind = indexes[0]) {
                 is IntArray -> get(*ind)
                 is LongArray -> get(*ind)
-                else -> interp.getValue(getPointer(), indexes)
+                else -> interp.getValue(
+                    getPointer(),
+                    indexes.map { if (it is IntRange) it.toSlice() else it }.toTypedArray()
+                )
             }
         } else {
-            interp.getValue(getPointer(), indexes)
+            interp.getValue(getPointer(), indexes.map { if (it is IntRange) it.toSlice() else it }.toTypedArray())
         }
     }
 
@@ -118,7 +127,7 @@ class KtNDArray<T : Any> private constructor(private val pointer: Long, dataBuff
     }
 
     operator fun set(vararg indexes: Any, element: KtNDArray<T>) {
-        interp.setValue(getPointer(), indexes, element)
+        interp.setValue(getPointer(), indexes.map { if (it is IntRange) it.toSlice() else it }.toTypedArray(), element)
     }
 
     fun flatIter(): Iterator<T> {
@@ -138,7 +147,7 @@ class KtNDArray<T : Any> private constructor(private val pointer: Long, dataBuff
      * Iteration takes place on the direct buffer indexes obtained from the nditer.
      * This iterator is equivalent to ndarray.flat or nditer with order 'C'.
      */
-    operator fun iterator(): Iterator<KtNDArray<T>> = NDIterator(this, shape.first())
+    operator fun iterator(): Iterator<KtNDArray<T>> = NDIterator(this.getPointer())
 
     override fun equals(other: Any?): Boolean {
         if (other !is KtNDArray<*>)

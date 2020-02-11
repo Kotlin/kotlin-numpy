@@ -16,16 +16,25 @@
 
 package org.jetbrains.numkt.core
 
+import org.jetbrains.numkt.Interpreter.Companion.interpreter
 import org.jetbrains.numkt.NumKtException
 import java.nio.ByteBuffer
 
-class NDIterator<T : Any>(private val ndArray: KtNDArray<T>, private val size: Int) : Iterator<KtNDArray<T>> {
-    private var index = 0
+class NDIterator<T : Any>(pointer: Long) : Iterator<KtNDArray<T>> {
+    private var ret: KtNDArray<T>? = null
+    private val iterator: Long = interpreter!!.getIter(pointer)
 
-    override fun hasNext(): Boolean = index < size
+    override fun hasNext(): Boolean {
+        ret = interpreter!!.iterNext(iterator)
+        return if (ret != null)
+            true
+        else {
+            interpreter!!.iterDealloc(iterator)
+            return false
+        }
+    }
 
-    override fun next(): KtNDArray<T> =
-        ndArray[index++]
+    override fun next(): KtNDArray<T> = ret!!
 }
 
 class FlatIterator<T : Any>(

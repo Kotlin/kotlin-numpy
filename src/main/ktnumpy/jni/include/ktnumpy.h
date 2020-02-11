@@ -43,6 +43,10 @@ jobject get_ndvalue (JNIEnv *, PyObject *, jobjectArray);
 void set_value (JNIEnv *, PyObject *, jlongArray, jobject);
 void set_ndvalue (JNIEnv *, PyObject *, jobjectArray, jobject);
 
+jlong get_iterator (JNIEnv *, PyObject *);
+jobject iter_next (JNIEnv *, PyObject *);
+void iter_dealloc (PyObject *);
+
 jobject
 invoke_call_function (JNIEnv *, jobjectArray, jobjectArray, jobject);
 jobject

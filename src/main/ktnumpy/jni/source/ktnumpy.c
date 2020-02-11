@@ -606,6 +606,44 @@ void set_ndvalue (JNIEnv *env, PyObject *ndarray, jobjectArray jobject_array, jo
   Py_XDECREF (py_ind);
 }
 
+jlong get_iterator (JNIEnv *env, PyObject *ndarray)
+{
+  PyObject *iter = NULL;
+  iter = PyObject_GetIter (ndarray);
+  python_exception (env);
+  return (jlong) iter;
+}
+
+jobject iter_next (JNIEnv *env, PyObject *iter)
+{
+  jobject ret = NULL;
+  PyObject *py_ret = NULL;
+
+  py_ret = PyIter_Next (iter);
+
+  if (python_exception (env) || py_ret == NULL)
+    {
+      goto end;
+    }
+
+  if (NpyArray_Check (py_ret))
+    {
+      ret = new_ktndarray (env, (PyArrayObject *) py_ret, NULL);
+    }
+  else
+    {
+      ret = new_ktndarray (env, NULL, pyobject_to_jobject (env, py_ret, OBJECT_TYPE));
+    }
+
+  end:
+  return ret;
+}
+
+void iter_dealloc (PyObject *iter)
+{
+  Py_XDECREF (iter);
+}
+
 jobject
 invoke_call_function
     (JNIEnv *env, jobjectArray arr_names_func, jobjectArray args, jobject kwargs)
