@@ -1,6 +1,7 @@
 package org.jetbrains.numkt.core
 
 import org.jetbrains.numkt.Casting
+import org.jetbrains.numkt.NumKtException
 
 enum class IterFlag {
     NPY_ITER_DONT_NEGATE_STRIDES,
@@ -12,9 +13,13 @@ class KtNDIter<T : Any> constructor(
     op: KtNDArray<T>,
     vararg val flags: IterFlag,
     private val casting: Casting = Casting.SAFE
-) : AutoCloseable {
+) : AutoCloseable, Iterable<T> {
 
-    private var pointer: Long = iterNew(op, flags.map { it.name }.toTypedArray(), casting.str)
+    private var pointer: Long = if (op.size != 0) iterNew(
+        op,
+        flags.map { it.name }.toTypedArray(),
+        casting.str
+    ) else throw NumKtException("Cannot create KtNDIter from an empty array")
 
     val finished: Boolean
         get() = finishedGetCritical(pointer)
@@ -124,7 +129,7 @@ class KtNDIter<T : Any> constructor(
     fun reset(): Boolean = iterReset(pointer)
     private external fun iterReset(ptr: Long): Boolean
 
-    operator fun iterator(): Iterator<T> = object : Iterator<T> {
+    override operator fun iterator(): Iterator<T> = object : Iterator<T> {
         var ret: T? = null
         override fun hasNext(): Boolean {
             ret = nextC(pointer)
