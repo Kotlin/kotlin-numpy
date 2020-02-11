@@ -24,15 +24,25 @@ jobject new_ktndarray (JNIEnv *env, PyArrayObject *nparray, jobject scalar)
 {
   jobject jbytebuffer = NULL;
   jobject ktndarray = NULL;
+  jlong p = 0;
 
-  if (!JNI_METHOD(newKtNDArrayID, env, KTNDARRAY_TYPE, "<init>", "(JLjava/nio/ByteBuffer;Ljava/lang/Object;)V"))
+  if (!JNI_METHOD(newKtNDArrayID, env, KTNDARRAY_TYPE, "<init>", "(JLjava/nio/ByteBuffer;Ljava/lang/Object;J)V"))
     {
       return NULL;
     }
 
   if (nparray)
     {
-      jbytebuffer = get_bytebuffer (env, nparray);
+      if (NpyView_Check (nparray))
+        {
+          jbytebuffer = get_bytebuffer (env, (PyArrayObject *) PyArray_BASE (nparray));
+          p = get_point (nparray);
+        }
+      else
+        {
+          jbytebuffer = get_bytebuffer (env, nparray);
+        }
+
       if (jbytebuffer == NULL)
         {
           printf ("Error jbytebuffer");
@@ -40,7 +50,7 @@ jobject new_ktndarray (JNIEnv *env, PyArrayObject *nparray, jobject scalar)
         }
     }
 
-  ktndarray = (*env)->NewObject (env, KTNDARRAY_TYPE, newKtNDArrayID, (jlong) nparray, jbytebuffer, scalar);
+  ktndarray = (*env)->NewObject (env, KTNDARRAY_TYPE, newKtNDArrayID, (jlong) nparray, jbytebuffer, scalar, p);
   if (ktndarray == NULL)
     {
       printf ("Error to create new KtNDArray!\n");

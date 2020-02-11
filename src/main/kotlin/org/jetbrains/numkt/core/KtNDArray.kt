@@ -137,7 +137,8 @@ class KtNDArray<T : Any> private constructor(
             this.strides,
             this.itemsize,
             this.shape,
-            this.dtype
+            this.dtype,
+            p
         )
     }
 

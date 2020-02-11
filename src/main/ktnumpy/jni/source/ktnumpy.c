@@ -78,6 +78,18 @@ int NpyScalar_Check (PyObject *py_object)
   return PyArray_IsScalar (py_object, Number) || PyArray_IsScalar(py_object, Bool);
 }
 
+int NpyView_Check (PyArrayObject *py_object)
+{
+  if (PyArray_BASE (py_object) != NULL)
+    {
+      return 1;
+    }
+  else
+    {
+      return 0;
+    }
+}
+
 jobject npy_scalar_as_jobject (JNIEnv *env, PyObject *py_object, jclass clazz)
 {
   jobject result = NULL;
@@ -277,28 +289,17 @@ jobject get_bytebuffer (JNIEnv *env, PyArrayObject *nparray)
   jobject bufferRef = NULL;
 
   address = PyArray_BYTES (nparray);
-
-  if (PyArray_BASE (nparray) == NULL)
-    {
-      size_n_bytes = PyArray_NBYTES(nparray);
-    }
-  else
-    {
-      for (int i = 0; i < PyArray_NDIM (nparray); ++i)
-        {
-          size_n_bytes += PyArray_STRIDE (nparray, i) * PyArray_DIM (nparray, i);
-        }
-      if (size_n_bytes < 0)
-        {
-          address = PyArray_BYTES ((PyArrayObject *) PyArray_BASE (nparray));
-          size_n_bytes = PyArray_NBYTES((PyArrayObject *) PyArray_BASE (nparray));
-        }
-    }
+  size_n_bytes = PyArray_NBYTES(nparray);
 
   jobject directBuffer = (*env)->NewDirectByteBuffer (env, (void *) address, size_n_bytes);
   bufferRef = (*env)->NewWeakGlobalRef (env, directBuffer);
 
   return bufferRef;
+}
+
+jlong get_point (PyArrayObject *nparray)
+{
+  return ((jlong) PyArray_BYTES (nparray) - (jlong) PyArray_BYTES ((PyArrayObject *) PyArray_BASE (nparray)));
 }
 
 jintArray get_shape (JNIEnv *env, PyArrayObject *ndarray)

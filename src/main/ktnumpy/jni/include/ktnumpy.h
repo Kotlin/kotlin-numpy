@@ -21,12 +21,14 @@ int ktnumpy_init (JNIEnv *);
 
 int NpyArray_Check (PyObject *);
 int NpyScalar_Check (PyObject *);
+int NpyView_Check (PyArrayObject *);
 
 jobject npy_scalar_as_jobject (JNIEnv *, PyObject *, jclass);
 
 jobject npy_scalar_to_jobject (JNIEnv *, PyObject *);
 
 jobject get_bytebuffer (JNIEnv *, PyArrayObject *);
+jlong get_point (PyArrayObject *);
 
 jintArray get_shape (JNIEnv *, PyArrayObject *);
 jobject get_ndim (JNIEnv *, PyArrayObject *);
