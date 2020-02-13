@@ -706,6 +706,11 @@ private fun <T: Any, L: Any, R: Any> divide(left: L, right: R): KtNDArray<T> =
 @JvmName("doubleDivideAssignDouble") operator fun KtNDArray<Double>.divAssign(other: Double) = divAssignScalar(this, other)
 
 
+operator fun <T: Number> KtNDArray<T>.unaryMinus(): KtNDArray<T> =
+    callFunc(nameMethod = arrayOf("ndarray", "__neg__"), args = arrayOf(this))
+
+operator fun <T: Number> KtNDArray<T>.unaryPlus(): KtNDArray<T> =
+    callFunc(nameMethod = arrayOf("ndarray", "__pos__"), args = arrayOf(this))
 
 inline infix fun <reified T: Number> KtNDArray<T>.`@`(other: KtNDArray<T>) = dot(this, other)
 
