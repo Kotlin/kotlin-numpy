@@ -17,7 +17,7 @@
 package org.jetbrains.numkt
 
 import org.jetbrains.numkt.core.KtNDArray
-import org.jetbrains.numkt.core.None
+import org.jetbrains.numkt.core.None.Companion.none
 import java.io.File
 
 /** Return a new array of given shape and T type, without initializing entries. */
@@ -42,7 +42,7 @@ inline fun <reified T : Any> emptyLike(
 
 /** Return a 2-D array with ones on the diagonal and zeros elsewhere. */
 inline fun <reified T : Any> eye(n: Int, m: Int? = null, k: Int = 0, order: Order = Order.C): KtNDArray<T> =
-    callFunc(nameMethod = arrayOf("eye"), args = arrayOf(n, m ?: None.none, k, T::class.javaObjectType), order = order)
+    callFunc(nameMethod = arrayOf("eye"), args = arrayOf(n, m ?: none, k, T::class.javaObjectType), order = order)
 
 /** Return the identity array. */
 inline fun <reified T : Any> identity(n: Int): KtNDArray<T> =
@@ -150,6 +150,7 @@ inline fun <reified T : Any> fromstring(string: String, count: Int = -1, sep: St
     callFunc(nameMethod = arrayOf("fromstring"), args = arrayOf(string, T::class.javaObjectType, count, sep))
 
 
+// todo
 inline fun <reified T : Any> loadtxt(
     fname: String,
     comments: String = "#",
@@ -162,7 +163,10 @@ inline fun <reified T : Any> loadtxt(
     encoding: String = "bytes",
     max_rows: Int? = null
 ): KtNDArray<T> =
-    callFunc(nameMethod = arrayOf("loadtxt"), args = arrayOf(fname, T::class.javaObjectType, comments))
+    callFunc(
+        nameMethod = arrayOf("loadtxt"),
+        args = arrayOf(fname, T::class.javaObjectType, comments, delimiter ?: none)
+    )
 
 /**
  *
@@ -230,7 +234,7 @@ fun <T : Number> diagflat(v: List<Any>, k: Int = 0): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("diagflat"), args = arrayOf(v, k))
 
 inline fun <reified T : Any> tri(n: Int, m: Int? = null, k: Int = 0): KtNDArray<T> =
-    callFunc(nameMethod = arrayOf("tri"), args = arrayOf(n, m ?: None.none, k, T::class.javaObjectType))
+    callFunc(nameMethod = arrayOf("tri"), args = arrayOf(n, m ?: none, k, T::class.javaObjectType))
 
 @JvmName("trilByte")
 fun tril(m: List<List<Byte>>, k: Int = 0): KtNDArray<Long> =
@@ -281,13 +285,13 @@ fun triu(m: List<List<Double>>, k: Int = 0): KtNDArray<Double> =
     callFunc(nameMethod = arrayOf("triu"), args = arrayOf(m, k))
 
 fun <T : Number> vander(x: KtNDArray<T>, n: Int? = null, increasing: Boolean = false): KtNDArray<T> =
-    callFunc(nameMethod = arrayOf("vander"), args = arrayOf(x, n ?: None.none, increasing))
+    callFunc(nameMethod = arrayOf("vander"), args = arrayOf(x, n ?: none, increasing))
 
 fun <T : Number> vander(x: Array<T>, n: Int? = null, increasing: Boolean = false): KtNDArray<T> =
-    callFunc(nameMethod = arrayOf("vander"), args = arrayOf(x, n ?: None.none, increasing))
+    callFunc(nameMethod = arrayOf("vander"), args = arrayOf(x, n ?: none, increasing))
 
 fun <T : Number> vander(x: List<T>, n: Int? = null, increasing: Boolean = false): KtNDArray<T> =
-    callFunc(nameMethod = arrayOf("vander"), args = arrayOf(x, n ?: None.none, increasing))
+    callFunc(nameMethod = arrayOf("vander"), args = arrayOf(x, n ?: none, increasing))
 
 // this is matrix, but it is no longer recommended to use this class.
 @JvmName("mat1D")
@@ -308,5 +312,8 @@ inline fun <reified T : Any> bmat(data: List<KtNDArray<T>>): KtNDArray<T> =
 @JvmName("bmat2D")
 inline fun <reified T : Any> bmat(data: List<List<KtNDArray<T>>>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("bmat"), args = arrayOf(data, T::class.javaObjectType))
+
+fun <T: Number> meshgrid(vararg xi: KtNDArray<T>): List<KtNDArray<T>> =
+    callFunc(nameMethod = arrayOf("meshgrid"), args = arrayOf(*xi), kClass = List::class) as List<KtNDArray<T>>
 
 inline fun <reified T : Any> type(l: KtNDArray<T>) = T::class.java
