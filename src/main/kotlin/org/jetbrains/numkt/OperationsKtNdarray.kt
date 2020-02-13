@@ -118,7 +118,7 @@ fun atleast3D(vararg arys: Any): List<KtNDArray<Any>> =
  *
  * @param a - [List] of type [T]
  *
- * @return new array.
+ * @return The input will be returned uncopied iff it's a compatible.
  */
 inline fun <reified T : Any> asArray(a: List<Any>, order: Order? = null): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("asarray"), args = arrayOf(a, T::class.javaObjectType), order = order)
@@ -214,7 +214,7 @@ fun <T : Any> vstack(vararg tup: KtNDArray<T>): KtNDArray<T> =
 /**
  *
  */
-fun <T : Any> block(list: KtNDArray<KtNDArray<T>>): KtNDArray<T> =
+fun <T : Any> block(list: List<KtNDArray<T>>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("block"), args = arrayOf(list))
 
 /**
