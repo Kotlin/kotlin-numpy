@@ -2,7 +2,7 @@
 [ ![Download](https://api.bintray.com/packages/kotlin/kotlin-numpy/kotlin-numpy/images/download.svg) ](https://bintray.com/kotlin/kotlin-numpy/kotlin-numpy/_latestVersion)
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
-# Kotlin bindings for NumPy (KNumPy)
+# Kotlin bindings for NumPy
 
 This project is a Kotlin library, which is a statically typed wrapper for the [NumPy](https://numpy.org/) library.
 
@@ -189,7 +189,7 @@ Augmented assigment (or override assigment) operations modify an existing array 
 
 #### Indexing, slicing, and iterating
 
-Arrays in KNumPy use the traditional indexinf to access the items. Also, there is an analogue of Python's `slice`.
+Arrays in Kotlin bindings for NumPy use the traditional index to access the items. Also, there is an analogue of Python's `slice`.
 To skip an index in slice, use `None`. For example, `[:8:2]` in Python is equivalent to `[None..8..2]` in kotlin.
 Iteration occurs elementwise regardless of shape.
 
@@ -419,7 +419,7 @@ The table below shows the conversion of objects of different types.
 
 #### What's inside `KtNDArray`
 
-The main object type in KNumPy is [KtNDArray](src/main/kotlin/org/jetbrains/numkt/core/KtNDArray.kt).
+The main object type is [KtNDArray](src/main/kotlin/org/jetbrains/numkt/core/KtNDArray.kt).
 Like `ndarray` in NumPy, it is a homogeneous multidimensional array. `KtNDArray` holds a pointer to
 its corresponding `ndarray`. Using the pointer, we can perform operations on the array.
 
@@ -537,7 +537,7 @@ for (i in 0..14) {
 ```
 
 ## Requirements
-To build and run the KNumPy library, you will need:
+To build and run the library, you will need:
 To run library you need:
 * Java 8 or above
 * Python 3.5 or above
@@ -552,9 +552,9 @@ To run library you need:
 
 ## Building
 
-To build , you will need Gcc or Clang.
+To build the library, you will need [GCC](https://gcc.gnu.org/) or [Clang](https://clang.llvm.org/).
 
-KNumPy uses Gradle for building. 
+The build system of this project is Gradle.
 
 First, you should build the native library: run `./gradlew ktnumpyReleaseSharedLibrary`. 
 The library will appear in `./build/libs/ktnumpy/shared/release`. 
