@@ -657,7 +657,7 @@ class Random {
         /**
          *
          */
-        fun normal(loc: Double = 0.0, scale: Double = 0.0): Double =
+        fun normal(loc: Double = 0.0, scale: Double = 1.0): Double =
             callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale), kClass = Double::class)
 
         fun normal(loc: DoubleArray, scale: Double = 0.0): KtNDArray<Double> =
@@ -669,13 +669,25 @@ class Random {
         fun normal(loc: DoubleArray, scale: DoubleArray): KtNDArray<Double> =
             callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale))
 
-        fun normal(loc: Double = 0.0, scale: Double = 0.0, vararg size: Int): KtNDArray<Double> =
+        fun normal(loc: Double = 0.0, scale: Double = 1.0, size: Int): KtNDArray<Double> =
             callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
 
-        fun normal(loc: DoubleArray, scale: Double = 0.0, vararg size: Int): KtNDArray<Double> =
+        fun normal(loc: Double = 0.0, scale: Double = 1.0, vararg size: Int): KtNDArray<Double> =
+            callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
+
+        fun normal(loc: DoubleArray, scale: Double = 1.0, size: Int): KtNDArray<Double> =
+            callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
+
+        fun normal(loc: DoubleArray, scale: Double = 1.0, vararg size: Int): KtNDArray<Double> =
+            callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
+
+        fun normal(loc: Double = 0.0, scale: DoubleArray, size: Int): KtNDArray<Double> =
             callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
 
         fun normal(loc: Double = 0.0, scale: DoubleArray, vararg size: Int): KtNDArray<Double> =
+            callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
+
+        fun normal(loc: DoubleArray, scale: DoubleArray, size: Int): KtNDArray<Double> =
             callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
 
         fun normal(loc: DoubleArray, scale: DoubleArray, vararg size: Int): KtNDArray<Double> =
