@@ -16,9 +16,11 @@
 
 package org.jetbrains.numkt.math
 
+import org.jetbrains.numkt.append
 import org.jetbrains.numkt.callFunc
 import org.jetbrains.numkt.core.KtNDArray
 import org.jetbrains.numkt.core.None
+import org.jetbrains.numkt.emptyLike
 
 /**
  *
@@ -77,8 +79,16 @@ fun <T : Number> cumprod(a: KtNDArray<T>, axis: Int? = null): KtNDArray<T> =
 /**
  *
  */
+@JvmName("cumsumNumber")
 fun <T : Number> cumsum(a: KtNDArray<T>, axis: Int? = null): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("cumsum"), args = arrayOf(a, axis ?: None.none, a.dtype))
+
+/**
+ *
+ */
+@JvmName("cumsumBoolean")
+fun cumsum(a: KtNDArray<Boolean>, axis: Int? = null): KtNDArray<Int> =
+    callFunc(nameMethod = arrayOf("cumsum"), args = arrayOf(a, axis ?: None.none))
 
 /**
  *
