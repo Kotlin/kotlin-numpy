@@ -106,8 +106,8 @@ class Linalg {
         /**
          *
          */
-        fun <T : Number> norm(x: KtNDArray<T>, ord: Int? = null, axes: Int): KtNDArray<Double> =
-            callFunc(arrayOf("linalg", "norm"), args = arrayOf(x, ord ?: None.none, axes))
+        fun <T : Number> norm(x: KtNDArray<T>, ord: Int? = null, axis: Int): KtNDArray<Double> =
+            callFunc(arrayOf("linalg", "norm"), args = arrayOf(x, ord ?: None.none, axis))
 
         /**
          *
