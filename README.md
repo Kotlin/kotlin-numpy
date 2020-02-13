@@ -8,16 +8,22 @@ This project is a Kotlin library, which is a statically typed wrapper for the [N
 
 ## Features
 
-* Statically typed multidimensional arrays
-* Idiomatic API for users with NumPy experience
-* Random, math, linear algebra and other useful functions from NumPy
-* Python allocates memory for arrays and frees memory when JVM GC collects unnecessary arrays
-* Direct access to array data using DirectBuffer 
-    * Increased performance working with array's data compared to python
+* Statically typed multidimensional arrays.
+* Idiomatic API for users with NumPy experience.
+* Random, math, linear algebra, and other useful functions from NumPy.
+* Python allocates memory for arrays and frees memory when JVM GC collects unnecessary arrays.
+* Direct access to array data using DirectBuffer. 
+    * Increased performance working with array's data compared to python.
     
-## Install
+## Installation
 
-Groovy
+In your Gradle build script:
+
+1. Add the `kotlin-numpy` repository.
+2. Add the `org.jetbrains:kotlin-numpy:0.1.0` implementation dependency.
+
+Groovy build script (`build.gradle`):
+
 ```groovy
 repositories {
     maven { url "https://kotlin.bintray.com/kotlin-numpy" }
@@ -28,7 +34,8 @@ dependencies {
 }
 ```
 
-Kotlin
+Kotlin build script (`build.gradle.kts`):
+
 ```kotlin
 repositories {
     maven("https://dl.bintray.com/kotlin/kotlin-numpy")
@@ -41,9 +48,10 @@ dependencies {
     
 ## Usage
 
-Kotlin bindings API is very similar to NumPy API. Consider the following programs:
+Kotlin bindings for NumPy offer an API very similar to the original NumPy API. Consider the following programs:
 
-Python
+Python:
+
 ```python
 import numpy as np
 a = np.arange(15).reshape(3, 5) # ndarray([[ 0,  1,  2,  3,  4],
@@ -71,7 +79,8 @@ print(d)
 ```
 
 
-Kotlin
+Kotlin:
+
 ```kotlin
 import org.jetbrains.numkt.core.*
 import org.jetbrains.numkt.math.*
@@ -110,8 +119,10 @@ fun main() {
 }
 ```
 
-#### Array Creation
+#### Array creation
+
 Simple ways to create arrays look like this:
+
 ```kotlin
     array(arrayOf(1, 2, 3)) // simple flat array: KtNDArray<Int>([1, 2, 3])
 
@@ -123,8 +134,10 @@ Simple ways to create arrays look like this:
     linspace<Double>( 1, 3, 10 ) // array have 10 numbers from 1 to 3
 ```
 
-#### Basic Operations
+#### Basic operations
+
 Arithmetic operations are supported:
+
 ```kotlin
     val a = array(arrayOf(20, 30, 40, 50)) // [20, 30, 40, 50]
     val b = arange(4) // [0, 1, 2, 3]
@@ -135,6 +148,7 @@ Arithmetic operations are supported:
 ```
 
 Matrix operations:
+
 ```kotlin
     val matA = array<Long>(listOf(listOf(1, 1), listOf(0, 1))) // KtNDArray<Long>([[1, 1])
                                                                                 // [0, 1]])
@@ -158,11 +172,12 @@ Matrix operations:
     //  [3 4]]
 ```
 
-Override assigment operations, 
-act in place to modify an existing array rather than create a new one.
+Augmented assigment (or override assigment) operations modify an existing array instead of creating a new one.
 
->Note: Be careful when importing operations, kotlin extends the operation. E.g., if a is var, then with a += b, 
->kotlin try to generate code a = a + b. To avoid this, explicitly specify imports.
+>Note: When using augmented assignments, don't forget to import them explicitly (or import the entire package 
+>`org.jetbrains.numkt.math.*`. Otherwise, kotlin tries to extend the operation. For example, the line `a += b`, 
+>is extended to `a = a + b`.
+
 ```kotlin
     val a = ones<Int>(2, 3)
     val b = Random.random(2, 3)
@@ -172,11 +187,12 @@ act in place to modify an existing array rather than create a new one.
 ```
 
 
-#### Indexing, Slicing and Iterating
+#### Indexing, slicing, and iterating
 
-There is indexing with which you can access the item. Also, there is ana analogue of slice python,
-for skipping use None, e.g. `[:8:2]` in python, `[None..8..2]` in kotlin.
+Arrays in Kotlin bindings for NumPy use the traditional index to access the items. Also, there is an analogue of Python's `slice`.
+To skip an index in slice, use `None`. For example, `[:8:2]` in Python is equivalent to `[None..8..2]` in kotlin.
 Iteration occurs elementwise regardless of shape.
+
 ```kotlin
     val a = arange(10L) `**` 3 // KtNDArray<Long>([0, 1, 8, 27, 64, 125 216 343 512 729])
 
@@ -197,7 +213,7 @@ Iteration occurs elementwise regardless of shape.
     }
 ```
 
-It is important to consider that when indexing, you must pass the number of indexes equal to the dimension of the KtNDArray
+Remember that, when indexing, you must pass the number of indexes equal to the dimension of the `KtNDArray`
 (| j<sub>1</sub>, j<sub>2</sub>, j<sub>3</sub>, ... | = ndim).
 When slicing, this is not necessary.
 
@@ -335,87 +351,93 @@ When slicing, this is not necessary.
 ## How it works
 
 ### Foundation
-Using Java Native Interface (JNI) and Python C Extensions, we attach the python 
+
+Using Java Native Interface (JNI) and Python C Extensions, we attach the Python 
 interpreter to the JVM process. There is a singleton [Interpreter](src/main/kotlin/org/jetbrains/numkt/Interpreter.kt) for this. 
 Initialization of the Python interpreter occurs on the first call of any function. The interpreter will remain in the JVM
 until the JVM exits. The [Interpreter](src/main/kotlin/org/jetbrains/numkt/Interpreter.kt) 
 class contains external functions (as `callFunc`) through which NumPy functions are called. 
-Consider the call to NumPy functions in more detail.
+Let's have a more detailed look at the call to NumPy functions.
 
 The following arguments are required to call NumPy functions:
-* Array of call attributes - module names and function names in NumPy
+* Array of call attributes - module names and function names in NumPy.
 * Array of arguments - function arguments, equivalent to `*args` in Python.
 Importantly, the arguments should be in the same order and in the same places as in Python.
-If some argument is not passed, None is used instead.
-* Map of arguments - maps name of arguments to arguments, equivalent to `**kwargs` in Python.
+If you skip an argument, pass `None` instead.
+* Map of arguments - maps names of arguments to arguments, equivalent to `**kwargs` in Python.
 * Return type - which class we expect to return. If the expected type is KtNDArray, then this is not needed.
 
-To call the NumPy function, the above arguments are passed to the associated external kotlin function.
+To call a NumPy function, the above arguments are passed to the associated external kotlin function.
 After that, the following code will appear in native code:
-* By the array of call attributes we get callable `PyObject`. This is a related function NumPy.
+* By the array of call attributes we get callable `PyObject`. This is a related function from NumPy.
 * The array of arguments is converted to a tuple of the corresponding Python objects.
-* If the map of argument is not empty, then it is converted into a dictionary of keyword arguments.
+* If the map of arguments is not empty, then it is converted into a dictionary of keyword arguments.
 * We call a NumPy function with arguments passed to it - `PyObject_Call(FunctionObject, TupleArgs, DictKwargs)`,
 in python it is `FunctionObject(TupleArgs, DictKwargs)`
-* Convert the result in Java type and returned.
+* Convert the result in a Java object and return it.
 
-Let's look at an example. 
-The diagonal method returns the specified diagonal, of the same type as the called KtNDArray object.
+Let's have a look at an example.
+
+The diagonal method returns the specified diagonal, of the same type as the called `KtNDArray` object.
+
 ```kotlin
 fun <T : Any> KtNDArray<T>.diagonal(offset: Int = 0, axis1: Int = 0, axis2: Int = 1): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("ndarray", "diagonal"), args = arrayOf(this, offset, axis1, axis2))
 ```
+
 We see that the first argument is an array of strings. 
-Getting the final attribute will look like this: numpy -> ndarray -> diagonal (the numpy module is used by default).
-The next argument is an array of arguments: this (KtNDArray from which the diagonals are taken), offset, axis1, axis2.
-In this case kwargs are note used. We also expect the array to return, so we don’t pass anything to the return type.
+Getting the final attribute will look like this: `numpy` -> `ndarray` -> `diagonal` (the NumPy module is used by default).
+The next argument is an array of arguments: `this` (`KtNDArray` from which the diagonals are taken), `offset`, `axis1`, `axis2`.
+In this case, `kwargs` are not used. We also expect the array to return, so we don’t pass anything to the return type.
 
 
 ### Objects
-#### Type Matching
+
+#### Type matching
 
 When processing objects in native code, there is a conversion from Java objects to Python
-objects, and when the result is returned back - from Python Objects to Java objects.
+objects, and when the result is returned, back from Python objects to Java objects.
 The table below shows the conversion of objects of different types.
 
-|  Kotlin -> Python | Python/NumPy -> Kotlin |
-|:-----------------:|:----------------------:|
-|    None -> None   |      None -> null      |
-|    Char -> str    |                        |
-|   String -> str   |     str -> String      |
-|  Boolean -> bool  |     bool -> Boolean    |
-|    Byte -> int8   |      int8 -> Byte      |
-|   Short -> int16  |     int16 -> Short     |
-|    Int -> int32   |      int32 -> Int      |
-|   Long -> int64   |      int64 -> Long     |
-|  Float -> float32 |    float32 -> Float    |
-| Double -> float64 |    float64 -> Double   |
-|   Array -> tuple  |     tuple -> Array     |
-|    List -> list   |      list -> List      |
-|    Map -> dict    |       dict -> Map      |
-|KtNDArray -> ndarray| ndarray -> KtNDArray  |
-|   Slice -> slice  |                        |
+|    Kotlin -> Python    | Python/NumPy -> Kotlin |
+|:----------------------:|:----------------------:|
+|    `None` -> `None`    |     `None` -> `null`   |
+|    `Char` -> `str`     |                        |
+|   `String` -> `str`    |    `str` -> `String`   |
+|  `Boolean` -> `bool`   |    `bool` -> `Boolean` |
+|    `Byte` -> `int8`    |     `int8` -> `Byte`   |
+|   `Short` -> `int16`   |    `int16` -> `Short`  |
+|    `Int` -> `int32`    |     `int32` -> `Int`   |
+|   `Long` -> `int64`    |     `int64` -> `Long`  |
+|  `Float` -> `float32`  |   `float32` -> `Float` |
+| `Double` -> `float64`  |   `float64` -> `Double`|
+|   `Array` -> `tuple`   |    `tuple` -> `Array`  |
+|    `List` -> `list`    |     `list` -> `List`   |
+|      `Map` -> `dict`   |      `dict` -> `Map`   |
+|`KtNDArray` -> `ndarray`|`ndarray` -> `KtNDArray`|
+|    `Slice` -> `slice`  |                        |
 
-#### What's inside KtNDArray
+#### What's inside `KtNDArray`
 
-The main object is [KtNDArray](src/main/kotlin/org/jetbrains/numkt/core/KtNDArray.kt), like ndarray in NumPy, it is 
-a homogeneous multidimensional array. KtNDArray holds a pointer to
-its corresponding ndarray. Using the pointer, we can perform operations on the array.
+The main object type is [KtNDArray](src/main/kotlin/org/jetbrains/numkt/core/KtNDArray.kt).
+Like `ndarray` in NumPy, it is a homogeneous multidimensional array. `KtNDArray` holds a pointer to
+its corresponding `ndarray`. Using the pointer, we can perform operations on the array.
 
-KtNDArray and ndarray operate on shared memory. Python allocates 
-memory for the array and through `java.nio.DirectByteBuffer` 
-we get access to this memory.
+`KtNDArray` and `ndarray` operate on shared memory. Python allocates memory for the array,
+and through `java.nio.DirectByteBuffer`, we get access to this memory.
 
-KtNDArray provides access to some ndarray attributes, such as `shape`, `ndim`, `itemsize`,
-`size`, `strides`, `dtype`. Also KtNDArray has `data` field of type `ByteBuffer`. 
+`KtNDArray` provides access to some `ndarray` attributes, such as `shape`, `ndim`, `itemsize`,
+`size`, `strides`, `dtype`. Additionally, `KtNDArray` has the field `data` of type `ByteBuffer`. 
 This is the direct buffer.    
 
-### Type Safety
+### Type safety
 
 Kotlin is a statically typed programing language. This makes it possible to catch errors
 at the compilation stage.
 
-Lest's look at an example:
+Lest's have a look at an example:
+
+Python:
 ```python
 import numpy as np
 
@@ -424,29 +446,32 @@ import numpy as np
 a = np.ones((3, 3), dtype=int) * 3
 b = np.random.random((3, 3))
 
-b *= a # successfully
+b *= a # success
 
-a *= b # get at runtime TypeError
+a *= b # TypeError at runtime 
 ```
 
-The same code on Kotlin will notify us of an error during compilation:
-```kotlin
+The same code written in Kotlin will notify us of an error during the compilation:
 
+
+```kotlin
 // ...
 
 val a = ones<Int>(3, 3) * 3
 val b = Random.random(3, 3)
 
-b *= a // successfully
+b *= a // success
 
-a *= b // Get compilation error
+a *= b // compilation error
 // Kotlin: Type mismatch: inferred type is KtNDArray<Double> but KtNDArray<Int> was expected
 ```
 
-A few more errors that can be prevented in the kotlin at the compilation stage
+There are other types of errors that can be prevented during the compilation, for example:
 
-When passing parameters to functions:
-Python
+* type mismatch of function arguments :
+
+Python:
+
 ```python
 a = np.array(['a', 'b', 'c'])
 np.sin(a)
@@ -455,7 +480,8 @@ np.sin(a)
 # and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
 ```
 
-Kotlin
+Kotlin:
+
 ```kotlin
 val a = array(arrayOf('a', 'b', 'c'))
 sin(a)
@@ -464,26 +490,30 @@ sin(a)
 // is not satisfied: inferred type Char is not a subtype of Number
 ```
 
-Method signature defined:
+* Method signature defined:
 
-Python
+Python:
+
 ```python
 a = np.array([0, 1], [1, 0])
 
 # TypeError: data type not understood
 ```
-Kotlin
+
+Kotlin:
+
 ```kotlin
 val a = array(listOf(0, 1), listOf(1, 0))
 
 // Kotlin: None of the following functions can be called with the arguments supplied: ...
 ```
 
-Implicit type conversions will make you look for errors for a long time.
-The following code will be executed, but implicitly converts float -> int,
-which the user may not expect and as a result, the final result will differ from the desired
+In Python, there are implicit type conversions that can be really tricky.
+The following code will be seems to work fine, but implicitly converts `float` to `int`,
+which the user may not expect. As a result, the output differs from the desired but no errors are seen.
 
-Python
+Python:
+
 ```python
 a = np.arange(15, dtype=np.int32)
 b = np.linspace(0, 1, 15, dtype=np.float64)[::-1]
@@ -496,7 +526,8 @@ print(a)
 
 In Kotlin, the compiler will tell the user that an explicit conversion is required here.
 
-Kotlin
+Kotlin:
+
 ```kotlin
 val a = arange(15)
 val b = linspace<Double>(0, 1, 15)[None..None..-1]
@@ -505,15 +536,14 @@ for (i in 0..14) {
 }
 ```
 
-
-
 ## Requirements
+To build and run the library, you will need:
 To run library you need:
-* Java >= 8
-* Python >= 3.5
-* NumPy >= 1.7
+* Java 8 or above
+* Python 3.5 or above
+* NumPy 1.7 or above.
 
->Note: Make sure you use the correct python environment.
+>Note: Make sure you use the correct Python environment.
 >This is necessary to use the correct version of Python and NumPy.
 >
 >For the convenience of installing Python, NumPy and setting the environment,
@@ -522,12 +552,14 @@ To run library you need:
 
 ## Building
 
-The build you need Gcc or Clang.
+To build the library, you will need [GCC](https://gcc.gnu.org/) or [Clang](https://clang.llvm.org/).
 
-This library is built with Gradle. You must first build the native library: run `./gradlew ktnumpyReleaseSharedLibrary`. 
-The library will be in `./build/libs/ktnumpy/shared/release`. 
+The build system of this project is Gradle.
 
-Run for debug: `./gradlew ktnumpyDebugSharedLibrary`.
-Accordingly, the library will be in `./build/libs/ktnumpy/shared/debug`.
+First, you should build the native library: run `./gradlew ktnumpyReleaseSharedLibrary`. 
+The library will appear in `./build/libs/ktnumpy/shared/release`. 
 
-After building the native library, to run `./gradlew build`
+For the debug version, run: `./gradlew ktnumpyDebugSharedLibrary`.
+Accordingly, the library will appear in `./build/libs/ktnumpy/shared/debug`.
+
+After building the native library, run `./gradlew build`
