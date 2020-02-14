@@ -7,6 +7,7 @@ import os.path
 from setuptools import setup, Extension, find_packages
 
 from buildScr.python.build_lib import build_ktlib
+from buildScr.python.clean import dclean
 from buildScr.python.utils import get_pylib, get_python_lib_link, get_java_includes, get_numpy_include
 
 CLASSIFIERS = """\
@@ -67,6 +68,7 @@ if __name__ == '__main__':
               )
           ],
           cmdclass={
-              'build_ext': build_ktlib
+              'build_ext': build_ktlib,
+              'clean': dclean
           }
           )
