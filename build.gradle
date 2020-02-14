@@ -23,6 +23,8 @@ plugins {
     id "com.jfrog.bintray" version "1.8.4"
 }
 
+apply from: rootProject.file('gradle/python.gradle.kts')
+
 group 'org.jetbrains'
 version project.findProperty('version')
 
@@ -156,8 +158,18 @@ shadowJar {
     }
 }
 
+clean.dependsOn pyClean
+
+localInstallPyPackage.dependsOn wheelBuild
+
+task showKtnumpy(type: Exec) {
+//    commandLine 'which', 'python'
+    commandLine 'python', '-m', 'pip', 'show', 'ktnumpy'
+}
+
 test {
-    systemProperty "java.library.path", file("${buildDir}/libs/ktnumpy/shared/release").absolutePath
+    dependsOn localInstallPyPackage
+    systemProperty "java.library.path", file("${buildDir}/libs/ktnumpy").absolutePath
 }
 
 task sourceJar(type: Jar, dependsOn: classes) {
