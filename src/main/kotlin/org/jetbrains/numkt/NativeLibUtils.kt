@@ -71,15 +71,17 @@ object LibraryLoader {
         }
 
         // pip
+        val pypiURL = if (version!!.contains("dev")) "https://test.pypi.org/simple/" else "https://pypi.org/simple/"
+
         var pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
 
         if (pipOut.isEmpty() || "Package(s) not found" in pipOut) {
-            execCommand("python", "-m", "pip", "install", "ktnumpy")
+            execCommand("python", "-m", "pip", "install", "-i", pypiURL, "ktnumpy==$version")
             pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
         }
 
         if (version != null && pipOut.substringAfter("Version: ").substringBefore("\n") != version) {
-            execCommand("python", "-m", "pip", "install", "--upgrade", "ktnumpy")
+            execCommand("python", "-m", "pip", "install", "-i", pypiURL, "--upgrade", "ktnumpy==$version")
         }
 
         locationLib = if (pythonConf.osType == OSType.WINDOWS) {

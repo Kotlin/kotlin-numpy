@@ -23,6 +23,13 @@ plugins {
     id "com.jfrog.bintray" version "1.8.4"
 }
 
+ext {
+    boolean isMerge = isMerge()
+    String buildNumber = isMerge ? '' : System.getenv('buildNumber')
+    buildNumber += buildNumber == '' ? '' : 'dev1'
+    project.version = version + buildNumber
+}
+
 apply from: rootProject.file('gradle/python.gradle.kts')
 
 group 'org.jetbrains'
@@ -55,93 +62,6 @@ compileTestKotlin {
 }
 
 
-model {
-
-    buildTypes {
-        debug
-        release
-    }
-
-    platforms {
-        x64 {
-            architecture "x86_64"
-        }
-    }
-
-    toolChains {
-        gcc(Gcc)
-        clang(Clang)
-    }
-
-    components {
-
-        def process = new ProcessBuilder("python", "get_args_for_gradle.py")
-                .directory(file('buildScr/python'))
-                .start()
-
-        def errStream = process.errorStream.readLines()
-        if (!errStream.empty) {
-            throw new Exception(errStream.join("\n"))
-        }
-
-        def paths = new JsonSlurper().parseText(process.inputStream.text)
-        ext.includePythonDir = paths.inc_python
-        ext.includeNumpyDir = paths.inc_numpy
-        ext.pathLibPython = paths.libdir
-        ext.libPython = paths.pylib
-
-        ktnumpy(NativeLibrarySpec) {
-
-            targetPlatform("x64")
-
-            sources {
-                c {
-                    source {
-                        srcDir "src/main/ktnumpy/jni/source"
-                        include "*.c", "**/*.c"
-                    }
-                    exportedHeaders {
-                        srcDirs "src/main/ktnumpy/jni/include"
-                    }
-                }
-            }
-
-
-            binaries.all {
-                if (buildType == buildTypes.debug) {
-                    cCompiler.args '-g'
-                }
-                cCompiler.args '-O3'
-                cCompiler.args '-std=gnu99'
-                cCompiler.args '-I', "${Jvm.current().javaHome}/include"
-
-                if (targetPlatform.operatingSystem.macOsX) {
-                    cCompiler.args '-fPIC'
-                    cCompiler.args '-I', "${Jvm.current().javaHome}/include/darwin"
-                    cCompiler.args '-I', ext.includePythonDir
-                    cCompiler.args '-I', ext.includeNumpyDir
-                    linker.args '-L', ext.pathLibPython
-                } else if (targetPlatform.operatingSystem.linux) {
-                    cCompiler.args '-fPIC'
-                    cCompiler.args '-I', "${Jvm.current().javaHome}/include/linux"
-                    cCompiler.args '-I', ext.includePythonDir
-                    cCompiler.args '-I', ext.includeNumpyDir
-                    linker.args '-L', ext.pathLibPython
-                } else if (targetPlatform.operatingSystem.windows) {
-                    cCompiler.args '-I', "${Jvm.current().javaHome}/include/win32"
-                    cCompiler.args '-I', ext.includePythonDir
-                    cCompiler.args '-I', ext.includeNumpyDir
-                    linker.args '-L', ext.pathLibPython
-                } else {
-                    throw new Exception("${targetPlatform.operatingSystem} not supported")
-                }
-                linker.args '-l', ext.libPython
-            }
-        }
-    }
-}
-
-
 jar {
     dependsOn shadowJar
     enabled = false
@@ -166,15 +86,12 @@ clean.dependsOn pyClean
 
 localInstallPyPackage.dependsOn wheelBuild
 
-task showKtnumpy(type: Exec) {
-//    commandLine 'which', 'python'
-    commandLine 'python', '-m', 'pip', 'show', 'ktnumpy'
-}
-
 test {
-    dependsOn localInstallPyPackage
+    dependsOn wheelBuild
     systemProperty "java.library.path", file("${buildDir}/libs/ktnumpy").absolutePath
 }
+
+build.dependsOn wheelBuild
 
 task sourceJar(type: Jar, dependsOn: classes) {
     classifier 'sources'
@@ -214,4 +131,13 @@ bintray {
             name = project.version
         }
     }
+}
+
+boolean isMerge() {
+    def branch = System.getenv("build.branch") as String
+    println("Current branch: $branch")
+    if (branch != null) {
+        return '/merge' in branch
+    }
+    return false
 }
