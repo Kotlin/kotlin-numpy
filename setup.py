@@ -57,7 +57,7 @@ if __name__ == '__main__':
           packages=find_packages(),
           classifiers=[_f for _f in CLASSIFIERS.split('\n') if _f],
           platforms=["Windows", "Linux", "Mac OS-X"],
-          install_requires=["numpy>=1.15"],
+          install_requires=["numpy>=1.17"],
           ext_modules=[
               Extension(
                   name='ktnumpy',
