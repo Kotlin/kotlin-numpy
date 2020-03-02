@@ -21,6 +21,10 @@ import org.jetbrains.numkt.logic.arrayEqual
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
+@Experimental(level = Experimental.Level.WARNING)
+@Retention(AnnotationRetention.BINARY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
+annotation class ExperimentalNumkt
 
 /**
  */
