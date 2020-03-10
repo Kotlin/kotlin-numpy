@@ -20,26 +20,26 @@ import org.jetbrains.numkt.callFunc
 import org.jetbrains.numkt.core.KtNDArray
 
 /**
- *
+ * Return the reciprocal of the argument, element-wise.
  */
 fun <T : Number> reciprocal(x: KtNDArray<T>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("reciprocal"), args = arrayOf(x))
 
 /**
- *
+ * Numerical positive, element-wise.
  */
 fun <T : Number> positive(x: KtNDArray<T>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("positive"), args = arrayOf(x))
 
 /**
- *
+ * 	Numerical negative, element-wise.
  */
 fun <T : Number> negative(x: KtNDArray<T>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("negative"), args = arrayOf(x))
 
 
 /**
- *
+ * First array elements raised to powers from second array, element-wise.
  */
 fun <T : Number> power(x1: KtNDArray<T>, x2: Byte): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("power"), args = arrayOf(x1, x2))
@@ -60,13 +60,13 @@ fun <T : Number> power(x1: KtNDArray<T>, x2: Double): KtNDArray<Double> =
     callFunc(nameMethod = arrayOf("power"), args = arrayOf(x1, x2))
 
 /**
- *
+ * First array elements raised to powers from second array, element-wise.
  */
 fun <T : Number, E : Number> floatPower(x1: KtNDArray<T>, x2: KtNDArray<E>): KtNDArray<Double> =
     callFunc(nameMethod = arrayOf("float_power"), args = arrayOf(x1, x2))
 
 /**
- *
+ * Return the element-wise remainder of division.
  */
 fun <T : Number, E : Number> fmod(x1: KtNDArray<T>, x2: E): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("fmod"), args = arrayOf(x1, x2))

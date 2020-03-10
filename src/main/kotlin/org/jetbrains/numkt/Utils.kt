@@ -20,6 +20,27 @@ import org.jetbrains.numkt.Interpreter.Companion.interpreter
 import org.jetbrains.numkt.core.KtNDArray
 import kotlin.reflect.KClass
 
+/**
+ * Wrapper over a call to a numpy method that return an [KtNDArray].
+ *
+ * @param nameMethod hierarchical array of PyObject names from the numpy submodule to the method.
+ * @param args of *args
+ * @param out item from **kwargs. per output array.
+ * @param where item from **kwargs. Condition not implemented.
+ * @param axes item from **kwargs. Axis list.
+ * @param axis item from **kwargs.
+ * @param keepdims item from **kwargs. Шf this is set to *true*,
+ * axes which are reduced over will be left in the result as a dimension with size one,
+ * so that the result will broadcast correctly against the inputs.
+ * @param casting item from **kwargs. See [Casting].
+ * @param order item from **kwargs. See [Order].
+ * @param dtype item from **kwargs. [KtNDArray] type.
+ * @param subok item from **kwargs. If *true*, then sub-classes will be passed-through,
+ * otherwise the returned array will be forced to be a base-class array (default).
+ * @param shape item from **kwargs. [KtNDArray] shape.
+ * @param ndmin item from **kwargs. Specifies the minimum number of dimensions that the resulting array should have.
+ * @return [KtNDArray] of type [T].
+ */
 fun <T : Any> callFunc(
     nameMethod: Array<String>,
     args: Array<out Any>? = null,
@@ -40,6 +61,26 @@ fun <T : Any> callFunc(
         kwargs = argsToKwargs(out, where, axes, axis, keepdims, casting, order, dtype, subok, shape, ndmin)
     )
 
+/**
+ * Wrapper over a call to a numpy method that returns an object of a given type.
+ *
+ * @param nameMethod hierarchical array of PyObject names from the numpy submodule to the method.
+ * @param args of *args
+ * @param out item from **kwargs. per output array.
+ * @param where item from **kwargs. Condition not implemented.
+ * @param axes item from **kwargs. Axis list.
+ * @param axis item from **kwargs.
+ * @param keepdims item from **kwargs. Шf this is set to *true*,
+ * axes which are reduced over will be left in the result as a dimension with size one,
+ * so that the result will broadcast correctly against the inputs.
+ * @param casting item from **kwargs. See [Casting].
+ * @param order item from **kwargs. See [Order].
+ * @param dtype item from **kwargs. [KtNDArray] type.
+ * @param subok item from **kwargs. If *true*, then sub-classes will be passed-through,
+ * otherwise the returned array will be forced to be a base-class array (default).
+ * @param kClass type to which the result is converted.
+ * @return object of a [kClass] type.
+ */
 fun <T : Any> callFunc(
     nameMethod: Array<String>,
     args: Array<out Any>? = null,

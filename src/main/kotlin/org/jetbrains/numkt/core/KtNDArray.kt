@@ -22,10 +22,22 @@ import org.jetbrains.numkt.callFunc
 import org.jetbrains.numkt.logic.arrayEqual
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import kotlin.collections.ArrayList
 
 
 /**
+ * Wrapper over `numpy.ndarray`. Stores a pointer to ndarray and [DirectBuffer][java.nio.ByteBuffer]
+ * above the memory allocated by numpy for the array.
+ *
+ * @property base Base object. Currently a stub.
+ * @property data [ByteBuffer] of array's data.
+ * @property dtype Type of array's elements.
+ * @property itemsize Length of one array element in bytes.
+ * @property ndim Number of array dimensions.
+ * @property scalar If the array is a scalar, contains it, otherwise null.
+ * @property shape [IntArray] of array dimensions.
+ * @property size Number of elements in the array.
+ * @property strides [IntArray] of bytes to step in each dimension when traversing an array.
+ * @property t The transposed array
  */
 class KtNDArray<T : Any> private constructor(
     private val pointer: Long,
@@ -130,6 +142,9 @@ class KtNDArray<T : Any> private constructor(
         interp.setValue(getPointer(), indexes.map { if (it is IntRange) it.toSlice() else it }.toTypedArray(), element)
     }
 
+    /**
+     * Returns [FlatIterator].
+     */
     fun flatIter(): Iterator<T> {
         return FlatIterator(
             this.data ?: throw NumKtException("KtNDArray is scalar."),
@@ -142,12 +157,18 @@ class KtNDArray<T : Any> private constructor(
         )
     }
 
+    /**
+     * Returns 1-D [List].
+     */
     fun toList(): List<T> = ArrayList<T>(this.size).also {
         for (el in this.flatIter()) {
             it.add(el)
         }
     }
 
+    /**
+     * Returns 2-D [List].
+     */
     fun toList2d(): List<List<T>> {
         assert(this.ndim == 2)
         return MutableList(shape[0]) {
@@ -155,6 +176,9 @@ class KtNDArray<T : Any> private constructor(
         }
     }
 
+    /**
+     * Returns 3-D [List].
+     */
     fun toList3d(): List<List<List<T>>> {
         assert(this.ndim == 3)
         return MutableList(this.shape[0]) {
@@ -170,6 +194,9 @@ class KtNDArray<T : Any> private constructor(
      */
     operator fun iterator(): Iterator<KtNDArray<T>> = NDIterator(this.getPointer())
 
+    /**
+     * Uses [arrayEqual]
+     */
     override fun equals(other: Any?): Boolean {
         if (other !is KtNDArray<*>)
             return false
@@ -191,49 +218,64 @@ class KtNDArray<T : Any> private constructor(
         else
             interp.getField("toString", pointer, String::class.java)
 
-
+    /**
+     * If the array is not a scalar, the counter of the array decreases by one.
+     * If the counter is zero, python will free up memory.
+     */
     protected fun finalize() {
         if (isNotScalar())
             interp.freeArray(pointer, data!!)
     }
 }
 
-// <
+/**
+ * <
+ */
 infix fun <T : Any, C : Number> KtNDArray<T>.lt(other: C): KtNDArray<Boolean> =
     callFunc(nameMethod = arrayOf("ndarray", "__lt__"), args = arrayOf(this, other))
 
 infix fun <T : Any> KtNDArray<T>.lt(other: KtNDArray<T>): KtNDArray<Boolean> =
     callFunc(nameMethod = arrayOf("ndarray", "__lt__"), args = arrayOf(this, other))
 
-// <=
+/**
+ * <=
+ */
 infix fun <T : Any, C : Number> KtNDArray<T>.le(other: C): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("ndarray", "__le__"), args = arrayOf(this, other))
 
 infix fun <T : Any> KtNDArray<T>.le(other: KtNDArray<T>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("ndarray", "__le__"), args = arrayOf(this, other))
 
-// >
+/**
+ * >
+ */
 infix fun <T : Any, C : Number> KtNDArray<T>.gt(other: C): KtNDArray<Boolean> =
     callFunc(nameMethod = arrayOf("ndarray", "__gt__"), args = arrayOf(this, other))
 
 infix fun <T : Any> KtNDArray<T>.gt(other: KtNDArray<T>): KtNDArray<Boolean> =
     callFunc(nameMethod = arrayOf("ndarray", "__gt__"), args = arrayOf(this, other))
 
-// >=
+/**
+ * >=
+ */
 infix fun <T : Any, C : Number> KtNDArray<T>.ge(other: C): KtNDArray<Boolean> =
     callFunc(nameMethod = arrayOf("ndarray", "__ge__"), args = arrayOf(this, other))
 
 infix fun <T : Any> KtNDArray<T>.ge(other: KtNDArray<T>): KtNDArray<Boolean> =
     callFunc(nameMethod = arrayOf("ndarray", "__ge__"), args = arrayOf(this, other))
 
-// ==
+/**
+ * ==
+ */
 infix fun <T : Any, C : Number> KtNDArray<T>.eq(other: C): KtNDArray<Boolean> =
     callFunc(nameMethod = arrayOf("ndarray", "__eq__"), args = arrayOf(this, other))
 
 infix fun <T : Any> KtNDArray<T>.eq(other: KtNDArray<T>): KtNDArray<Boolean> =
     callFunc(nameMethod = arrayOf("ndarray", "__eq__"), args = arrayOf(this, other))
 
-// !=
+/**
+ * !=
+ */
 infix fun <T : Any, C : Number> KtNDArray<T>.ne(other: C): KtNDArray<Boolean> =
     callFunc(nameMethod = arrayOf("ndarray", "__ne__"), args = arrayOf(this, other))
 
