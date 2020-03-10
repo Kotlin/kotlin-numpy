@@ -20,13 +20,13 @@ import org.jetbrains.numkt.callFunc
 import org.jetbrains.numkt.core.KtNDArray
 
 /**
- *
+ * Returns the lowest common multiple of |x1| and |x2|
  */
 fun <T : Number> lcm(x1: KtNDArray<T>, x2: KtNDArray<T>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("lcm"), args = arrayOf(x1, x2))
 
 /**
- *
+ * Returns the greatest common divisor of |x1| and |x2|
  */
 fun <T : Number> gcd(x1: KtNDArray<T>, x2: KtNDArray<T>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("gcd"), args = arrayOf(x1, x2))

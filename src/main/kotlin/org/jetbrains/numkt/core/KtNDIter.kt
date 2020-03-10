@@ -3,12 +3,45 @@ package org.jetbrains.numkt.core
 import org.jetbrains.numkt.Casting
 import org.jetbrains.numkt.NumKtException
 
+/**
+ * Enum class flags for [KtNDIter] iterator.
+ */
 enum class IterFlag {
+    /**
+     * This only affects the iterator when NPY_KEEPORDER is specified for the order parameter.
+     * By default with NPY_KEEPORDER, the iterator reverses axes which have negative strides,
+     * so that memory is traversed in a forward direction.
+     * This disables this step. Use this flag if you want to use the underlying memory-ordering of the axes,
+     * but don’t want an axis reversed.
+     */
     NPY_ITER_DONT_NEGATE_STRIDES,
-    NPY_ITER_REFS_OK, NPY_ITER_ZEROSIZE_OK,
-    NPY_ITER_BUFFERED, NPY_ITER_DELAY_BUFALLOC
+
+    /**
+     * Not impl.
+     */
+    NPY_ITER_REFS_OK,
+
+    /**
+     * Indicates that arrays with a size of zero should be permitted.
+     */
+    NPY_ITER_ZEROSIZE_OK,
+
+    /**
+     * Causes the iterator to store buffering data,
+     * and use buffering to satisfy data type, alignment, and byte-order requirements.
+     */
+    NPY_ITER_BUFFERED,
+
+    /**
+     * When buffering is enabled,
+     * this delays allocation of the buffers until NpyIter_Reset or another reset function is called.
+     */
+    NPY_ITER_DELAY_BUFALLOC
 }
 
+/**
+ * It is a mapping of the C array iterator API.
+ */
 class KtNDIter<T : Any> constructor(
     op: KtNDArray<T>,
     vararg val flags: IterFlag,
@@ -60,12 +93,7 @@ class KtNDIter<T : Any> constructor(
         get() = valueGet(pointer)
 
     val operand: KtNDArray<T> = op
-
-//    constructor(op: KtNDArray<T>, vararg flags: IterFlags, casting: Casting = Casting.SAFE) : this() {
-//        this.pointer = iterNew(op, flags.map { it.name }.toTypedArray(), casting.str)
-//        this.operand = op
-//    }
-
+    
     // java critical
     companion object {
         @JvmStatic

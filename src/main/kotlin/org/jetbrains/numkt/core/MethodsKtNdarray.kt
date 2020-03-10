@@ -23,19 +23,22 @@ private const val NDARRAY_STR = "ndarray"
 /**
  * Test whether all array elements along a given axis evaluate to *true*.
  *
- * @param axis: default none, [Int] or [IntArray]- axis along which a logical AND reduction is performed.
- * If [axis] is negative, in which case if counts from the last to the first axis.
- *
- * @return new [KtNDArray] of type [Boolean] or [Boolean] value.
+ * @return [Boolean] value.
  */
 fun <T : Any> KtNDArray<T>.all(): Boolean =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "all"), args = arrayOf(this), kClass = Boolean::class)
 
-
+/**
+ * @param axis: [Int] or [IntArray]- axis along which a logical AND reduction is performed.
+ * If [axis] is negative, in which case if counts from the last to the first axis.
+ *
+ * @return new [KtNDArray] of type [Boolean].
+ */
 fun <T : Any> KtNDArray<T>.all(vararg axis: Int): KtNDArray<Boolean> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "all"), args = arrayOf(this, axis))
 
-/** Returns 'true' if all elements satisfy the predicate.
+/**
+ * Returns *true* if all elements satisfy the predicate.
  * Using buffer.
  */
 inline fun <T : Any> KtNDArray<T>.all(predicate: (T) -> Boolean): Boolean {
@@ -47,18 +50,22 @@ inline fun <T : Any> KtNDArray<T>.all(predicate: (T) -> Boolean): Boolean {
 /**
  * Test whether any array element along a given axis evaluates to *true*.
  *
- * @param axis: default none, [Int] or [IntArray] - Axis along which a logical OR reduction is performed.
- * If [axis] is negative, in which case it counts from the last to the first axis.
- *
- * @return new [KtNDArray] of type [Boolean] or [Boolean] value.
+ * @return [Boolean] value.
  */
 fun <T : Any> KtNDArray<T>.any(): Boolean =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "any"), args = arrayOf(this), kClass = Boolean::class)
 
+/**
+ * @param axis: default none, [Int] or [IntArray] - Axis along which a logical OR reduction is performed.
+ * If [axis] is negative, in which case it counts from the last to the first axis.
+ * @return new [KtNDArray] of type [Boolean].
+ */
 fun <T : Any> KtNDArray<T>.any(vararg axis: Int): KtNDArray<Boolean> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "any"), args = arrayOf(this, axis))
 
-/** Returns 'true' if any element satisfy the predicate. */
+/**
+ * Returns 'true' if any element satisfy the predicate.
+ */
 inline fun <T : Any> KtNDArray<T>.any(predicate: (T) -> Boolean): Boolean {
     for (element in this.flatIter()) if (predicate(element)) return true
     return false
@@ -67,14 +74,16 @@ inline fun <T : Any> KtNDArray<T>.any(predicate: (T) -> Boolean): Boolean {
 /**
  * Returns the indices of the maximum values along an axis.
  *
- * @param axis - index is into the specified axis. By default, the index is into the flattened array.
- *
- * @return new [KtNDArray] of type [Long] or [Long] value. Array indices into the array.
- * It has the same shape as [shape] with the dimension along [axis] removed.
+ * @return [Long] value.
  */
 fun <T : Number> KtNDArray<T>.argMax(): Long =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "argmax"), args = arrayOf(this), kClass = Long::class)
 
+/**
+ * @param axis index is into the specified axis. By default, the index is into the flattened array.
+ * @return new [KtNDArray] of type [Long]. Array indices into the array.
+ * It has the same shape as shape with the dimension along [axis] removed.
+ */
 fun <T : Number> KtNDArray<T>.argMax(axis: Int): KtNDArray<Long> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "argmax"), args = arrayOf(this, axis))
 
@@ -82,14 +91,16 @@ fun <T : Number> KtNDArray<T>.argMax(axis: Int): KtNDArray<Long> =
 /**
  * Return the indices of the minimum values along the given axis of array.
  *
- * @param axis - By default, axis is none, the index is nto the flattened array,
- * otherwise along the specified axis.
- *
- * @return new [KtNDArray] of type [Long] or [Long] value.
+ * @return [Long] value.
  */
 fun <T : Number> KtNDArray<T>.argMin(): Long =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "argmin"), args = arrayOf(this), kClass = Long::class)
 
+/**
+ * @param axis By default, axis is none, the index is nto the flattened array,
+ * otherwise along the specified axis.
+ * @return new [KtNDArray] of type [Long].
+ */
 fun <T : Number> KtNDArray<T>.argMin(axis: Int): KtNDArray<Long> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "argmin"), args = arrayOf(this, axis))
 
@@ -97,16 +108,13 @@ fun <T : Number> KtNDArray<T>.argMin(axis: Int): KtNDArray<Long> =
 /**
  * Returns the indices that would partition this array.
  *
- * @param kth - Element index to partition by.
+ * @param kth Element index to partition by.
  * The k-th element will be in its final sorted position and all smaller elements will be moved before it and
  * all larger elements behind it. The order all elements in the partitions is undefined.
  * If provided with a sequence of k-th it will partition all of them into their sorted position at once.
- *
- * @param axis - Axis along which to sort. The default is -1 (the last axis). If null, the flattened array is used.
- *
- * @param kind - Selection algorithm. Default is ‘introselect’.
- *
- * @return [KtNDArray] - Array of indices that partition this array along the specified axis.
+ * @param axis Axis along which to sort. The default is -1 (the last axis). If null, the flattened array is used.
+ * @param kind Selection algorithm. Default is ‘introselect’.
+ * @return [KtNDArray] Array of indices that partition this array along the specified axis.
  */
 fun <T : Any> KtNDArray<T>.argPartition(kth: IntArray, axis: Int? = -1, kind: String = "introselect"): KtNDArray<Long> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "argpartition"), args = arrayOf(this, kth, axis ?: None.none, kind))
@@ -115,11 +123,9 @@ fun <T : Any> KtNDArray<T>.argPartition(kth: IntArray, axis: Int? = -1, kind: St
 /**
  * Returns the indices that would sort this array.
  *
- * @param axis - axis along which to sort.
+ * @param axis axis along which to sort.
  * The default is -1 (the last axis). If null, the flattened array is used.
- *
- * @param kind - sorting algorithm from {'quicksort', 'mergesort', 'heapsort', 'stable'}. The default is 'quicksort'.
- *
+ * @param kind sorting algorithm from {'quicksort', 'mergesort', 'heapsort', 'stable'}. The default is 'quicksort'.
  * @return [KtNDArray] of [Long] type. Array of indices that sort this array along the specified [axis].
  */
 fun <T : Any> KtNDArray<T>.argSort(axis: Int? = -1, kind: String? = null): KtNDArray<Long> =
@@ -133,18 +139,14 @@ fun <T : Any> KtNDArray<T>.argSort(axis: Int? = -1, kind: String? = null): KtNDA
  *
  * type [T] to which the array is cast.
  *
- * @param order: {'C', 'F', 'A', 'K'} - controls the memory layout order of the result. Default is 'K'.
- *
- * @param casting: [Casting] - controls what kind of data casting may occur.
+ * @param order {'C', 'F', 'A', 'K'} - controls the memory layout order of the result. Default is 'K'.
+ * @param casting [Casting] controls what kind of data casting may occur.
  * Defaults to ‘unsafe’ for backwards compatibility.
- *
- * @param subok - If true, then sub-classes will be passed-through (default),
+ * @param subok If *true*, then sub-classes will be passed-through (default),
  * otherwise the returned array will be forced to be a base-class array.
- *
- * @param copy - By default, asType always returns a newly allocated array.
+ * @param copy By default, asType always returns a newly allocated array.
  * If this is set to false, and the type [R], [order], and [subok] requirements are satisfied,
  * the input array is returned instead of a copy.
- *
  * @return [KtNDArray] of type [R].
  * Unless [copy] is false and the other conditions for returning the input array are satisfied
  * (see description for copy input parameter),
@@ -166,9 +168,8 @@ inline fun <T : Any, reified R : Any> KtNDArray<T>.asType(
  * Swap the bytes of the array elements.
  *
  * @param inplace if 'true', swap swap in-place. Default value 'false'.
- *
- * @return [KtNDArray].  If inplace 'true' return view, else copy data to new buffer.
- * */
+ * @return [KtNDArray]. If inplace 'true' return view, else copy data to new buffer.
+ */
 fun <T : Any> KtNDArray<T>.byteSwap(inplace: Boolean = false): KtNDArray<T> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "byteswap"), args = arrayOf(this, inplace))
 
@@ -176,9 +177,8 @@ fun <T : Any> KtNDArray<T>.byteSwap(inplace: Boolean = false): KtNDArray<T> =
 /**
  * Use an index array to construct a new array from a set of choices.
  *
- * @param choices - choice arrays.
- * @param mode - specifies how indices outside [0, n-1] will be treated.
- *
+ * @param choices choice arrays.
+ * @param mode specifies how indices outside ```[0, n-1]``` will be treated.
  * @return The merged [KtNDArray] of type [T].
  */
 fun <E : Number, T : Number> KtNDArray<T>.choose(choices: Array<E>, mode: Mode = Mode.RAISE): KtNDArray<T> =
@@ -192,26 +192,24 @@ fun <E : Number, T : Number> KtNDArray<T>.choose(choices: KtNDArray<E>, mode: Mo
 
 
 /**
- * Return an array whose values are limited to [min, max]. One of max or min must be given.
+ * Return an array whose values are limited to (min, max). One of max or min must be given.
  *
- * @param min - minimum value. If null, clipping is not performed on lower interval edge.
+ * @param min minimum value. If null, clipping is not performed on lower interval edge.
  * Not more than one of [min] and [max] may be null.
- * @param max - maximum value. If null, clipping is not performed on upper interval edge.
+ * @param max maximum value. If null, clipping is not performed on upper interval edge.
  * Not more than one of [min] and [max] may be null.
- *
  * @return [KtNDArray] of type [T].
- * */
+ */
 fun <T : Any> KtNDArray<T>.clip(min: T? = null, max: T? = null): KtNDArray<T> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "clip"), args = arrayOf(this, min ?: None.none, max ?: None.none))
 
 
 /** Return selected slices of this array along given axis.
  *
- * @param condition - array of boolean that selects which entries to return.
- * @param axis - axis along which to take slices. If null (default), work on the flattened array.
- *
+ * @param condition array of boolean that selects which entries to return.
+ * @param axis axis along which to take slices. If null (default), work on the flattened array.
  * @return a copy of a without the slices along axis for which condition is false.
- * */
+ */
 fun <T : Any> KtNDArray<T>.compress(condition: BooleanArray, axis: Int? = null): KtNDArray<T> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "compress"), args = arrayOf(this, condition, axis ?: None.none))
 
@@ -224,7 +222,6 @@ fun <T : Any> KtNDArray<T>.copy(order: Order = Order.C): KtNDArray<T> =
  *
  * @param axis along which the cumulative product is computed.
  * The default (null) is to compute the [cumProd] over the flattened array.
- *
  * @return a new [KtNDArray] of type [T].
  */
 fun <T : Any> KtNDArray<T>.cumProd(axis: Int? = null): KtNDArray<T> =
@@ -236,9 +233,8 @@ fun <T : Any> KtNDArray<T>.cumProd(axis: Int? = null): KtNDArray<T> =
  *
  * @param axis along which the cumulative sum is computed.
  * The default (null) is to compute the [cumSum] over the flattened array.
- *
  * @return a new [KtNDArray] of type [T].
- * */
+ */
 fun <T : Any> KtNDArray<T>.cumSum(axis: Int? = null): KtNDArray<T> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "cumsum"), args = arrayOf(this, axis ?: None.none, this.dtype))
 
@@ -247,28 +243,23 @@ fun <T : Any> KtNDArray<T>.cumSum(axis: Int? = null): KtNDArray<T> =
  *
  * @param offset of the digonal from the main diagonal. Can be positive or negative.
  * Defaults to main diagonal, offset is 0.
- *
  * @param axis1 to be used as the first axis of the 2D subarrays from which the diagonals should be taken.
  * Defaults to first axis is 0.
- *
  * @param axis2 to be used as the second axis of the 2D subarrays from which the diagonals should be taken.
  * Defaults to second axis is 1
- *
- * @return
- * */
+ */
 fun <T : Any> KtNDArray<T>.diagonal(offset: Int = 0, axis1: Int = 0, axis2: Int = 1): KtNDArray<T> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "diagonal"), args = arrayOf(this, offset, axis1, axis2))
+
+private fun <T : Number, E : Number, R : Number> KtNDArray<T>.prDot(b: KtNDArray<E>): KtNDArray<R> =
+    callFunc(nameMethod = arrayOf(NDARRAY_STR, "dot"), args = arrayOf(this, b))
 
 /**
  * Dot product of two arrays.
  *
- * @param b - second array.
- *
+ * @param b second array.
  * @return returns the dot product this array and b array.
  */
-private fun <T : Number, E : Number, R : Number> KtNDArray<T>.prDot(b: KtNDArray<E>): KtNDArray<R> =
-    callFunc(nameMethod = arrayOf(NDARRAY_STR, "dot"), args = arrayOf(this, b))
-
 @JvmName("byteDotOther")
 fun <T : Number> KtNDArray<Byte>.dot(b: KtNDArray<T>): KtNDArray<T> = this.prDot(b)
 
@@ -322,6 +313,7 @@ fun <T : Number> KtNDArray<Double>.dot(b: KtNDArray<T>): KtNDArray<Double> = thi
 
 /**
  * Dump a pickle of the array to the specified file.
+ * @param file filename.
  */
 fun <T : Any> KtNDArray<T>.dump(file: String) {
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "dump"), args = arrayOf(this, file), kClass = Unit::class)
@@ -345,8 +337,7 @@ fun <T : Any> KtNDArray<T>.fill(value: T) {
 /**
  * Return a copy of the array collapsed into one dimension.
  *
- * @param order - [Order]
- *
+ * @param order see [Order].
  * @return a flatten [KtNDArray] of type [T].
  */
 fun <T : Any> KtNDArray<T>.flatten(order: Order = Order.C): KtNDArray<T> =
@@ -356,12 +347,11 @@ fun <T : Any> KtNDArray<T>.flatten(order: Order = Order.C): KtNDArray<T> =
  * Returns a field of the given array as a certain type.
  * A field is a view of the array data with a given data-type.
  *
- * @param T - type of array.
- * @param R - type of field.
- * @param offset - numbers of bytes to skip before beginning the element view.
- *
+ * @param T type of array.
+ * @param R type of field.
+ * @param offset numbers of bytes to skip before beginning the element view.
  * @return view of [KtNDArray] of type [R].
- * */
+ */
 inline fun <T : Any, reified R : Any> KtNDArray<T>.getfield(offset: Int = 0): KtNDArray<R> =
     callFunc(nameMethod = arrayOf("ndarray", "getfield"), args = arrayOf(this, R::class.javaObjectType, offset))
 
@@ -382,8 +372,7 @@ fun <T : Any> KtNDArray<T>.itemset(vararg indices: Long, element: T) {
 /**
  * Maximum of an array or maximum along an axis.
  *
- * @param axis - axis or axes along which to operate. By default, flattened input is used.
- *
+ * @param axis axis or axes along which to operate. By default, flattened input is used.
  * @return new [KtNDArray] of type [T] or [T] value.
  */
 inline fun <reified T : Number> KtNDArray<T>.max(): T? =
@@ -395,9 +384,7 @@ fun <T : Any> KtNDArray<T>.max(vararg axis: Int): KtNDArray<T> =
 /**
  * Returns the average of the array elements along given axis.
  *
- * @param axis: none, Int or IntArray - axis or axes along which the means are computed.
- *
- * @return [Double] or [KtNDArray] of [Double].
+ * @return [Double].
  */
 fun <T : Number> KtNDArray<T>.mean(): Double =
     callFunc(
@@ -406,19 +393,25 @@ fun <T : Number> KtNDArray<T>.mean(): Double =
         kClass = Double::class
     )
 
+/**
+ * @param axis Int or IntArray - axis or axes along which the means are computed.
+ * @return [KtNDArray].
+ */
 fun <T : Number> KtNDArray<T>.mean(vararg axis: Int): KtNDArray<Double> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "mean"), args = arrayOf(this, axis, Double::class.javaObjectType))
 
 /**
  * Return the minimum along a given axis.
  *
- * @param axis - axis or axes along which to operate. By default, flattened input is used.
- *
- * @return new [KtNDArray] of type [T] or [T] value.
+ * @return [T] value.
  */
 inline fun <reified T : Any> KtNDArray<T>.min(): T? =
     callFunc(nameMethod = arrayOf("ndarray", "min"), args = arrayOf(this), kClass = T::class)
 
+/**
+ * @param axis axis or axes along which to operate.
+ * @return new [KtNDArray] of type [T]/
+ */
 fun <T : Any> KtNDArray<T>.min(vararg axis: Int): KtNDArray<T> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "min"), args = arrayOf(this, axis))
 
@@ -426,11 +419,10 @@ fun <T : Any> KtNDArray<T>.min(vararg axis: Int): KtNDArray<T> =
  * Return the array with the same data viewed with a different byte order.
  *
  * @param newOrder - 'S' - swap dtype from current to opposite endian
- * {'<', 'L'} - little endian
- * {'>', 'B'} - big endian
- * {'=', 'N'} - native endian
- * {‘|’, ‘I’} - ignore (no change to byte order)
- * default 'S'
+ * - {'<', 'L'} - little endian
+ * - {'>', 'B'} - big endian
+ * - {'=', 'N'} - native endian
+ * - {‘|’, ‘I’} - ignore (no change to byte order)
  */
 fun <T : Any> KtNDArray<T>.newByteOrder(newOrder: Char = 'S'): KtNDArray<T> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "newbyteorder"), args = arrayOf(this, newOrder))
@@ -446,9 +438,9 @@ fun <T : Any> KtNDArray<T>.nonZero(): Array<Any> =
  * Rearranges the elements in the array in such a way that the value of
  * the element in kth position is in the position it would be in a sorted array.
  *
- * @param kth - element index to partition by.
- * @param axis - axis along which to sort. Default is -1, which means sort along the last axis.
- * @param kind - selection algorithm. Default is 'introselect'.
+ * @param kth element index to partition by.
+ * @param axis axis along which to sort. Default is -1, which means sort along the last axis.
+ * @param kind selection algorithm. Default is 'introselect'.
  */
 fun <T : Any> KtNDArray<T>.partition(kth: IntArray, axis: Int = -1, kind: String = "introselect") {
     callFunc(
@@ -462,9 +454,7 @@ fun <T : Any> KtNDArray<T>.partition(kth: IntArray, axis: Int = -1, kind: String
 /**
  * Return the product of the array elements over the given axis.
  *
- * @param axis: none, [Int] or [IntArray] - axis or axes along which a product is performed.
- *
- * @return new [KtNDArray] of type [T] or [T] value.
+ * @return [T] value.
  */
 inline fun <reified T : Number> KtNDArray<T>.prod(): T =
     callFunc(
@@ -473,14 +463,18 @@ inline fun <reified T : Number> KtNDArray<T>.prod(): T =
         kClass = T::class
     )
 
+/**
+ * @param axis [Int] or [IntArray] - axis or axes along which a product is performed.
+ *
+ * @return new [KtNDArray] of type [T].
+ */
 fun <T : Number> KtNDArray<T>.prod(vararg axis: Int): KtNDArray<T> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "prod"), args = arrayOf(this, axis, this.dtype))
 
 /**
  * Peak to peak (maximum - minimum) value along a given axis.
  *
- * @param axis: null, [Int], [IntArray] - Axis along which to find the peaks.
- *
+ * @param axis null, [Int], [IntArray] - Axis along which to find the peaks.
  * @return A new array holding the result.
  */
 fun <T : Number> KtNDArray<T>.ptp(vararg axis: Int? = emptyArray()): KtNDArray<T> =
@@ -511,8 +505,8 @@ fun <T : Any> KtNDArray<T>.ravel(order: Order = Order.C): KtNDArray<T> =
 /**
  * Repeat elements of an array.
  *
- * @param repeats - The number of repetitions for each element.
- * @param axis - The axis along which to repeat values.
+ * @param repeats The number of repetitions for each element.
+ * @param axis The axis along which to repeat values.
  * By default, use the flattened input array, and return a flat output array.
  *
  * @return [KtNDArray]. Output array which has the same shape as input array, except along the given axis.
@@ -540,7 +534,7 @@ fun <T : Any> KtNDArray<T>.resize(vararg dims: Int) {
 /**
  * Return a with each element rounded to the given number of decimals.
  *
- * @param decimals - Number of decimal places to round to (default: 0).
+ * @param decimals Number of decimal places to round to (default: 0).
  * If decimals is negative, it specifies the number of positions to the left of the decimal point.
  *
  * @return [KtNDArray]
@@ -602,9 +596,6 @@ fun <T : Any> KtNDArray<T>.squeeze(axis: Int? = null): KtNDArray<T> =
 /**
  * Returns the standard deviation of the array elements along given axis.
  *
- * @param axis
- * @param ddof
- *
  * @return [Double] or [KtNDArray] of [Double].
  */
 fun <T : Number> KtNDArray<T>.std(ddof: Int = 0): Double =
@@ -623,11 +614,7 @@ fun <T : Number> KtNDArray<T>.std(axis: Int, ddof: Int = 0): KtNDArray<Double> =
 /**
  * Sum of array elements over a given axis.
  *
- * @param axis - Axis or axes along which a sum is performed.
- * If [axis] is negative it counts from the last to the first axis.
- *
- * @return new [KtNDArray] of type [T]. An array with the same shape as *this*,
- * with the specified axis removed.
+ * @return [T] value.
  */
 inline fun <reified T : Number> KtNDArray<T>.sum(): T? =
     callFunc(
@@ -636,13 +623,19 @@ inline fun <reified T : Number> KtNDArray<T>.sum(): T? =
         kClass = T::class
     )
 
+/**
+ * @param axis Axis or axes along which a sum is performed.
+ * If [axis] is negative it counts from the last to the first axis.
+ * @return new [KtNDArray] of type [T]. An array with the same shape as *this*,
+ * with the specified axis removed.
+ */
 fun <T : Number> KtNDArray<T>.sum(axis: Int): KtNDArray<T> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "sum"), args = arrayOf(this, axis, this.dtype))
 
 /**
  * Return a view of the array with axis1 and axis2 interchanged.
  *
- * @return View
+ * @return View of [KtNDArray].
  */
 fun <T : Any> KtNDArray<T>.swapAxes(axis1: Int, axis2: Int): KtNDArray<T> =
     callFunc(nameMethod = arrayOf(NDARRAY_STR, "swapaxes"), args = arrayOf(this, axis1, axis2))

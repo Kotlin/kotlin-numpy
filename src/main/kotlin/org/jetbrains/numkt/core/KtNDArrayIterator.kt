@@ -20,6 +20,9 @@ import org.jetbrains.numkt.Interpreter.Companion.interpreter
 import org.jetbrains.numkt.NumKtException
 import java.nio.ByteBuffer
 
+/**
+ * An iterator for an [KtNDArray]. Returns an view even for one-dimensional arrays.
+ */
 class NDIterator<T : Any>(pointer: Long) : Iterator<KtNDArray<T>> {
     private var ret: KtNDArray<T>? = null
     private val iterator: Long = interpreter!!.getIter(pointer)
@@ -37,7 +40,12 @@ class NDIterator<T : Any>(pointer: Long) : Iterator<KtNDArray<T>> {
     override fun next(): KtNDArray<T> = ret!!
 }
 
-class FlatIterator<T : Any>(
+/**
+ * Iterator over DirectBuffer.
+ *
+ * Iterates through a flattened array. This iterator can work with view.
+ */
+internal class FlatIterator<T : Any>(
     private val data: ByteBuffer,
     private val ndim: Int,
     private val strides: IntArray,

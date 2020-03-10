@@ -23,12 +23,22 @@ import java.nio.file.Files
 private const val pythonScriptName = "utils"
 private const val baseNameNativeLib = "ktnumpy"
 
+/** Type of current operating system. */
 enum class OSType {
     MACOS, LINUX, WINDOWS, UNKNOWN
 }
 
+/** A configuration object for Python.
+ *
+ * @property osType is operating system.
+ * @property pythonHome is the location of the standard Python libraries.
+ * @property pythonLibPath is absolute path to *pythonlib*.
+ */
 data class PythonConf(val osType: OSType, val pythonHome: String, val pythonLibPath: String)
 
+/**
+ * Object that provides loading of the native *ktnumpy* and python library.
+ */
 object LibraryLoader {
     private val nameNativeLib = System.mapLibraryName(baseNameNativeLib)
     private val tmpDir: File
@@ -67,6 +77,11 @@ object LibraryLoader {
         }
     }
 
+    /**
+     * Load *ktnumpy* and *pythonlib*.
+     *
+     * Pip is used to search for *ktnumpy*, if *ktnumpy* is not installed, pip installs the appropriate version.
+     */
     fun loadLibraries() {
 
         //load python lib
@@ -114,7 +129,7 @@ object LibraryLoader {
             .readLine()
 }
 
-fun getOS(): OSType {
+private fun getOS(): OSType {
     val os = System.getProperty("os.name")
     return when {
         os.contains("Darwin") || os.contains("Mac OS X") -> OSType.MACOS

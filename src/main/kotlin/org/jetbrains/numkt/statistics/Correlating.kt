@@ -20,20 +20,43 @@ import org.jetbrains.numkt.callFunc
 import org.jetbrains.numkt.core.KtNDArray
 import org.jetbrains.numkt.core.None
 
+/**
+ *
+ */
 enum class ModeCorr(val str: String) {
+    /**
+     * Mode ‘valid’ returns output of length max(M, N) - min(M, N) + 1.
+     * The convolution product is only given for points where the signals overlap completely.
+     * Values outside the signal boundary have no effect.
+     */
     VALID("valid"),
+
+    /**
+     * Mode ‘same’ returns output of length max(M, N). Boundary effects are still visible.
+     */
     SAME("same"),
+
+    /**
+     * By default, mode is ‘full’.
+     * This returns the convolution at each point of overlap, with an output shape of (N+M-1,).
+     * At the end-points of the convolution, the signals do not overlap completely, and boundary
+     * effects may be seen.
+     */
     FULL("full")
 }
 
-
+/**
+ * Return Pearson product-moment correlation coefficients.
+ */
 fun <T : Number, E : Number> corrcoef(
     x: KtNDArray<T>,
     y: KtNDArray<E>? = null,
     rowvar: Boolean = true
 ): KtNDArray<Double> = callFunc(nameMethod = arrayOf("corrcoef"), args = arrayOf(x, y ?: None.none, rowvar))
 
-
+/**
+ * Cross-correlation of two 1-dimensional sequences.
+ */
 fun <T : Number, E : Number> correlate(
     a: KtNDArray<T>,
     v: KtNDArray<E>,
@@ -41,7 +64,9 @@ fun <T : Number, E : Number> correlate(
 ): KtNDArray<Double> =
     callFunc(nameMethod = arrayOf("corrcoef"), args = arrayOf(a, v, mode.str))
 
-
+/**
+ * Estimate a covariance matrix, given data and weights.
+ */
 fun <T : Number, E : Number> cov(
     m: KtNDArray<T>,
     y: KtNDArray<E>? = null,

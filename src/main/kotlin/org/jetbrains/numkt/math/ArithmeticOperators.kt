@@ -32,6 +32,9 @@ private fun <T: Any, L: Any, R: Any> add(left: L, right: R): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("add"), args = arrayOf(left, right))
 
 // Byte
+/**
+ * Plus. Returns new [KtNDArray].
+ */
 @JvmName("bytePlusByte") operator fun KtNDArray<Byte>.plus(other: KtNDArray<Byte>): KtNDArray<Byte> = add(this, other)
 @JvmName("bytePlusShort") operator fun KtNDArray<Byte>.plus(other: KtNDArray<Short>): KtNDArray<Short> = add(this, other)
 @JvmName("bytePlusInt") operator fun KtNDArray<Byte>.plus(other: KtNDArray<Int>): KtNDArray<Int> = add(this, other)
@@ -48,6 +51,9 @@ private fun <T: Any, L: Any, R: Any> add(left: L, right: R): KtNDArray<T> =
 
 @JvmName("scalarBytePlusByte") operator fun <R: Number> Byte.plus(other: KtNDArray<R>): KtNDArray<R> = add(this, other)
 
+/**
+ * Plus. In-place operation.
+ */
 @JvmName("bytePlusAssignNDByte") operator fun KtNDArray<Byte>.plusAssign(other: KtNDArray<Byte>) = plusAssignTwoKtNDArray(this, other)
 @JvmName("bytePlusAssignNDShort") operator fun KtNDArray<Byte>.plusAssign(other: KtNDArray<Short>) = plusAssignTwoKtNDArray(this, other)
 @JvmName("bytePlusAssignNDInt") operator fun KtNDArray<Byte>.plusAssign(other: KtNDArray<Int>) = plusAssignTwoKtNDArray(this, other)
@@ -225,6 +231,9 @@ private fun <T: Any, L: Any, R: Any> subtract(left: L, right: R): KtNDArray<T> =
 
 
 // Byte
+/**
+ * Subtract. Returns [KtNDArray].
+ */
 @JvmName("byteMinusByte") operator fun KtNDArray<Byte>.minus(other: KtNDArray<Byte>): KtNDArray<Byte> = subtract(this, other)
 @JvmName("byteMinusShort") operator fun KtNDArray<Byte>.minus(other: KtNDArray<Short>): KtNDArray<Short> = subtract(this, other)
 @JvmName("byteMinusInt") operator fun KtNDArray<Byte>.minus(other: KtNDArray<Int>): KtNDArray<Int> = subtract(this, other)
@@ -241,6 +250,9 @@ private fun <T: Any, L: Any, R: Any> subtract(left: L, right: R): KtNDArray<T> =
 
 @JvmName("scalarByteMinus") operator fun <R: Number> Byte.minus(other: KtNDArray<R>): KtNDArray<R> = subtract(this, other)
 
+/**
+ * Subtract. In-place operation.
+ */
 @JvmName("byteMinusAssignNDByte") operator fun KtNDArray<Byte>.minusAssign(other: KtNDArray<Byte>) = minusAssignTwoKtNDArray(this, other)
 @JvmName("byteMinusAssignNDShort") operator fun KtNDArray<Byte>.minusAssign(other: KtNDArray<Short>) = minusAssignTwoKtNDArray(this, other)
 @JvmName("byteMinusAssignNDInt") operator fun KtNDArray<Byte>.minusAssign(other: KtNDArray<Int>) = minusAssignTwoKtNDArray(this, other)
@@ -418,6 +430,9 @@ private fun <T: Any, L: Any, R: Any> multiply(left: L, right: R): KtNDArray<T> =
 
 
 // Byte
+/**
+ * Multiply. Returns [KtNDArray].
+ */
 @JvmName("byteMultiplyByte") operator fun KtNDArray<Byte>.times(other: KtNDArray<Byte>): KtNDArray<Byte> = multiply(this, other)
 @JvmName("byteMultiplyShort") operator fun KtNDArray<Byte>.times(other: KtNDArray<Short>): KtNDArray<Short> = multiply(this, other)
 @JvmName("byteMultiplyInt") operator fun KtNDArray<Byte>.times(other: KtNDArray<Int>): KtNDArray<Int> = multiply(this, other)
@@ -434,6 +449,9 @@ private fun <T: Any, L: Any, R: Any> multiply(left: L, right: R): KtNDArray<T> =
 
 @JvmName("scalarByteMultiply") operator fun <R: Number> Byte.times(other: KtNDArray<R>): KtNDArray<R> = multiply(this, other)
 
+/**
+ * Multiply. In-place operation.
+ */
 @JvmName("byteMultiplyAssignNDByte") operator fun KtNDArray<Byte>.timesAssign(other: KtNDArray<Byte>) = timesAssignTwoKtNDArray(this, other)
 @JvmName("byteMultiplyAssignNDShort") operator fun KtNDArray<Byte>.timesAssign(other: KtNDArray<Short>) = timesAssignTwoKtNDArray(this, other)
 @JvmName("byteMultiplyAssignNDInt") operator fun KtNDArray<Byte>.timesAssign(other: KtNDArray<Int>) = timesAssignTwoKtNDArray(this, other)
@@ -609,7 +627,9 @@ private fun <T: KtNDArray<*>, S: Number> divAssignScalar(array: T, scalar: S) {
 private fun <T: Any, L: Any, R: Any> divide(left: L, right: R): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("divide"), args = arrayOf(left, right))
 
-
+/**
+ * Divide. Returns [KtNDArray].
+ */
 @JvmName("arrayDivideArray") operator fun <T: Number, T1: Number, L : KtNDArray<T>, R : KtNDArray<T1>> L.div(other: R): KtNDArray<Double> = divide(this, other)
 @JvmName("arrayDivideScalar") operator fun <T: Number, T1: Number, L: KtNDArray<T>> L.div(other: T1): KtNDArray<Double> = divide(this, other)
 @JvmName("scalarDivideArray") operator fun <T: Number, T1: Number, R: KtNDArray<T>> T1.div(other: R): KtNDArray<Double> = divide(this, other)
@@ -619,6 +639,9 @@ private fun <T: Any, L: Any, R: Any> divide(left: L, right: R): KtNDArray<T> =
 // Byte
 @JvmName("byteDivideFloat") operator fun KtNDArray<Byte>.div(other: KtNDArray<Float>): KtNDArray<Float> = divide(this, other)
 
+/**
+ * Divide. In-place operation.
+ */
 @JvmName("byteDivideAssignNDByte") operator fun KtNDArray<Byte>.divAssign(other: KtNDArray<Byte>) = divAssignTwoKtNDArray(this, other)
 @JvmName("byteDivideAssignNDShort") operator fun KtNDArray<Byte>.divAssign(other: KtNDArray<Short>) = divAssignTwoKtNDArray(this, other)
 @JvmName("byteDivideAssignNDInt") operator fun KtNDArray<Byte>.divAssign(other: KtNDArray<Int>) = divAssignTwoKtNDArray(this, other)
@@ -712,9 +735,14 @@ operator fun <T: Number> KtNDArray<T>.unaryMinus(): KtNDArray<T> =
 operator fun <T: Number> KtNDArray<T>.unaryPlus(): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("ndarray", "__pos__"), args = arrayOf(this))
 
+/**
+ * Alias for [dot].
+ */
 inline infix fun <reified T: Number> KtNDArray<T>.`@`(other: KtNDArray<T>) = dot(this, other)
 
-
+/**
+ * Pow operator
+ */
 infix fun <T: Number> KtNDArray<T>.`**`(other: Byte): KtNDArray<T> = power(this, other)
 
 infix fun <T: Number> KtNDArray<T>.`**`(other: Short): KtNDArray<T> = power(this, other)

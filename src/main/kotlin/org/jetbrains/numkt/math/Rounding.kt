@@ -20,32 +20,32 @@ import org.jetbrains.numkt.callFunc
 import org.jetbrains.numkt.core.KtNDArray
 
 /**
- *
+ * Evenly round to the given number of decimals.
  */
 fun <T : Number> around(a: KtNDArray<T>, decimals: Int = 0): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("around"), args = arrayOf(a, decimals))
 
 /**
- *
+ * Round an array to the given number of decimals.
  */
 fun <T : Number> rint(a: KtNDArray<T>): KtNDArray<Double> = callFunc(nameMethod = arrayOf("rint"), args = arrayOf(a))
 
 /**
- *
+ * Round to nearest integer towards zero.
  */
 fun <T : Number> fix(a: KtNDArray<T>): KtNDArray<Double> = callFunc(nameMethod = arrayOf("fix"), args = arrayOf(a))
 
 /**
- *
+ * 	Return the floor of the input, element-wise.
  */
 fun <T : Number> floor(a: KtNDArray<T>): KtNDArray<Double> = callFunc(nameMethod = arrayOf("floor"), args = arrayOf(a))
 
 /**
- *
+ * 	Return the ceiling of the input, element-wise.
  */
 fun <T : Number> ceil(a: KtNDArray<T>): KtNDArray<Double> = callFunc(nameMethod = arrayOf("ceil"), args = arrayOf(a))
 
 /**
- *
+ * Return the truncated value of the input, element-wise.
  */
 fun <T : Number> trunc(a: KtNDArray<T>): KtNDArray<Double> = callFunc(nameMethod = arrayOf("trunc"), args = arrayOf(a))

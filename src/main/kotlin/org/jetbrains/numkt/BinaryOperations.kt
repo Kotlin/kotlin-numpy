@@ -19,12 +19,12 @@ package org.jetbrains.numkt
 import org.jetbrains.numkt.core.KtNDArray
 import org.jetbrains.numkt.core.None
 
-/**
- * Compute the bit-wise AND of two arrays element-wise.
- */
 private inline fun <L: Any, R: Any, reified T: Any> bitwiseAndOp(x1: KtNDArray<L>, x2: KtNDArray<R>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("bitwise_and"), args = arrayOf(x1,  x2))
 
+/**
+ * Compute the bit-wise AND of two arrays element-wise.
+ */
 @JvmName("boolAndBool") fun bitwiseAnd(x1: KtNDArray<Boolean>, x2: KtNDArray<Boolean>): KtNDArray<Boolean> = bitwiseAndOp(x1, x2)
 @JvmName("boolAndByte") fun bitwiseAnd(x1: KtNDArray<Boolean>, x2: KtNDArray<Byte>): KtNDArray<Byte> = bitwiseAndOp(x1, x2)
 @JvmName("boolAndShort") fun bitwiseAnd(x1: KtNDArray<Boolean>, x2: KtNDArray<Short>): KtNDArray<Short> = bitwiseAndOp(x1, x2)
@@ -52,12 +52,12 @@ private inline fun <L: Any, R: Any, reified T: Any> bitwiseAndOp(x1: KtNDArray<L
 @JvmName("longAndLong") fun bitwiseAnd(x1: KtNDArray<Long>, x2: KtNDArray<Long>): KtNDArray<Long> = bitwiseAndOp(x1, x2)
 
 
-/**
- *
- */
 private inline fun <L: Any, R: Any, reified T: Any> bitwiseOrOp(x1: KtNDArray<L>, x2: KtNDArray<R>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("bitwise_or"), args = arrayOf(x1,  x2))
 
+/**
+ * Compute the bit-wise OR of two arrays element-wise.
+ */
 @JvmName("boolOrBool") fun bitwiseOr(x1: KtNDArray<Boolean>, x2: KtNDArray<Boolean>): KtNDArray<Boolean> = bitwiseOrOp(x1, x2)
 @JvmName("boolOrByte") fun bitwiseOr(x1: KtNDArray<Boolean>, x2: KtNDArray<Byte>): KtNDArray<Byte> = bitwiseOrOp(x1, x2)
 @JvmName("boolOrShort") fun bitwiseOr(x1: KtNDArray<Boolean>, x2: KtNDArray<Short>): KtNDArray<Short> = bitwiseOrOp(x1, x2)
@@ -84,12 +84,13 @@ private inline fun <L: Any, R: Any, reified T: Any> bitwiseOrOp(x1: KtNDArray<L>
 @JvmName("intOrLong") fun bitwiseOr(x1: KtNDArray<Int>, x2: KtNDArray<Long>): KtNDArray<Long> = bitwiseOrOp(x1, x2)
 @JvmName("longOrLong") fun bitwiseOr(x1: KtNDArray<Long>, x2: KtNDArray<Long>): KtNDArray<Long> = bitwiseOrOp(x1, x2)
 
-/**
- *
- */
+
 private inline fun <L: Any, R: Any, reified T: Any> bitwiseXorOp(x1: KtNDArray<L>, x2: KtNDArray<R>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("bitwise_xor"), args = arrayOf(x1,  x2))
 
+/**
+ * Compute the bit-wise XOR of two arrays element-wise.
+ */
 @JvmName("boolXorBool") fun bitwiseXor(x1: KtNDArray<Boolean>, x2: KtNDArray<Boolean>): KtNDArray<Boolean> = bitwiseXorOp(x1, x2)
 @JvmName("boolXorByte") fun bitwiseXor(x1: KtNDArray<Boolean>, x2: KtNDArray<Byte>): KtNDArray<Byte> = bitwiseXorOp(x1, x2)
 @JvmName("boolXorShort") fun bitwiseXor(x1: KtNDArray<Boolean>, x2: KtNDArray<Short>): KtNDArray<Short> = bitwiseXorOp(x1, x2)
@@ -116,12 +117,13 @@ private inline fun <L: Any, R: Any, reified T: Any> bitwiseXorOp(x1: KtNDArray<L
 @JvmName("intXorLong") fun bitwiseXor(x1: KtNDArray<Int>, x2: KtNDArray<Long>): KtNDArray<Long> = bitwiseXorOp(x1, x2)
 @JvmName("longXorLong") fun bitwiseXor(x1: KtNDArray<Long>, x2: KtNDArray<Long>): KtNDArray<Long> = bitwiseXorOp(x1, x2)
 
-/**
- *
- */
+
 private fun <T: Any> invertOp(x: KtNDArray<T>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("invert"), args = arrayOf(x))
 
+/**
+ * Compute bit-wise inversion, or bit-wise NOT, element-wise.
+ */
 @JvmName("invertBool") fun invert(x: KtNDArray<Boolean>): KtNDArray<Boolean> = invertOp(x)
 @JvmName("invertByte") fun invert(x: KtNDArray<Byte>): KtNDArray<Byte> = invertOp(x)
 @JvmName("invertShort") fun invert(x: KtNDArray<Short>): KtNDArray<Short> = invertOp(x)
@@ -129,12 +131,12 @@ private fun <T: Any> invertOp(x: KtNDArray<T>): KtNDArray<T> =
 @JvmName("invertLong") fun invert(x: KtNDArray<Long>): KtNDArray<Long> = invertOp(x)
 
 
-/**
- *
- */
 private inline fun <L: Any, R: Any, reified T: Any> leftShiftOp(x1: KtNDArray<L>, x2: KtNDArray<R>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("left_shift"), args = arrayOf(x1, x2))
 
+/**
+ * Shift the bits of an integer to the left.
+ */
 @JvmName("byteLeftShiftByte") fun leftShift(x1: KtNDArray<Byte>, x2: KtNDArray<Byte>): KtNDArray<Byte> = leftShiftOp(x1, x2)
 @JvmName("shortLeftShiftByte") fun leftShift(x1: KtNDArray<Short>, x2: KtNDArray<Byte>): KtNDArray<Short> = leftShiftOp(x1, x2)
 @JvmName("intLeftShiftByte") fun leftShift(x1: KtNDArray<Int>, x2: KtNDArray<Byte>): KtNDArray<Int> = leftShiftOp(x1, x2)
@@ -153,13 +155,12 @@ private inline fun <L: Any, R: Any, reified T: Any> leftShiftOp(x1: KtNDArray<L>
 @JvmName("longLeftShiftLong") fun leftShift(x1: KtNDArray<Long>, x2: KtNDArray<Long>): KtNDArray<Long> = leftShiftOp(x1, x2)
 
 
-/**
- *
- */
 private inline fun <L: Any, R: Any, reified T: Any> rightShiftOp(x1: KtNDArray<L>, x2: KtNDArray<R>): KtNDArray<T> =
     callFunc(nameMethod = arrayOf("right_shift"), args = arrayOf(x1, x2))
 
-
+/**
+ * Shift the bits of an integer to the right.
+ */
 @JvmName("byteRightShiftByte") fun rightShift(x1: KtNDArray<Byte>, x2: KtNDArray<Byte>): KtNDArray<Byte> = rightShiftOp(x1, x2)
 @JvmName("shortRightShiftByte") fun rightShift(x1: KtNDArray<Short>, x2: KtNDArray<Byte>): KtNDArray<Short> = rightShiftOp(x1, x2)
 @JvmName("intRightShiftByte") fun rightShift(x1: KtNDArray<Int>, x2: KtNDArray<Byte>): KtNDArray<Int> = rightShiftOp(x1, x2)
@@ -177,12 +178,13 @@ private inline fun <L: Any, R: Any, reified T: Any> rightShiftOp(x1: KtNDArray<L
 @JvmName("intRightShiftLong") fun rightShift(x1: KtNDArray<Int>, x2: KtNDArray<Long>): KtNDArray<Long> = rightShiftOp(x1, x2)
 @JvmName("longRightShiftLong") fun rightShift(x1: KtNDArray<Long>, x2: KtNDArray<Long>): KtNDArray<Long> = rightShiftOp(x1, x2)
 
-/**
- *
- */
+
 private fun <T: Any> packbitsOp(a: KtNDArray<T>, axis: Int? = null, bitorder: String): KtNDArray<Byte> =
     callFunc(nameMethod = arrayOf("packbits"), args = arrayOf(a, axis ?: None.none, bitorder))
 
+/**
+ * Packs the elements of a binary-valued array into bits in a uint8 array.
+ */
 @JvmName("packbitsBool") fun packbits(x: KtNDArray<Boolean>, axis: Int? = null, bitorder: String = "big"): KtNDArray<Byte> = packbitsOp(x, axis, bitorder)
 @JvmName("packbitsByte") fun packbits(x: KtNDArray<Byte>, axis: Int? = null, bitorder: String = "big"): KtNDArray<Byte> = packbitsOp(x, axis, bitorder)
 @JvmName("packbitsShort") fun packbits(x: KtNDArray<Short>, axis: Int? = null, bitorder: String = "big"): KtNDArray<Byte> = packbitsOp(x, axis, bitorder)
@@ -191,13 +193,21 @@ private fun <T: Any> packbitsOp(a: KtNDArray<T>, axis: Int? = null, bitorder: St
 
 
 /**
+ * Unpacks elements of a uint8 array into a binary-valued output array.
  *
+ * @param a input array.
+ * @param axis the dimension over which bit-unpacking is done.
+ * @param count the number of elements to unpack along [axis],
+ * provided as a way of undoing the effect of packing a size that is not a multiple of eight.
+ * @param bitorder the order of the returned bits.
+ * @return the elements are binary-valued (0, or 1).
+ * @see packbits
  */
 fun unpackbits(a: KtNDArray<Byte>, axis: Int? = null, count: Int? = null, bitorder: String = "big"): KtNDArray<Byte> =
     callFunc(nameMethod = arrayOf("unpackbits"), args = arrayOf(a, axis ?: None.none, count ?: None.none, bitorder))
 
 /**
- *
+ * Return the binary representation of the input number as a string.
  */
 fun binaryRepr(num: Int, width: Int? = null): String =
     callFunc(nameMethod = arrayOf("binary_repr"), args = arrayOf(num, width ?: None.none), kClass = String::class)

@@ -16,8 +16,14 @@
 
 package org.jetbrains.numkt.core
 
-fun Array<out Slice>.slicePythonView(): String = this.joinToString(prefix = "[", postfix = "]") { it.slice }
-
+/**
+ * eq. python slice. 1:2:3 ~ 1..2..3
+ *
+ * @property start starting integer where the slicing of the object starts.
+ * @property stop integer until which the slicing takes place.
+ * @property step integer value which determines the increment between each index for slicing.
+ * @property slice string representation.
+ */
 class Slice private constructor(val start: Int?, val stop: Int?, val step: Int?) {
 
     val slice: String = buildString {
