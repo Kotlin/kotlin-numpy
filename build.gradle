@@ -27,7 +27,7 @@ plugins {
 }
 
 group 'org.jetbrains'
-version '0.1.1'
+version project.findProperty('version')
 
 repositories {
     jcenter()
@@ -149,9 +149,10 @@ shadowJar {
 
     configurations = [project.configurations.compile]
 
-    metaInf {
-        from "$buildDir/libs/ktnumpy/shared/release/" into 'Native'
-    }
+    manifest.attributes(
+            'Implementation-Title': project.name,
+            'Implementation-Version': version
+    )
 
     metaInf {
         from 'buildScr/python' into 'pythonScript' include('*.py')

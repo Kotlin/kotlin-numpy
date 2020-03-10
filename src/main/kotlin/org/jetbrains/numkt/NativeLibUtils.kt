@@ -17,7 +17,6 @@
 package org.jetbrains.numkt
 
 import java.io.File
-import java.io.FileNotFoundException
 import java.nio.file.Files
 
 private const val pythonScriptName = "utils"
@@ -40,6 +39,7 @@ data class PythonConf(val osType: OSType, val pythonHome: String, val pythonLibP
  * Object that provides loading of the native *ktnumpy* and python library.
  */
 object LibraryLoader {
+    private var version: String? = null
     private val nameNativeLib = System.mapLibraryName(baseNameNativeLib)
     private val tmpDir: File
     val pythonConf by lazy {
@@ -48,15 +48,7 @@ object LibraryLoader {
         PythonConf(
             osType = osType,
             pythonHome = pythonHome,
-            pythonLibPath = if (osType == OSType.WINDOWS) buildString {
-                append(pythonHome)
-                append('\\')
-                append(getPythonEnv(pythonScriptName, "get_pylib"))
-                append(".dll")
-            } else getPythonEnv(
-                pythonScriptName,
-                "get_pylib_path"
-            )
+            pythonLibPath = getPythonEnv(pythonScriptName, "get_pylib_path")
         )
     }
 
@@ -66,14 +58,10 @@ object LibraryLoader {
             tmpDir = dirScr
         } else {
             tmpDir = Files.createTempDirectory("nativeKtNumPy").toFile().apply(File::deleteOnExit)
+            version = this::class.java.`package`.implementationVersion
 
-            //extract py script and native lib from jar
-            mapOf(
-                "/META-INF/pythonScript/$pythonScriptName.py" to "$pythonScriptName.py",
-                "/META-INF/Native/$nameNativeLib" to nameNativeLib
-            ).forEach {
-                extractFileFromJar(it.key, it.value)
-            }
+            //extract py script from jar
+            extractFileFromJar("/META-INF/pythonScript/$pythonScriptName.py", "$pythonScriptName.py")
         }
     }
 
@@ -83,12 +71,7 @@ object LibraryLoader {
      * Pip is used to search for *ktnumpy*, if *ktnumpy* is not installed, pip installs the appropriate version.
      */
     fun loadLibraries() {
-
-        //load python lib
-        if (!File(pythonConf.pythonLibPath).exists()) {
-            throw FileNotFoundException(pythonConf.pythonLibPath)
-        }
-        System.load(pythonConf.pythonLibPath)
+        val locationLib: String
 
         val exceptionMessage = StringBuilder()
 
@@ -102,14 +85,55 @@ object LibraryLoader {
                 .append("\n")
         }
 
+        // pip
+        var pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
+
+        if (pipOut.isEmpty() || "Package(s) not found" in pipOut) {
+            execCommand("python", "-m", "pip", "install", "ktnumpy")
+            pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
+        }
+
+        if (version != null && pipOut.substringAfter("Version: ").substringBefore("\n") != version) {
+            execCommand("python", "-m", "pip", "install", "--upgrade", "ktnumpy")
+        }
+
+        locationLib = if (pythonConf.osType == OSType.WINDOWS) {
+            buildString {
+                append(pythonConf.pythonHome)
+                append("\\Lib\\site-packages\\ktnumpy\\$nameNativeLib")
+            }
+        } else {
+            buildString {
+                append(pipOut.substringAfter("Location: ").substringBefore("\n"))
+                append("/ktnumpy/$nameNativeLib")
+            }
+        }
+
         try {
             // load native lib
-            System.load("${tmpDir.absolutePath}/$nameNativeLib")
+            System.load(locationLib)
         } catch (e: UnsatisfiedLinkError) {
             exceptionMessage
                 .append(e.message)
                 .append("\n")
             throw UnsatisfiedLinkError(exceptionMessage.toString())
+        }
+    }
+
+    private fun execCommand(vararg commands: String): String {
+        val errStr: String
+        val inStr: String
+        ProcessBuilder(*commands)
+            .start()
+            .apply {
+                waitFor()
+                errStr = errorStream.bufferedReader().readText()
+                inStr = inputStream.bufferedReader().readText()
+            }
+        return when {
+            errStr.isEmpty() -> inStr
+            "WARNING" in errStr -> errStr
+            else -> throw Exception("\"${errStr.trim()}\" when executing the command: ${commands.joinToString(" ")}")
         }
     }
 
