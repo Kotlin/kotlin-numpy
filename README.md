@@ -231,6 +231,63 @@ When slicing, this is not necessary.
 //    6
 ```
 
+There are three iterators:
+
+##### [NDIterator](src/main/kotlin/org/jetbrains/numkt/core/KtNDArrayIterator.kt).
+Calls a standard Python iterator. Always returns an view. If iteration occurs over a flat array, use the `scalar`
+property to obtain the element. If the array is not a scalar, the `null` will be returned. To check, use methods
+`isScalar` and `isNotScalar`.
+```kotlin
+val a = linspace<Double>(0, 10).reshape(2, 5, 5)
+
+// Get ten one-dimensional arrays
+for (ax1 in a) {
+    for (ax2 in ax1) {
+        println(ax2)
+    }
+}
+
+// Sum of all elements
+var sum = 0.0
+for (ax1 in a) {
+    for (ax2 in ax1) {
+        for (el in ax2) {
+            sum += el.scalar!!
+        }
+    }
+}
+```
+
+##### [KtNDIter](src/main/kotlin/org/jetbrains/numkt/core/KtNDIter.kt).
+This iterator is a mapping of the C array iterator API, like in python `np.nditer`.
+It also displays items in the order they are in memory.
+```kotlin
+val a = arange(6).apply { resize(2, 3) }
+
+// Square each element in the array
+val iter = KtNDIter(a)
+for (i in iter) {
+    a[iter.multiIndex] = i * i
+}
+
+for (x in KtNDIter(a[None..None, 1..None..-1])) {
+    print("$x ")
+}
+```
+
+##### [FlatIterator](src/main/kotlin/org/jetbrains/numkt/core/KtNDArrayIterator.kt).
+An iterator directly above the buffer. The fastest of all these iterators. Able to display view. Use method `flatIter`.
+
+```kotlin
+val a = linspace<Double>(0, 10)
+
+// Displays all items
+for (el in a.flatIter()) {
+    print("$el ")
+}
+```
+
+
 #### Stacking
 
 ```kotlin
