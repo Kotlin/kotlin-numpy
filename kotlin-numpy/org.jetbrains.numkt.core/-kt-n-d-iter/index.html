@@ -1,0 +1,205 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>KtNDIter - kotlin-numpy</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="../index.html">org.jetbrains.numkt.core</a>&nbsp;/&nbsp;<a href="./index.html">KtNDIter</a><br/>
+<br/>
+<h1>KtNDIter</h1>
+<code><span class="keyword">class </span><span class="identifier">KtNDIter</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html"><span class="identifier">AutoCloseable</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/core/KtNDIter.kt#L45">(source)</a>
+<p>It is a mapping of the C array iterator API.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>It is a mapping of the C array iterator API.</p>
+<code><span class="identifier">KtNDIter</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.core.KtNDIter$<init>(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.KtNDIter.T)), kotlin.Array((org.jetbrains.numkt.core.IterFlag)), org.jetbrains.numkt.Casting)/op">op</span><span class="symbol">:</span>&nbsp;<a href="../-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="keyword">vararg</span> <span class="identifier" id="org.jetbrains.numkt.core.KtNDIter$<init>(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.KtNDIter.T)), kotlin.Array((org.jetbrains.numkt.core.IterFlag)), org.jetbrains.numkt.Casting)/flags">flags</span><span class="symbol">:</span>&nbsp;<a href="../-iter-flag/index.html"><span class="identifier">IterFlag</span></a><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.core.KtNDIter$<init>(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.KtNDIter.T)), kotlin.Array((org.jetbrains.numkt.core.IterFlag)), org.jetbrains.numkt.Casting)/casting">casting</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt/-casting/index.html"><span class="identifier">Casting</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Casting.SAFE<span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="finished.html">finished</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">finished</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="flags.html">flags</a></h4>
+</td>
+<td>
+<code><span class="keyword">vararg</span> <span class="keyword">val </span><span class="identifier">flags</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="../-iter-flag/index.html"><span class="identifier">IterFlag</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="has-delayed-bufalloc.html">hasDelayedBufalloc</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">hasDelayedBufalloc</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="has-index.html">hasIndex</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">hasIndex</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="has-multi-index.html">hasMultiIndex</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">hasMultiIndex</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="--index--.html">index</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">index</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="iter-index.html">iterIndex</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">iterIndex</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="iter-range.html">iterRange</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">iterRange</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span class="identifier">Pair</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="iter-size.html">iterSize</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">iterSize</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="multi-index.html">multiIndex</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">multiIndex</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int-array/index.html"><span class="identifier">IntArray</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="ndim.html">ndim</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">ndim</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="operand.html">operand</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">operand</span><span class="symbol">: </span><a href="../-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="shape.html">shape</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">shape</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int-array/index.html"><span class="identifier">IntArray</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="value.html">value</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">value</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="close.html">close</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">close</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="copy.html">copy</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">copy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">KtNDIter</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="debug-print.html">debugPrint</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">debugPrint</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="finalize.html">finalize</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">finalize</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="iterator.html">iterator</a></h4>
+</td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">iterator</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html"><span class="identifier">Iterator</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="iter-next.html">iterNext</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">iterNext</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="next.html">next</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">next</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="remove-axis.html">removeAxis</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeAxis</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.core.KtNDIter$removeAxis(kotlin.Int)/axis">axis</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="remove-multi-index.html">removeMultiIndex</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeMultiIndex</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="reset.html">reset</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">reset</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

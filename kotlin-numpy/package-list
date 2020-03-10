@@ -1,0 +1,61 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:org.jetbrains.numkt.core$rangeTo(kotlin.Int, org.jetbrains.numkt.core.None.Companion)org.jetbrains.numkt.core/kotlin.-int/range-to.html
+$dokka.location:org.jetbrains.numkt.core$rangeTo(kotlin.ranges.IntProgression, kotlin.Int)org.jetbrains.numkt.core/kotlin.ranges.-int-progression/range-to.html
+$dokka.location:org.jetbrains.numkt.core$rangeTo(kotlin.ranges.IntProgression, org.jetbrains.numkt.core.None.Companion)org.jetbrains.numkt.core/kotlin.ranges.-int-progression/range-to.html
+$dokka.location:org.jetbrains.numkt.core$toSlice(kotlin.ranges.IntProgression)org.jetbrains.numkt.core/kotlin.ranges.-int-progression/to-slice.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Byte, org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.math.minus.R)))org.jetbrains.numkt.math/kotlin.-byte/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Byte)))org.jetbrains.numkt.math/kotlin.-double/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Double)))org.jetbrains.numkt.math/kotlin.-double/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Float)))org.jetbrains.numkt.math/kotlin.-double/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Int)))org.jetbrains.numkt.math/kotlin.-double/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Long)))org.jetbrains.numkt.math/kotlin.-double/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Short)))org.jetbrains.numkt.math/kotlin.-double/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Byte)))org.jetbrains.numkt.math/kotlin.-float/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Double)))org.jetbrains.numkt.math/kotlin.-float/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Float)))org.jetbrains.numkt.math/kotlin.-float/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Int)))org.jetbrains.numkt.math/kotlin.-float/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Long)))org.jetbrains.numkt.math/kotlin.-float/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Short)))org.jetbrains.numkt.math/kotlin.-float/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Int, org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.math.minus.R)))org.jetbrains.numkt.math/kotlin.-int/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Long, org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.math.minus.R)))org.jetbrains.numkt.math/kotlin.-long/minus.html
+$dokka.location:org.jetbrains.numkt.math$minus(kotlin.Short, org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.math.minus.R)))org.jetbrains.numkt.math/kotlin.-short/minus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Byte, org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.math.plus.R)))org.jetbrains.numkt.math/kotlin.-byte/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Byte)))org.jetbrains.numkt.math/kotlin.-double/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Double)))org.jetbrains.numkt.math/kotlin.-double/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Float)))org.jetbrains.numkt.math/kotlin.-double/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Int)))org.jetbrains.numkt.math/kotlin.-double/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Long)))org.jetbrains.numkt.math/kotlin.-double/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Short)))org.jetbrains.numkt.math/kotlin.-double/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Byte)))org.jetbrains.numkt.math/kotlin.-float/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Double)))org.jetbrains.numkt.math/kotlin.-float/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Float)))org.jetbrains.numkt.math/kotlin.-float/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Int)))org.jetbrains.numkt.math/kotlin.-float/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Long)))org.jetbrains.numkt.math/kotlin.-float/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Short)))org.jetbrains.numkt.math/kotlin.-float/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Int, org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.math.plus.R)))org.jetbrains.numkt.math/kotlin.-int/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Long, org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.math.plus.R)))org.jetbrains.numkt.math/kotlin.-long/plus.html
+$dokka.location:org.jetbrains.numkt.math$plus(kotlin.Short, org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.math.plus.R)))org.jetbrains.numkt.math/kotlin.-short/plus.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Byte, org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.math.times.R)))org.jetbrains.numkt.math/kotlin.-byte/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Byte)))org.jetbrains.numkt.math/kotlin.-double/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Double)))org.jetbrains.numkt.math/kotlin.-double/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Float)))org.jetbrains.numkt.math/kotlin.-double/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Int)))org.jetbrains.numkt.math/kotlin.-double/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Long)))org.jetbrains.numkt.math/kotlin.-double/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Double, org.jetbrains.numkt.core.KtNDArray((kotlin.Short)))org.jetbrains.numkt.math/kotlin.-double/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Byte)))org.jetbrains.numkt.math/kotlin.-float/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Double)))org.jetbrains.numkt.math/kotlin.-float/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Float)))org.jetbrains.numkt.math/kotlin.-float/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Int)))org.jetbrains.numkt.math/kotlin.-float/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Long)))org.jetbrains.numkt.math/kotlin.-float/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Float, org.jetbrains.numkt.core.KtNDArray((kotlin.Short)))org.jetbrains.numkt.math/kotlin.-float/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Int, org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.math.times.R)))org.jetbrains.numkt.math/kotlin.-int/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Long, org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.math.times.R)))org.jetbrains.numkt.math/kotlin.-long/times.html
+$dokka.location:org.jetbrains.numkt.math$times(kotlin.Short, org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.math.times.R)))org.jetbrains.numkt.math/kotlin.-short/times.html
+org.jetbrains.numkt
+org.jetbrains.numkt.core
+org.jetbrains.numkt.linalg
+org.jetbrains.numkt.logic
+org.jetbrains.numkt.math
+org.jetbrains.numkt.random
+org.jetbrains.numkt.statistics

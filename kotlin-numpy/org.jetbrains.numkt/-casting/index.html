@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Casting - kotlin-numpy</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="../index.html">org.jetbrains.numkt</a>&nbsp;/&nbsp;<a href="./index.html">Casting</a><br/>
+<br/>
+<h1>Casting</h1>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">Casting</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/EnumParameters.kt#L22">(source)</a>
+<p>Controls what kind of data casting may occur when copying.</p>
+<h3>Enum Values</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-n-o.html">NO</a></h4>
+</td>
+<td>
+<p>means the data types should not be cast at all.</p>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="-e-q-u-i-v.html">EQUIV</a></h4>
+</td>
+<td>
+<p>means only byte-order changes are allowed.</p>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="-s-a-f-e.html">SAFE</a></h4>
+</td>
+<td>
+<p>means only casts which can preserve values are allowed.</p>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="-s-a-m-e_-k-i-n-d.html">SAME_KIND</a></h4>
+</td>
+<td>
+<p>means only safe casts or casts within a kind, like <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a> (float64) to <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> (float32), are allowed.</p>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="-u-n-s-a-f-e.html">UNSAFE</a></h4>
+</td>
+<td>
+<p>means any data conversions may be done.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="str.html">str</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">str</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

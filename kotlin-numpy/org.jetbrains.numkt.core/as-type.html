@@ -1,0 +1,34 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>asType - kotlin-numpy</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="index.html">org.jetbrains.numkt.core</a>&nbsp;/&nbsp;<a href="./as-type.html">asType</a><br/>
+<br/>
+<h1>asType</h1>
+<a name="org.jetbrains.numkt.core$asType(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.asType.T)), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean, kotlin.Boolean)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">, </span><span class="keyword">reified</span>&nbsp;<span class="identifier">R</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">asType</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.core$asType(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.asType.T)), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean, kotlin.Boolean)/order">order</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt/-order/index.html"><span class="identifier">Order</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Order.K<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.core$asType(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.asType.T)), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean, kotlin.Boolean)/casting">casting</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt/-casting/index.html"><span class="identifier">Casting</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Casting.UNSAFE<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.core$asType(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.asType.T)), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean, kotlin.Boolean)/subok">subok</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.core$asType(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.asType.T)), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean, kotlin.Boolean)/copy">copy</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">R</span><span class="symbol">&gt;</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/core/MethodsKtNdarray.kt#L155">(source)</a>
+<p>Copy of the array, cast to a specified type.</p>
+<p>type <a href="as-type.html#T">T</a> to which the array is cast.</p>
+<h3>Parameters</h3>
+<p><a name="order"></a>
+<code>order</code> - {'C', 'F', 'A', 'K'} - controls the memory layout order of the result. Default is 'K'.</p>
+<p><a name="casting"></a>
+<code>casting</code> - <a href="../org.jetbrains.numkt/-casting/index.html">Casting</a> controls what kind of data casting may occur.
+Defaults to ‘unsafe’ for backwards compatibility.</p>
+<p><a name="subok"></a>
+<code>subok</code> - If <em>true</em>, then sub-classes will be passed-through (default),
+otherwise the returned array will be forced to be a base-class array.</p>
+<p><a name="copy"></a>
+<code>copy</code> - By default, asType always returns a newly allocated array.
+If this is set to false, and the type <a href="as-type.html#R">R</a>, <a href="as-type.html#org.jetbrains.numkt.core$asType(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.asType.T)), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean, kotlin.Boolean)/order">order</a>, and <a href="as-type.html#org.jetbrains.numkt.core$asType(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.asType.T)), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean, kotlin.Boolean)/subok">subok</a> requirements are satisfied,
+the input array is returned instead of a copy.</p>
+<p><strong>Return</strong><br/>
+<a href="-kt-n-d-array/index.html">KtNDArray</a> of type <a href="as-type.html#R">R</a>.
+Unless <a href="as-type.html#org.jetbrains.numkt.core$asType(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.asType.T)), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean, kotlin.Boolean)/copy">copy</a> is false and the other conditions for returning the input array are satisfied
+(see description for copy input parameter),
+return array is a new array of the same shape as the input array, with <a href="as-type.html#R">R</a>, <a href="as-type.html#org.jetbrains.numkt.core$asType(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.asType.T)), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean, kotlin.Boolean)/order">order</a> given by <a href="as-type.html#R">R</a>, <a href="as-type.html#org.jetbrains.numkt.core$asType(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.asType.T)), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean, kotlin.Boolean)/order">order</a>.</p>
+</BODY>
+</HTML>

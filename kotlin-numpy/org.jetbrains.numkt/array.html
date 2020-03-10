@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>array - kotlin-numpy</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="index.html">org.jetbrains.numkt</a>&nbsp;/&nbsp;<a href="./array.html">array</a><br/>
+<br/>
+<h1>array</h1>
+<a name="org.jetbrains.numkt$array(kotlin.Array((org.jetbrains.numkt.array.T)), org.jetbrains.numkt.Order, kotlin.Boolean, kotlin.Int)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">array</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt$array(kotlin.Array((org.jetbrains.numkt.array.T)), org.jetbrains.numkt.Order, kotlin.Boolean, kotlin.Int)/arr">arr</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$array(kotlin.Array((org.jetbrains.numkt.array.T)), org.jetbrains.numkt.Order, kotlin.Boolean, kotlin.Int)/order">order</span><span class="symbol">:</span>&nbsp;<a href="-order/index.html"><span class="identifier">Order</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Order.K<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$array(kotlin.Array((org.jetbrains.numkt.array.T)), org.jetbrains.numkt.Order, kotlin.Boolean, kotlin.Int)/subok">subok</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$array(kotlin.Array((org.jetbrains.numkt.array.T)), org.jetbrains.numkt.Order, kotlin.Boolean, kotlin.Int)/ndmin">ndmin</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;0<span class="symbol">)</span><span class="symbol">: </span><a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/BaseKtNdarray.kt#L221">(source)</a>
+<p>Create an flattened array.</p>
+<h3>Parameters</h3>
+<p><a name="arr"></a>
+<code>arr</code> - any <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>.</p>
+<p><a name="order"></a>
+<code>order</code> - specify the memory layout of the array.</p>
+<p><a name="subok"></a>
+<code>subok</code> - if <em>true</em>, then sub-classes will be passed-through,
+otherwise the returned array will be forced to be a base-class array (default).</p>
+<p><a name="ndmin"></a>
+<code>ndmin</code> - specifies the minimum number of dimensions that the resulting array should have.</p>
+<p><strong>Return</strong><br/>
+<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html">KtNDArray</a></p>
+<p><strong>See Also</strong><br/>
+<p><a href="empty-like.html">emptyLike</a></p>
+<p><a href="ones-like.html">onesLike</a></p>
+<p><a href="zeros-like.html">zerosLike</a></p>
+<p><a href="full-like.html">fullLike</a></p>
+<p><a href="empty.html">empty</a></p>
+<p><a href="ones.html">ones</a></p>
+<p><a href="zeros.html">zeros</a></p>
+<p><a href="full.html">full</a></p>
+</p>
+<a name="org.jetbrains.numkt$array(kotlin.collections.List((kotlin.Any)), org.jetbrains.numkt.Order, kotlin.Boolean, kotlin.Int)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">array</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt$array(kotlin.collections.List((kotlin.Any)), org.jetbrains.numkt.Order, kotlin.Boolean, kotlin.Int)/arr">arr</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$array(kotlin.collections.List((kotlin.Any)), org.jetbrains.numkt.Order, kotlin.Boolean, kotlin.Int)/order">order</span><span class="symbol">:</span>&nbsp;<a href="-order/index.html"><span class="identifier">Order</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Order.K<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$array(kotlin.collections.List((kotlin.Any)), org.jetbrains.numkt.Order, kotlin.Boolean, kotlin.Int)/subok">subok</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$array(kotlin.collections.List((kotlin.Any)), org.jetbrains.numkt.Order, kotlin.Boolean, kotlin.Int)/ndmin">ndmin</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;0<span class="symbol">)</span><span class="symbol">: </span><a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/BaseKtNdarray.kt#L255">(source)</a>
+<p>Create an array.
+Dimension is set by nesting lists.</p>
+<p>Note that the <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a> type is <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>; use the same type everywhere.</p>
+<h3>Parameters</h3>
+<p><a name="arr"></a>
+<code>arr</code> - list of any.</p>
+<p><a name="order"></a>
+<code>order</code> - specify the memory layout of the array.</p>
+<p><a name="subok"></a>
+<code>subok</code> - if <em>true</em>, then sub-classes will be passed-through,
+otherwise the returned array will be forced to be a base-class array (default).</p>
+<p><a name="ndmin"></a>
+<code>ndmin</code> - specifies the minimum number of dimensions that the resulting array should have.</p>
+<p><strong>Return</strong><br/>
+<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html">KtNDArray</a></p>
+<p><strong>See Also</strong><br/>
+<p><a href="empty-like.html">emptyLike</a></p>
+<p><a href="ones-like.html">onesLike</a></p>
+<p><a href="zeros-like.html">zerosLike</a></p>
+<p><a href="full-like.html">fullLike</a></p>
+<p><a href="empty.html">empty</a></p>
+<p><a href="ones.html">ones</a></p>
+<p><a href="zeros.html">zeros</a></p>
+<p><a href="full.html">full</a></p>
+</p>
+</BODY>
+</HTML>

@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>org.jetbrains.numkt.linalg - kotlin-numpy</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="./index.html">org.jetbrains.numkt.linalg</a><br/>
+<br/>
+<h2>Package org.jetbrains.numkt.linalg</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-linalg/index.html">Linalg</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Linalg</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="dot.html">dot</a></h4>
+</td>
+<td>
+<p>Dot product of two arrays.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">dot</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg$dot(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.dot.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.dot.T)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$dot(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.dot.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.dot.T)))/b">b</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="einsum.html">einsum</a></h4>
+</td>
+<td>
+<p>Evaluates the Einstein summation convention on the operands.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">einsum</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg$einsum(kotlin.String, kotlin.Array((org.jetbrains.numkt.core.KtNDArray((kotlin.Number)))), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean)/subscripts">subscripts</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="keyword">vararg</span> <span class="identifier" id="org.jetbrains.numkt.linalg$einsum(kotlin.String, kotlin.Array((org.jetbrains.numkt.core.KtNDArray((kotlin.Number)))), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean)/operands">operands</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$einsum(kotlin.String, kotlin.Array((org.jetbrains.numkt.core.KtNDArray((kotlin.Number)))), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean)/order">order</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt/-order/index.html"><span class="identifier">Order</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Order.K<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$einsum(kotlin.String, kotlin.Array((org.jetbrains.numkt.core.KtNDArray((kotlin.Number)))), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean)/casting">casting</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt/-casting/index.html"><span class="identifier">Casting</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Casting.SAFE<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$einsum(kotlin.String, kotlin.Array((org.jetbrains.numkt.core.KtNDArray((kotlin.Number)))), org.jetbrains.numkt.Order, org.jetbrains.numkt.Casting, kotlin.Boolean)/optimize">optimize</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="inner.html">inner</a></h4>
+</td>
+<td>
+<p>Inner product of two arrays.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">inner</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg$inner(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.inner.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.inner.T)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$inner(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.inner.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.inner.T)))/b">b</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="kron.html">kron</a></h4>
+</td>
+<td>
+<p>Kronecker product of two arrays.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">kron</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg$kron(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.kron.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.kron.T)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$kron(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.kron.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.kron.T)))/b">b</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="matmul.html">matmul</a></h4>
+</td>
+<td>
+<p>Matrix product of two arrays.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">matmul</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg$matmul(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.matmul.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.matmul.T)))/x1">x1</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$matmul(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.matmul.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.matmul.T)))/x2">x2</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="outer.html">outer</a></h4>
+</td>
+<td>
+<p>Compute the outer product of two vectors.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">outer</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg$outer(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.outer.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.outer.T)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$outer(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.outer.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.outer.T)))/b">b</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="trace2-d.html">trace2D</a></h4>
+</td>
+<td>
+<p>Return the sum along diagonals of the 2-D array.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">trace2D</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg$trace2D(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.trace2D.T)), kotlin.Int, kotlin.Int, kotlin.Int)/a">a</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$trace2D(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.trace2D.T)), kotlin.Int, kotlin.Int, kotlin.Int)/offset">offset</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;0<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$trace2D(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.trace2D.T)), kotlin.Int, kotlin.Int, kotlin.Int)/axis1">axis1</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;0<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$trace2D(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.trace2D.T)), kotlin.Int, kotlin.Int, kotlin.Int)/axis2">axis2</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;1<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="trace-n-d.html">traceND</a></h4>
+</td>
+<td>
+<p>Return the sum along diagonals of the n-D array.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">traceND</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg$traceND(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.traceND.T)), kotlin.Int, kotlin.Int, kotlin.Int)/a">a</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$traceND(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.traceND.T)), kotlin.Int, kotlin.Int, kotlin.Int)/offset">offset</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;0<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$traceND(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.traceND.T)), kotlin.Int, kotlin.Int, kotlin.Int)/axis1">axis1</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;0<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$traceND(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.traceND.T)), kotlin.Int, kotlin.Int, kotlin.Int)/axis2">axis2</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;1<span class="symbol">)</span><span class="symbol">: </span><a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="vdot.html">vdot</a></h4>
+</td>
+<td>
+<p>Return the dot product of two vectors.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">vdot</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg$vdot(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.vdot.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.vdot.T)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg$vdot(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.vdot.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.vdot.T)))/b">b</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

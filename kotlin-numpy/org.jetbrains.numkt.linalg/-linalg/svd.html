@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Linalg.svd - kotlin-numpy</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="../index.html">org.jetbrains.numkt.linalg</a>&nbsp;/&nbsp;<a href="index.html">Linalg</a>&nbsp;/&nbsp;<a href="./svd.html">svd</a><br/>
+<br/>
+<h1>svd</h1>
+<a name="org.jetbrains.numkt.linalg.Linalg.Companion$svd(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.svd.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">svd</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$svd(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.svd.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$svd(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.svd.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)/fullMatrices">fullMatrices</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$svd(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.svd.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)/computeUV">computeUV</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$svd(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.svd.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)/hermitian">hermitian</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/linalg/Linalg.kt#L90">(source)</a>
+<p>Singular Value Decomposition.</p>
+<h3>Parameters</h3>
+<p><a name="a"></a>
+<code>a</code> - a real array with a.ndim &gt;= 2.</p>
+<p><a name="fullMatrices"></a>
+<code>fullMatrices</code> - if True (default), u and vh have the shapes (..., M, M) and (..., N, N), respectively.
+Otherwise, the shapes are (..., M, K) and (..., K, N), respectively, where K = min(M, N).</p>
+<p><a name="computeUV"></a>
+<code>computeUV</code> - whether or not to compute u and vh in addition to s. True by default.</p>
+<p><a name="hermitian"></a>
+<code>hermitian</code> - if <em>true</em>, a is assumed to be Hermitian (symmetric if real-valued),
+enabling a more efficient method for finding singular values. Defaults to <em>false</em>.</p>
+<p><strong>Return</strong><br/>
+svd.</p>
+</BODY>
+</HTML>

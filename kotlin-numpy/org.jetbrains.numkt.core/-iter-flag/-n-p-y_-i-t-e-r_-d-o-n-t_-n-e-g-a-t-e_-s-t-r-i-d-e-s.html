@@ -1,0 +1,19 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>IterFlag.NPY_ITER_DONT_NEGATE_STRIDES - kotlin-numpy</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="../index.html">org.jetbrains.numkt.core</a>&nbsp;/&nbsp;<a href="index.html">IterFlag</a>&nbsp;/&nbsp;<a href="./-n-p-y_-i-t-e-r_-d-o-n-t_-n-e-g-a-t-e_-s-t-r-i-d-e-s.html">NPY_ITER_DONT_NEGATE_STRIDES</a><br/>
+<br/>
+<h1>NPY_ITER_DONT_NEGATE_STRIDES</h1>
+<a name="org.jetbrains.numkt.core.IterFlag.NPY_ITER_DONT_NEGATE_STRIDES"></a>
+<code><span class="identifier">NPY_ITER_DONT_NEGATE_STRIDES</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/core/KtNDIter.kt#L17">(source)</a>
+<p>This only affects the iterator when NPY_KEEPORDER is specified for the order parameter.
+By default with NPY_KEEPORDER, the iterator reverses axes which have negative strides,
+so that memory is traversed in a forward direction.
+This disables this step. Use this flag if you want to use the underlying memory-ordering of the axes,
+but don’t want an axis reversed.</p>
+</BODY>
+</HTML>

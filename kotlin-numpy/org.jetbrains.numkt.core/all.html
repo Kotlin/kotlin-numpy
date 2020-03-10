@@ -1,0 +1,29 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>all - kotlin-numpy</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="index.html">org.jetbrains.numkt.core</a>&nbsp;/&nbsp;<a href="./all.html">all</a><br/>
+<br/>
+<h1>all</h1>
+<a name="org.jetbrains.numkt.core$all(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.all.T)))"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">all</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/core/MethodsKtNdarray.kt#L28">(source)</a>
+<p>Test whether all array elements along a given axis evaluate to <em>true</em>.</p>
+<p><strong>Return</strong><br/>
+<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> value.</p>
+<a name="org.jetbrains.numkt.core$all(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.all.T)), kotlin.IntArray)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">all</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="org.jetbrains.numkt.core$all(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.all.T)), kotlin.IntArray)/axis">axis</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/core/MethodsKtNdarray.kt#L37">(source)</a>
+<h3>Parameters</h3>
+<p><a name="axis"></a>
+<code>axis</code> - : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> or <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int-array/index.html">IntArray</a>- axis along which a logical AND reduction is performed.
+If <a href="all.html#org.jetbrains.numkt.core$all(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.all.T)), kotlin.IntArray)/axis">axis</a> is negative, in which case if counts from the last to the first axis.</p>
+<p><strong>Return</strong><br/>
+new <a href="-kt-n-d-array/index.html">KtNDArray</a> of type <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>.</p>
+<a name="org.jetbrains.numkt.core$all(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.all.T)), kotlin.Function1((org.jetbrains.numkt.core.all.T, kotlin.Boolean)))"></a>
+<code><span class="keyword">inline</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">all</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.core$all(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.all.T)), kotlin.Function1((org.jetbrains.numkt.core.all.T, kotlin.Boolean)))/predicate">predicate</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">T</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/core/MethodsKtNdarray.kt#L44">(source)</a>
+<p>Returns <em>true</em> if all elements satisfy the predicate.
+Using buffer.</p>
+</BODY>
+</HTML>

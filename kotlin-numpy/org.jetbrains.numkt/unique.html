@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>unique - kotlin-numpy</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="index.html">org.jetbrains.numkt</a>&nbsp;/&nbsp;<a href="./unique.html">unique</a><br/>
+<br/>
+<h1>unique</h1>
+<a name="org.jetbrains.numkt$unique(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.unique.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean, kotlin.Int)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">unique</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt$unique(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.unique.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean, kotlin.Int)/ar">ar</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$unique(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.unique.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean, kotlin.Int)/returnIndex">returnIndex</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$unique(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.unique.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean, kotlin.Int)/returnInverse">returnInverse</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$unique(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.unique.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean, kotlin.Int)/returnCounts">returnCounts</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$unique(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.unique.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean, kotlin.Int)/axis">axis</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">&gt;</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/OperationsKtNdarray.kt#L430">(source)</a>
+<p>Find the unique elements of an array.</p>
+<h3>Parameters</h3>
+<p><a name="ar"></a>
+<code>ar</code> - input array.</p>
+<p><a name="returnIndex"></a>
+<code>returnIndex</code> - if True, also return the indices of <a href="unique.html#org.jetbrains.numkt$unique(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.unique.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean, kotlin.Int)/ar">ar</a> (along the specified axis,
+if provided, or in the flattened array) that result in the unique array.</p>
+<p><a name="returnInverse"></a>
+<code>returnInverse</code> - if True, also return the indices of the unique array (for the specified axis, if provided)
+that can be used to reconstruct <a href="unique.html#org.jetbrains.numkt$unique(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.unique.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean, kotlin.Int)/ar">ar</a>.</p>
+<p><a name="returnCounts"></a>
+<code>returnCounts</code> - if True, also return the number of times each unique item appears in <a href="unique.html#org.jetbrains.numkt$unique(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.unique.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean, kotlin.Int)/ar">ar</a>.</p>
+<p><a name="axis"></a>
+<code>axis</code> - the axis to operate on.</p>
+<p><strong>Return</strong><br/>
+The sorted unique values.</p>
+</BODY>
+</HTML>

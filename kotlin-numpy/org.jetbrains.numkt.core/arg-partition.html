@@ -1,0 +1,27 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>argPartition - kotlin-numpy</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="index.html">org.jetbrains.numkt.core</a>&nbsp;/&nbsp;<a href="./arg-partition.html">argPartition</a><br/>
+<br/>
+<h1>argPartition</h1>
+<a name="org.jetbrains.numkt.core$argPartition(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.argPartition.T)), kotlin.IntArray, kotlin.Int, kotlin.String)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">argPartition</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.core$argPartition(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.argPartition.T)), kotlin.IntArray, kotlin.Int, kotlin.String)/kth">kth</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int-array/index.html"><span class="identifier">IntArray</span></a><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.core$argPartition(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.argPartition.T)), kotlin.IntArray, kotlin.Int, kotlin.String)/axis">axis</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;-1<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.core$argPartition(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.core.argPartition.T)), kotlin.IntArray, kotlin.Int, kotlin.String)/kind">kind</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;"introselect"<span class="symbol">)</span><span class="symbol">: </span><a href="-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">&gt;</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/core/MethodsKtNdarray.kt#L119">(source)</a>
+<p>Returns the indices that would partition this array.</p>
+<h3>Parameters</h3>
+<p><a name="kth"></a>
+<code>kth</code> - Element index to partition by.
+The k-th element will be in its final sorted position and all smaller elements will be moved before it and
+all larger elements behind it. The order all elements in the partitions is undefined.
+If provided with a sequence of k-th it will partition all of them into their sorted position at once.</p>
+<p><a name="axis"></a>
+<code>axis</code> - Axis along which to sort. The default is -1 (the last axis). If null, the flattened array is used.</p>
+<p><a name="kind"></a>
+<code>kind</code> - Selection algorithm. Default is ‘introselect’.</p>
+<p><strong>Return</strong><br/>
+<a href="-kt-n-d-array/index.html">KtNDArray</a> Array of indices that partition this array along the specified axis.</p>
+</BODY>
+</HTML>

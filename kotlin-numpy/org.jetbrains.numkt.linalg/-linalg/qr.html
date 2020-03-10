@@ -1,0 +1,29 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Linalg.qr - kotlin-numpy</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="../index.html">org.jetbrains.numkt.linalg</a>&nbsp;/&nbsp;<a href="index.html">Linalg</a>&nbsp;/&nbsp;<a href="./qr.html">qr</a><br/>
+<br/>
+<h1>qr</h1>
+<a name="org.jetbrains.numkt.linalg.Linalg.Companion$qr(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.qr.T)), kotlin.String)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">qr</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$qr(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.qr.T)), kotlin.String)/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$qr(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.qr.T)), kotlin.String)/mode">mode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;"reduced"<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span class="identifier">Pair</span></a><span class="symbol">&lt;</span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/linalg/Linalg.kt#L72">(source)</a>
+<p>Compute the qr factorization of a matrix.</p>
+<h3>Parameters</h3>
+<p><a name="a"></a>
+<code>a</code> - matrix to be factored.</p>
+<p><a name="mode"></a>
+<code>mode</code> - <ul><li>'reduced' - returns q, r with dimensions (M, K), (K, N) (default)</li>
+<li>'complete' - returns q, r with dimensions (M, M), (M, N)</li>
+<li>'r' - returns r only with dimensions (K, N)</li>
+<li>'raw' - returns h, tau with dimensions (N, M), (K,)</li>
+<li>'full' - alias of ‘reduced’, deprecated</li>
+<li>'economic' - returns h from ‘raw’, deprecated.</li>
+</ul>
+</p>
+<p><strong>Return</strong><br/>
+A matrix with orthonormal columns.</p>
+</BODY>
+</HTML>

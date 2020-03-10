@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Slice - kotlin-numpy</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="../index.html">org.jetbrains.numkt.core</a>&nbsp;/&nbsp;<a href="./index.html">Slice</a><br/>
+<br/>
+<h1>Slice</h1>
+<code><span class="keyword">class </span><span class="identifier">Slice</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/core/Slice.kt#L27">(source)</a>
+<p>eq. python slice. 1:2:3 ~ 1..2..3</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="slice.html">slice</a></h4>
+</td>
+<td>
+<p>string representation.</p>
+<code><span class="keyword">val </span><span class="identifier">slice</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="start.html">start</a></h4>
+</td>
+<td>
+<p>starting integer where the slicing of the object starts.</p>
+<code><span class="keyword">val </span><span class="identifier">start</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="step.html">step</a></h4>
+</td>
+<td>
+<p>integer value which determines the increment between each index for slicing.</p>
+<code><span class="keyword">val </span><span class="identifier">step</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="stop.html">stop</a></h4>
+</td>
+<td>
+<p>integer until which the slicing takes place.</p>
+<code><span class="keyword">val </span><span class="identifier">stop</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="range-to.html">rangeTo</a></h4>
+</td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">rangeTo</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.core.Slice$rangeTo(kotlin.Int)/step">step</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Slice</span></a></code><br/>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">rangeTo</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.core.Slice$rangeTo(org.jetbrains.numkt.core.None.Companion)/step">step</span><span class="symbol">:</span>&nbsp;<span class="identifier">None.Companion</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Slice</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="to-string.html">toString</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="from-closed-slice.html">fromClosedSlice</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fromClosedSlice</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.core.Slice.Companion$fromClosedSlice(kotlin.Int, kotlin.Int, kotlin.Int)/sliceStart">sliceStart</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.core.Slice.Companion$fromClosedSlice(kotlin.Int, kotlin.Int, kotlin.Int)/sliceEnd">sliceEnd</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.core.Slice.Companion$fromClosedSlice(kotlin.Int, kotlin.Int, kotlin.Int)/step">step</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">Slice</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

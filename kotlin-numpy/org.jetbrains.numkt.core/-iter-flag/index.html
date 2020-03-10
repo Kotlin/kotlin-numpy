@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>IterFlag - kotlin-numpy</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="../index.html">org.jetbrains.numkt.core</a>&nbsp;/&nbsp;<a href="./index.html">IterFlag</a><br/>
+<br/>
+<h1>IterFlag</h1>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">IterFlag</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/core/KtNDIter.kt#L9">(source)</a>
+<p>Enum class flags for <a href="../-kt-n-d-iter/index.html">KtNDIter</a> iterator.</p>
+<h3>Enum Values</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-n-p-y_-i-t-e-r_-d-o-n-t_-n-e-g-a-t-e_-s-t-r-i-d-e-s.html">NPY_ITER_DONT_NEGATE_STRIDES</a></h4>
+</td>
+<td>
+<p>This only affects the iterator when NPY_KEEPORDER is specified for the order parameter.
+By default with NPY_KEEPORDER, the iterator reverses axes which have negative strides,
+so that memory is traversed in a forward direction.
+This disables this step. Use this flag if you want to use the underlying memory-ordering of the axes,
+but don’t want an axis reversed.</p>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="-n-p-y_-i-t-e-r_-r-e-f-s_-o-k.html">NPY_ITER_REFS_OK</a></h4>
+</td>
+<td>
+<p>Not impl.</p>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="-n-p-y_-i-t-e-r_-z-e-r-o-s-i-z-e_-o-k.html">NPY_ITER_ZEROSIZE_OK</a></h4>
+</td>
+<td>
+<p>Indicates that arrays with a size of zero should be permitted.</p>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="-n-p-y_-i-t-e-r_-b-u-f-f-e-r-e-d.html">NPY_ITER_BUFFERED</a></h4>
+</td>
+<td>
+<p>Causes the iterator to store buffering data,
+and use buffering to satisfy data type, alignment, and byte-order requirements.</p>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="-n-p-y_-i-t-e-r_-d-e-l-a-y_-b-u-f-a-l-l-o-c.html">NPY_ITER_DELAY_BUFALLOC</a></h4>
+</td>
+<td>
+<p>When buffering is enabled,
+this delays allocation of the buffers until NpyIter_Reset or another reset function is called.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

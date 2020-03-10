@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>argPartition - kotlin-numpy</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="index.html">org.jetbrains.numkt</a>&nbsp;/&nbsp;<a href="./arg-partition.html">argPartition</a><br/>
+<br/>
+<h1>argPartition</h1>
+<a name="org.jetbrains.numkt$argPartition(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.argPartition.T)), kotlin.Int, kotlin.Int, kotlin.String)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">argPartition</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt$argPartition(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.argPartition.T)), kotlin.Int, kotlin.Int, kotlin.String)/a">a</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$argPartition(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.argPartition.T)), kotlin.Int, kotlin.Int, kotlin.String)/kth">kth</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$argPartition(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.argPartition.T)), kotlin.Int, kotlin.Int, kotlin.String)/axis">axis</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;-1<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$argPartition(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.argPartition.T)), kotlin.Int, kotlin.Int, kotlin.String)/kind">kind</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;"introselect"<span class="symbol">)</span><span class="symbol">: </span><a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">&gt;</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/SearchSortCount.kt#L122">(source)</a>
+<p>Perform an indirect partition along the given axis using the algorithm specified by the kind keyword.</p>
+<h3>Parameters</h3>
+<p><a name="a"></a>
+<code>a</code> - array to sort.</p>
+<p><a name="kth"></a>
+<code>kth</code> - element index to partition by.</p>
+<p><a name="axis"></a>
+<code>axis</code> - along which to sort. Th default is the last axis (-1).</p>
+<p><a name="kind"></a>
+<code>kind</code> - selection algorithm. Default is <code>introselect</code>.</p>
+<p><strong>Return</strong><br/>
+<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html">KtNDArray</a> of indices that partition <a href="arg-partition.html#org.jetbrains.numkt$argPartition(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.argPartition.T)), kotlin.Int, kotlin.Int, kotlin.String)/a">a</a> along the specified axis.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="partition.html">partition</a></p>
+<p><a href="arg-sort.html">argSort</a></p>
+</p>
+</BODY>
+</HTML>

@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ModeCorr - kotlin-numpy</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="../index.html">org.jetbrains.numkt.statistics</a>&nbsp;/&nbsp;<a href="./index.html">ModeCorr</a><br/>
+<br/>
+<h1>ModeCorr</h1>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">ModeCorr</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/statistics/Correlating.kt#L26">(source)</a>
+<h3>Enum Values</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-v-a-l-i-d.html">VALID</a></h4>
+</td>
+<td>
+<p>Mode ‘valid’ returns output of length max(M, N) - min(M, N) + 1.
+The convolution product is only given for points where the signals overlap completely.
+Values outside the signal boundary have no effect.</p>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="-s-a-m-e.html">SAME</a></h4>
+</td>
+<td>
+<p>Mode ‘same’ returns output of length max(M, N). Boundary effects are still visible.</p>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="-f-u-l-l.html">FULL</a></h4>
+</td>
+<td>
+<p>By default, mode is ‘full’.
+This returns the convolution at each point of overlap, with an output shape of (N+M-1,).
+At the end-points of the convolution, the signals do not overlap completely, and boundary
+effects may be seen.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="str.html">str</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">str</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

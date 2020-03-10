@@ -1,0 +1,25 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Linalg.pinv - kotlin-numpy</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="../index.html">org.jetbrains.numkt.linalg</a>&nbsp;/&nbsp;<a href="index.html">Linalg</a>&nbsp;/&nbsp;<a href="./pinv.html">pinv</a><br/>
+<br/>
+<h1>pinv</h1>
+<a name="org.jetbrains.numkt.linalg.Linalg.Companion$pinv(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.pinv.T)), kotlin.Double, kotlin.Boolean)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">pinv</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$pinv(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.pinv.T)), kotlin.Double, kotlin.Boolean)/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$pinv(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.pinv.T)), kotlin.Double, kotlin.Boolean)/rcond">rcond</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a>&nbsp;<span class="symbol">=</span>&nbsp;1e-15<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$pinv(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.pinv.T)), kotlin.Double, kotlin.Boolean)/hermitian">hermitian</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/linalg/Linalg.kt#L230">(source)</a>
+<p>Compute the (Moore-Penrose) pseudo-inverse of a matrix.</p>
+<h3>Parameters</h3>
+<p><a name="a"></a>
+<code>a</code> - matrix or stack of matrices to be pseudo-inverted.</p>
+<p><a name="rcond"></a>
+<code>rcond</code> - cut-off for small singular values.</p>
+<p><a name="hermitian"></a>
+<code>hermitian</code> - if True, a is assumed to be Hermitian (symmetric if real-valued),
+enabling a more efficient method for finding singular values. Defaults to False.</p>
+<p><strong>Return</strong><br/>
+the pseudo-inverse of <a href="pinv.html#org.jetbrains.numkt.linalg.Linalg.Companion$pinv(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.pinv.T)), kotlin.Double, kotlin.Boolean)/a">a</a>. If <a href="pinv.html#org.jetbrains.numkt.linalg.Linalg.Companion$pinv(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.pinv.T)), kotlin.Double, kotlin.Boolean)/a">a</a> is matrix instance, the so is <em>B</em>.</p>
+</BODY>
+</HTML>

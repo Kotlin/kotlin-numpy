@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>unpackbits - kotlin-numpy</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="index.html">org.jetbrains.numkt</a>&nbsp;/&nbsp;<a href="./unpackbits.html">unpackbits</a><br/>
+<br/>
+<h1>unpackbits</h1>
+<a name="org.jetbrains.numkt$unpackbits(org.jetbrains.numkt.core.KtNDArray((kotlin.Byte)), kotlin.Int, kotlin.Int, kotlin.String)"></a>
+<code><span class="keyword">fun </span><span class="identifier">unpackbits</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt$unpackbits(org.jetbrains.numkt.core.KtNDArray((kotlin.Byte)), kotlin.Int, kotlin.Int, kotlin.String)/a">a</span><span class="symbol">:</span>&nbsp;<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte/index.html"><span class="identifier">Byte</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$unpackbits(org.jetbrains.numkt.core.KtNDArray((kotlin.Byte)), kotlin.Int, kotlin.Int, kotlin.String)/axis">axis</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$unpackbits(org.jetbrains.numkt.core.KtNDArray((kotlin.Byte)), kotlin.Int, kotlin.Int, kotlin.String)/count">count</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$unpackbits(org.jetbrains.numkt.core.KtNDArray((kotlin.Byte)), kotlin.Int, kotlin.Int, kotlin.String)/bitorder">bitorder</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;"big"<span class="symbol">)</span><span class="symbol">: </span><a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte/index.html"><span class="identifier">Byte</span></a><span class="symbol">&gt;</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/BinaryOperations.kt#L206">(source)</a>
+<p>Unpacks elements of a uint8 array into a binary-valued output array.</p>
+<h3>Parameters</h3>
+<p><a name="a"></a>
+<code>a</code> - input array.</p>
+<p><a name="axis"></a>
+<code>axis</code> - the dimension over which bit-unpacking is done.</p>
+<p><a name="count"></a>
+<code>count</code> - the number of elements to unpack along <a href="unpackbits.html#org.jetbrains.numkt$unpackbits(org.jetbrains.numkt.core.KtNDArray((kotlin.Byte)), kotlin.Int, kotlin.Int, kotlin.String)/axis">axis</a>,
+provided as a way of undoing the effect of packing a size that is not a multiple of eight.</p>
+<p><a name="bitorder"></a>
+<code>bitorder</code> - the order of the returned bits.</p>
+<p><strong>Return</strong><br/>
+the elements are binary-valued (0, or 1).</p>
+<p><strong>See Also</strong><br/>
+<p><a href="packbits.html">packbits</a></p>
+</p>
+</BODY>
+</HTML>

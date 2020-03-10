@@ -1,0 +1,167 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Linalg - kotlin-numpy</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="../index.html">org.jetbrains.numkt.linalg</a>&nbsp;/&nbsp;<a href="./index.html">Linalg</a><br/>
+<br/>
+<h1>Linalg</h1>
+<code><span class="keyword">class </span><span class="identifier">Linalg</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/linalg/Linalg.kt#L30">(source)</a>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">Linalg</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="cholesky.html">cholesky</a></h4>
+</td>
+<td>
+<p>Cholesky decomposition.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">cholesky</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$cholesky(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.cholesky.T)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="cond.html">cond</a></h4>
+</td>
+<td>
+<p>Compute the condition number of a matrix.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">cond</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$cond(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.cond.T)), kotlin.Int)/x">x</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$cond(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.cond.T)), kotlin.Int)/p">p</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="det.html">det</a></h4>
+</td>
+<td>
+<p>Compute the determinant of an array.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">det</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$det(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.det.T)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="eig.html">eig</a></h4>
+</td>
+<td>
+<p>Compute the eigenvalues and right eigenvectors of a square array.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">eig</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$eig(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.eig.T)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span class="identifier">Pair</span></a><span class="symbol">&lt;</span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="eigvals.html">eigvals</a></h4>
+</td>
+<td>
+<p>Compute the eigenvalues of a general matrix.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">eigvals</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$eigvals(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.eigvals.T)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="eigvalsh.html">eigvalsh</a></h4>
+</td>
+<td>
+<p>Compute the eigenvalues of real symmetric matrix.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">eigvalsh</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$eigvalsh(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.eigvalsh.T)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="inv.html">inv</a></h4>
+</td>
+<td>
+<p>Compute the (multiplicative) inverse of a matrix.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">inv</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$inv(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.inv.T)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="lstsq.html">lstsq</a></h4>
+</td>
+<td>
+<p>Return the least-squares solution to a linear matrix equation.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">lstsq</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$lstsq(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.lstsq.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.lstsq.E)), kotlin.Double)/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$lstsq(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.lstsq.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.lstsq.E)), kotlin.Double)/b">b</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">E</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$lstsq(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.lstsq.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.lstsq.E)), kotlin.Double)/rcond">rcond</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="matrix-power.html">matrixPower</a></h4>
+</td>
+<td>
+<p>Raise a square matrix to the (integer) power n,</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">matrixPower</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$matrixPower(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.matrixPower.T)), kotlin.Int)/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$matrixPower(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.matrixPower.T)), kotlin.Int)/n">n</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="matrix-rank.html">matrixRank</a></h4>
+</td>
+<td>
+<p>Return matrix rank of array using SVD method.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">matrixRank</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$matrixRank(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.matrixRank.T)))/m">m</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="multi-dot.html">multiDot</a></h4>
+</td>
+<td>
+<p>Compute the dot product of two or more arrays in a single function call,
+while automatically selecting the fastest evaluation order.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">multiDot</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$multiDot(kotlin.Array((org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.multiDot.T)))))/arrays">arrays</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="norm.html">norm</a></h4>
+</td>
+<td>
+<p>Matrix or vector norm.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">norm</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$norm(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.norm.T)), kotlin.Int)/x">x</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$norm(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.norm.T)), kotlin.Int)/ord">ord</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a></code><code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">norm</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$norm(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.norm.T)), kotlin.Int, kotlin.Int)/x">x</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$norm(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.norm.T)), kotlin.Int, kotlin.Int)/ord">ord</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$norm(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.norm.T)), kotlin.Int, kotlin.Int)/axis">axis</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="pinv.html">pinv</a></h4>
+</td>
+<td>
+<p>Compute the (Moore-Penrose) pseudo-inverse of a matrix.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">pinv</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$pinv(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.pinv.T)), kotlin.Double, kotlin.Boolean)/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$pinv(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.pinv.T)), kotlin.Double, kotlin.Boolean)/rcond">rcond</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a>&nbsp;<span class="symbol">=</span>&nbsp;1e-15<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$pinv(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.pinv.T)), kotlin.Double, kotlin.Boolean)/hermitian">hermitian</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="qr.html">qr</a></h4>
+</td>
+<td>
+<p>Compute the qr factorization of a matrix.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">qr</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$qr(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.qr.T)), kotlin.String)/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$qr(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.qr.T)), kotlin.String)/mode">mode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a>&nbsp;<span class="symbol">=</span>&nbsp;"reduced"<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span class="identifier">Pair</span></a><span class="symbol">&lt;</span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="slogdet.html">slogdet</a></h4>
+</td>
+<td>
+<p>Compute the sign and (natural) logarithm of the determinant of an array.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">slogdet</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$slogdet(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.slogdet.T)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span class="identifier">Pair</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="solve.html">solve</a></h4>
+</td>
+<td>
+<p>Solve a linear matrix equation, or system of linear scalar equations.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span> <span class="identifier">solve</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$solve(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.solve.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.solve.E)))/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$solve(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.solve.T)), org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.solve.E)))/b">b</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">E</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="svd.html">svd</a></h4>
+</td>
+<td>
+<p>Singular Value Decomposition.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">svd</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$svd(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.svd.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)/a">a</span><span class="symbol">:</span>&nbsp;<a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$svd(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.svd.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)/fullMatrices">fullMatrices</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$svd(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.svd.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)/computeUV">computeUV</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt.linalg.Linalg.Companion$svd(org.jetbrains.numkt.core.KtNDArray((org.jetbrains.numkt.linalg.Linalg.Companion.svd.T)), kotlin.Boolean, kotlin.Boolean, kotlin.Boolean)/hermitian">hermitian</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

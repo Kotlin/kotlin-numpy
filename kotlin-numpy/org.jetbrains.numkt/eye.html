@@ -1,0 +1,31 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>eye - kotlin-numpy</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kotlin-numpy</a>&nbsp;/&nbsp;<a href="index.html">org.jetbrains.numkt</a>&nbsp;/&nbsp;<a href="./eye.html">eye</a><br/>
+<br/>
+<h1>eye</h1>
+<a name="org.jetbrains.numkt$eye(kotlin.Int, kotlin.Int, kotlin.Int, org.jetbrains.numkt.Order)"></a>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="keyword">reified</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">eye</span><span class="symbol">(</span><span class="identifier" id="org.jetbrains.numkt$eye(kotlin.Int, kotlin.Int, kotlin.Int, org.jetbrains.numkt.Order)/n">n</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$eye(kotlin.Int, kotlin.Int, kotlin.Int, org.jetbrains.numkt.Order)/m">m</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$eye(kotlin.Int, kotlin.Int, kotlin.Int, org.jetbrains.numkt.Order)/k">k</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;0<span class="symbol">, </span><span class="identifier" id="org.jetbrains.numkt$eye(kotlin.Int, kotlin.Int, kotlin.Int, org.jetbrains.numkt.Order)/order">order</span><span class="symbol">:</span>&nbsp;<a href="-order/index.html"><span class="identifier">Order</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Order.C<span class="symbol">)</span><span class="symbol">: </span><a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html"><span class="identifier">KtNDArray</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code> <a href="https://github.com/kotlin/kotlin-numpy/tree/master/src/main/kotlin/org/jetbrains/numkt/BaseKtNdarray.kt#L70">(source)</a>
+<p>Return a 2-D array with ones on the diagonal and zeros elsewhere.</p>
+<h3>Parameters</h3>
+<p><a name="n"></a>
+<code>n</code> - number of rows in the output.</p>
+<p><a name="m"></a>
+<code>m</code> - number of columns in the output. If null, defaults to <a href="eye.html#org.jetbrains.numkt$eye(kotlin.Int, kotlin.Int, kotlin.Int, org.jetbrains.numkt.Order)/n">n</a>.</p>
+<p><a name="k"></a>
+<code>k</code> - index of the diagonal.</p>
+<p><a name="order"></a>
+<code>order</code> - see <a href="-order/index.html">Order</a></p>
+<p><strong>Return</strong><br/>
+<a href="../org.jetbrains.numkt.core/-kt-n-d-array/index.html">KtNDArray</a> where all elements are equal to zero, except for the k-th diagonal,
+whose values are equal to one.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="identity.html">identity</a></p>
+<p><a href="diag.html">diag</a></p>
+</p>
+</BODY>
+</HTML>
