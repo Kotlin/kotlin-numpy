@@ -18,5 +18,7 @@
 #define _PAIR_H_
 
 jobject kotlin_Pair_new (JNIEnv *, jobject, jobject);
+jobject kotlin_Pair_getFirst (JNIEnv *, jobject);
+jobject kotlin_Pair_getSecond (JNIEnv *, jobject);
 
 #endif //_PAIR_H_

@@ -29,14 +29,14 @@ class TestExpAndLog {
         val check = array(arrayOf(0.0, 1.0, 2.0))
         val a = array(arrayOf(1.0, E, E.pow(2), 0.0))
         assertEquals(log(a)[None..3], check)
-        assertEquals(log(a)[3], Double.NEGATIVE_INFINITY)
+        assertEquals(log(a)[3].scalar, Double.NEGATIVE_INFINITY)
     }
 
     @Test
     fun testLog10() {
         val a = array(arrayOf(1e-15, -3.0))
-        assertEquals(log10(a)[0], -15.0)
-        assertEquals(log10(a)[1], Double.NaN)
+        assertEquals(log10(a)[0].scalar, -15.0)
+        assertEquals(log10(a)[1].scalar, Double.NaN)
     }
 
     @Test
@@ -44,7 +44,7 @@ class TestExpAndLog {
         val check = array(arrayOf(0.0, 1.0, 4.0))
         val a = array(arrayOf(0, 1, 2, 2.0.pow(4).toInt()))
         assertEquals(log2(a)[1..4], check)
-        assertEquals(log2(a)[0], Double.NEGATIVE_INFINITY)
+        assertEquals(log2(a)[0].scalar, Double.NEGATIVE_INFINITY)
     }
 
     @Test
@@ -59,8 +59,8 @@ class TestExpAndLog {
         val prob1 = log(array(arrayOf(1e-50)))
         val prob2 = log(array(arrayOf(2.5e-50)))
         val prob12 = logaddexp(prob1, prob2)
-        assertEquals(prob12[0], -113.87649168120691)
-        assertEquals(exp(prob12)[0], 3.5000000000000057e-50)
+        assertEquals(prob12[0].scalar, -113.87649168120691)
+        assertEquals(exp(prob12)[0].scalar, 3.5000000000000057e-50)
     }
 
     @Test
@@ -68,6 +68,6 @@ class TestExpAndLog {
         val prob1 = log2(array(arrayOf(1e-50)))
         val prob2 = log2(array(arrayOf(2.5e-50)))
         val prob12 = logaddexp2(prob1, prob2)
-        assertEquals(prob12[0], -164.28904982231052)
+        assertEquals(prob12[0].scalar, -164.28904982231052)
     }
 }

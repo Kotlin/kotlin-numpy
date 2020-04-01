@@ -18,34 +18,42 @@ package org.jetbrains.numkt
 
 /**
  * Controls what kind of data casting may occur when copying.
- *
- * @property NO - means the data types should not be cast at all.
- * @property EQUIV - means only byte-order changes are allowed.
- * @property SAFE - means only casts which can preserve values are allowed.
- * @property SAME_KIND - means only safe casts or casts within a kind, like [Double] (float64) to [Float] (float32), are allowed.
- * @property UNSAFE - means any data conversions may be done.
  */
 enum class Casting(val str: String) {
+    /** means the data types should not be cast at all. */
     NO("no"),
+    /** means only byte-order changes are allowed. */
     EQUIV("equiv"),
+    /** means only casts which can preserve values are allowed. */
     SAFE("safe"),
+    /** means only safe casts or casts within a kind, like [Double] (float64) to [Float] (float32), are allowed. */
     SAME_KIND("same_kind"),
+    /** means any data conversions may be done. */
     UNSAFE("unsafe"),
 }
 
 /**
- * Specifies how indices outside [0, n-1] will be treated
- *
- * @property RAISE - an exception is raised.
- * @property WRAP - value becomes value mod n.
- * @property CLIP - values < 0 are mapped to 0, values > n - 1 are mapped to n - 1.
+ * Specifies how indices outside ```[0, n-1]``` will be treated
  */
 enum class Mode(val str: String) {
+    /** an exception is raised. */
     RAISE("raise"),
+    /** value becomes value mod n. */
     WRAP("wrap"),
+    /** values < 0 are mapped to 0, values > n - 1 are mapped to n - 1. */
     CLIP("clip")
 }
 
+/**
+ * Specifies the order of iterations over an array.
+ */
 enum class Order {
-    C, F, A, K
+    /** C-contiguous. */
+    C,
+    /** F-contiguous. */
+    F,
+    /** F-contiguous if the inputs are F-contiguous, C-contiguous otherwise. */
+    A,
+    /** default. */
+    K
 }

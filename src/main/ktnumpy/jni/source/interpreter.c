@@ -20,7 +20,7 @@
 #include <dlfcn.h>
 #endif
 
-static PyThreadState *mainThreadState = NULL;
+PyThreadState *mainThreadState = NULL;
 
 /*
  * Class:     org_jetbrains_numkt_Interpreter
@@ -150,21 +150,20 @@ JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_getField_00024kot
 /*
  * Class:     org_jetbrains_numkt_Interpreter
  * Method:    getValue_00024kotlin_numpy
- * Signature: (J[J)Ljava/lang/Object;
+ * Signature: (J[J)Lorg/jetbrains/numkt/core/KtNDArray;
  */
 JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_getValue_00024kotlin_1numpy__J_3J
     (JNIEnv *env, jobject jobj, jlong pointer, jlongArray jlong_array)
 {
-  return get_value (env, (PyObject *) pointer, jlong_array);
+  return get_value (env, (PyArrayObject *) pointer, jlong_array);
 }
 
 /*
  * Class:     org_jetbrains_numkt_Interpreter
  * Method:    getValue_00024kotlin_numpy
- * Signature: (J[Lorg/jetbrains/numkt/core/Slice;)Lorg/jetbrains/numkt/core/KtNDArray;
+ * Signature: (J[Ljava/lang/Object;)Lorg/jetbrains/numkt/core/KtNDArray;
  */
-JNIEXPORT jobject JNICALL
-Java_org_jetbrains_numkt_Interpreter_getValue_00024kotlin_1numpy__J_3Lorg_jetbrains_numkt_core_Slice_2
+JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_getValue_00024kotlin_1numpy__J_3Ljava_lang_Object_2
     (JNIEnv *env, jobject jobj, jlong pointer, jobjectArray jobject_array)
 {
   return get_ndvalue (env, (PyObject *) pointer, jobject_array);
@@ -184,13 +183,46 @@ JNIEXPORT void JNICALL Java_org_jetbrains_numkt_Interpreter_setValue_00024kotlin
 /*
  * Class:     org_jetbrains_numkt_Interpreter
  * Method:    setValue_00024kotlin_numpy
- * Signature: (J[Lorg/jetbrains/numkt/core/Slice;Ljava/lang/Object;)V
+ * Signature: (J[Ljava/lang/Object;Ljava/lang/Object;)V
  */
 JNIEXPORT void JNICALL
-Java_org_jetbrains_numkt_Interpreter_setValue_00024kotlin_1numpy__J_3Lorg_jetbrains_numkt_core_Slice_2Ljava_lang_Object_2
-    (JNIEnv *env, jobject jobj, jlong pointer, jobjectArray jlong_array, jobject element)
+Java_org_jetbrains_numkt_Interpreter_setValue_00024kotlin_1numpy__J_3Ljava_lang_Object_2Ljava_lang_Object_2
+    (JNIEnv *env, jobject jobj, jlong pointer, jobjectArray jobject_array, jobject element)
 {
-  set_ndvalue (env, (PyObject *) pointer, jlong_array, element);
+  set_ndvalue (env, (PyObject *) pointer, jobject_array, element);
+}
+
+/*
+ * Class:     org_jetbrains_numkt_Interpreter
+ * Method:    getIter_00024kotlin_numpy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_org_jetbrains_numkt_Interpreter_getIter_00024kotlin_1numpy
+    (JNIEnv *env, jobject jobj, jlong pointer)
+{
+  return get_iterator (env, (PyObject *) pointer);
+}
+
+/*
+ * Class:     org_jetbrains_numkt_Interpreter
+ * Method:    iterNext_00024kotlin_numpy
+ * Signature: (J)Lorg/jetbrains/numkt/core/KtNDArray;
+ */
+JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_iterNext_00024kotlin_1numpy
+    (JNIEnv *env, jobject jobj, jlong ptr_iter)
+{
+  return iter_next (env, (PyObject *) ptr_iter);
+}
+
+/*
+ * Class:     org_jetbrains_numkt_Interpreter
+ * Method:    iterDealloc_00024kotlin_numpy
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_jetbrains_numkt_Interpreter_iterDealloc_00024kotlin_1numpy
+    (JNIEnv *env, jobject jobj, jlong ptr_iter)
+{
+  iter_dealloc ((PyObject *) ptr_iter);
 }
 
 /*

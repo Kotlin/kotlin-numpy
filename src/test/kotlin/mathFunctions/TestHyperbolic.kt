@@ -12,13 +12,13 @@ class TestHyperbolic {
     @Test
     fun testSinh() {
         val a = array(arrayOf(0))
-        assertEquals(sinh(a)[0], 0.0)
+        assertEquals(sinh(a)[0].scalar, 0.0)
     }
 
     @Test
     fun testCosh() {
         val a = array(arrayOf(0))
-        assertEquals(cosh(a)[0], 1.0)
+        assertEquals(cosh(a)[0].scalar, 1.0)
     }
 
     @Test

@@ -20,7 +20,7 @@ import org.jetbrains.numkt.callFunc
 import org.jetbrains.numkt.core.KtNDArray
 
 /**
- *
+ * Compute the median along the specified axis.
  */
 fun <T : Number> median(a: KtNDArray<T>): Double =
     callFunc(nameMethod = arrayOf("median"), args = arrayOf(a), kClass = Double::class)
@@ -32,7 +32,7 @@ fun <T : Number> median(a: KtNDArray<T>, axis: Int): KtNDArray<Double> =
     callFunc(nameMethod = arrayOf("median"), args = arrayOf(a, axis))
 
 /**
- *
+ * Compute the weighted average along the specified axis.
  */
 fun <T : Number> average(a: KtNDArray<T>): Double =
     callFunc(nameMethod = arrayOf("average"), args = arrayOf(a), kClass = Double::class)
@@ -44,7 +44,7 @@ fun <T : Number> average(a: KtNDArray<T>, axis: Int): KtNDArray<Double> =
     callFunc(nameMethod = arrayOf("average"), args = arrayOf(a, axis))
 
 /**
- *
+ * Compute the arithmetic mean along the specified axis.
  */
 fun <T : Number> mean(a: KtNDArray<T>): Double =
     callFunc(nameMethod = arrayOf("mean"), args = arrayOf(a), kClass = Double::class)
@@ -56,7 +56,7 @@ fun <T : Number> mean(a: KtNDArray<T>, axis: Int): KtNDArray<Double> =
     callFunc(nameMethod = arrayOf("mean"), args = arrayOf(a, axis))
 
 /**
- *
+ * Compute the standard deviation along the specified axis.
  */
 fun <T : Number> std(a: KtNDArray<T>, ddof: Int = 0): Double =
     callFunc(nameMethod = arrayOf("std"), args = arrayOf(a, ddof), kClass = Double::class)
@@ -68,7 +68,7 @@ fun <T : Number> std(a: KtNDArray<T>, axis: Int, ddof: Int = 0): KtNDArray<Doubl
     callFunc(nameMethod = arrayOf("std"), args = arrayOf(a, axis, ddof))
 
 /**
- *
+ * Compute the variance along the specified axis.
  */
 fun <T : Number> `var`(a: KtNDArray<T>, ddof: Int = 0): Double =
     callFunc(nameMethod = arrayOf("var"), args = arrayOf(a, ddof), kClass = Double::class)
@@ -80,7 +80,7 @@ fun <T : Number> `var`(a: KtNDArray<T>, axis: Int, ddof: Int = 0): KtNDArray<Dou
     callFunc(nameMethod = arrayOf("var"), args = arrayOf(a, axis, ddof))
 
 /**
- *
+ * Compute the median along the specified axis, while ignoring NaNs.
  */
 fun <T : Number> nanMedian(a: KtNDArray<T>): Double =
     callFunc(nameMethod = arrayOf("nanmedian"), args = arrayOf(a), kClass = Double::class)
@@ -92,7 +92,7 @@ fun <T : Number> nanMedian(a: KtNDArray<T>, axis: Int): KtNDArray<Double> =
     callFunc(nameMethod = arrayOf("nanmedian"), args = arrayOf(a, axis))
 
 /**
- *
+ * Compute the arithmetic mean along the specified axis, ignoring NaNs.
  */
 fun <T : Number> nanMean(a: KtNDArray<T>): Double =
     callFunc(nameMethod = arrayOf("nanmean"), args = arrayOf(a), kClass = Double::class)
@@ -104,7 +104,7 @@ fun <T : Number> nanMean(a: KtNDArray<T>, axis: Int): KtNDArray<Double> =
     callFunc(nameMethod = arrayOf("nanmean"), args = arrayOf(a, axis))
 
 /**
- *
+ * Compute the standard deviation along the specified axis, while ignoring NaNs.
  */
 fun <T : Number> nanStd(a: KtNDArray<T>, ddof: Int = 0): Double =
     callFunc(nameMethod = arrayOf("nanstd"), args = arrayOf(a, ddof), kClass = Double::class)
@@ -116,7 +116,7 @@ fun <T : Number> nanStd(a: KtNDArray<T>, axis: Int, ddof: Int = 0): KtNDArray<Do
     callFunc(nameMethod = arrayOf("nanstd"), args = arrayOf(a, axis, ddof))
 
 /**
- *
+ * Compute the variance along the specified axis, while ignoring NaNs.
  */
 fun <T : Number> nanVar(a: KtNDArray<T>, ddof: Int = 0): Double =
     callFunc(nameMethod = arrayOf("nanvar"), args = arrayOf(a, ddof), kClass = Double::class)

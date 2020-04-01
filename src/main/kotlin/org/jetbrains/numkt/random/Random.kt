@@ -23,9 +23,8 @@ import org.jetbrains.numkt.core.None
 class Random {
     companion object {
 
-        // Simple random data
         /**
-         *
+         * Random values in a given shape. Defaults scalar.
          */
         fun rand(): Double =
             callFunc(nameMethod = arrayOf("random", "rand"), kClass = Double::class)
@@ -37,7 +36,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "rand"), args = arrayOf(d))
 
         /**
-         *
+         * Return a sample (or samples) from the “standard normal” distribution. Defaults scalar.
          */
         fun randn(): Double =
             callFunc(nameMethod = arrayOf("random", "rand"), kClass = Double::class)
@@ -49,7 +48,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "rand"), args = arrayOf(*(d.toTypedArray())))
 
         /**
-         *
+         * Return random integers from [low] (inclusive) to [high] (exclusive).
          */
         inline fun <reified T : Number> randint(low: Int, high: Int? = null): T =
             callFunc(
@@ -68,7 +67,7 @@ class Random {
             )
 
         /**
-         *
+         * Random integers of type [Long] between [low] and [high], inclusive.
          */
         fun randomIntegers(low: Int, high: Int? = null): Long =
             callFunc(
@@ -84,7 +83,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "random_integers"), args = arrayOf(low, high ?: None.none, size))
 
         /**
-         *
+         * Return random floats in the half-open interval [0.0, 1.0).
          */
         fun randomSample(): Double =
             callFunc(nameMethod = arrayOf("random", "random_sample"), kClass = Double::class)
@@ -96,7 +95,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "random_sample"), args = arrayOf(size))
 
         /**
-         *
+         * Return random floats in the half-open interval [0.0, 1.0). Defaults scalar.
          */
         fun random(): Double =
             callFunc(nameMethod = arrayOf("random", "random"), kClass = Double::class)
@@ -108,7 +107,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "random"), args = arrayOf(size))
 
         /**
-         *
+         * 	Return random floats in the half-open interval [0.0, 1.0). Defaults scalar.
          */
         fun ranf(): Double =
             callFunc(nameMethod = arrayOf("random", "ranf"), kClass = Double::class)
@@ -120,7 +119,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "ranf"), args = arrayOf(size))
 
         /**
-         *
+         * 	Return random floats in the half-open interval [0.0, 1.0).
          */
         fun sample(): Double =
             callFunc(nameMethod = arrayOf("random", "sample"), kClass = Double::class)
@@ -132,7 +131,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "sample"), args = arrayOf(size))
 
         /**
-         *
+         * Generates a random sample from a given 1-D array
          */
         fun choice(a: Int, replace: Boolean = true): Long =
             callFunc(
@@ -148,7 +147,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "choice"), args = arrayOf(a, size, replace, p ?: None.none))
 
         /**
-         *
+         * Return random bytes.
          */
         fun bytes(length: Int): ByteArray =
             callFunc(nameMethod = arrayOf("random", "bytes"), args = arrayOf(length), kClass = ByteArray::class)
@@ -156,14 +155,14 @@ class Random {
         // Permutations
 
         /**
-         *
+         * Modify a sequence in-place by shuffling its contents.
          */
         fun <T : Any> shuffle(x: KtNDArray<T>): Unit =
             callFunc(nameMethod = arrayOf("random", "shuffle"), args = arrayOf(x), kClass = Unit::class)
 
 
         /**
-         *
+         * Randomly permute a sequence, or return a permuted range.
          */
         fun permutation(x: Int): KtNDArray<Long> =
             callFunc(nameMethod = arrayOf("random", "permutation"), args = arrayOf(x))
@@ -181,7 +180,7 @@ class Random {
         // Distributions
 
         /**
-         *
+         * 	Draw samples from a Beta distribution.
          */
         fun beta(a: Double, b: Double): Double =
             callFunc(nameMethod = arrayOf("random", "beta"), args = arrayOf(a, b), kClass = Double::class)
@@ -208,7 +207,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "beta"), args = arrayOf(a, b, size))
 
         /**
-         *
+         * Draw samples from a binomial distribution.
          */
         fun binomial(n: Int, p: Double): Long =
             callFunc(nameMethod = arrayOf("random", "binomial"), args = arrayOf(n, p), kClass = Long::class)
@@ -235,7 +234,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "binomial"), args = arrayOf(n, p, size))
 
         /**
-         *
+         * Draw samples from a chi-square distribution.
          */
         fun chisquare(df: Double): Double =
             callFunc(nameMethod = arrayOf("random", "chisquare"), args = arrayOf(df), kClass = Double::class)
@@ -250,13 +249,13 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "chisquare"), args = arrayOf(df, size))
 
         /**
-         *
+         * 	Draw samples from the Dirichlet distribution.
          */
         fun <T : Number> dirichlet(alpha: Array<T>, vararg size: Int? = emptyArray()): KtNDArray<Double> =
             callFunc(nameMethod = arrayOf("random", "dirichlet"), args = arrayOf(alpha, size.ifEmpty { None.none }))
 
         /**
-         *
+         * Draw samples from an exponential distribution.
          */
         fun exponential(scale: Double = 1.0): Double =
             callFunc(nameMethod = arrayOf("random", "exponential"), args = arrayOf(scale), kClass = Double::class)
@@ -265,7 +264,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "exponential"), args = arrayOf(scale, size))
 
         /**
-         *
+         * Draw samples from an F distribution.
          */
         fun f(dfnum: Double, dfden: Double): Double =
             callFunc(nameMethod = arrayOf("random", "f"), args = arrayOf(dfnum, dfden), kClass = Double::class)
@@ -292,7 +291,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "f"), args = arrayOf(dfnum, dfden, size))
 
         /**
-         *
+         * 	Draw samples from a Gamma distribution.
          */
         fun gamma(shape: Double, scale: Double = 1.0): Double =
             callFunc(nameMethod = arrayOf("random", "gamma"), args = arrayOf(shape, scale), kClass = Double::class)
@@ -319,7 +318,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "gamma"), args = arrayOf(shape, scale, size))
 
         /**
-         *
+         * Draw samples from the geometric distribution.
          */
         fun geometric(p: Double): Long =
             callFunc(nameMethod = arrayOf("random", "geometric"), args = arrayOf(p), kClass = Long::class)
@@ -334,7 +333,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "geometric"), args = arrayOf(p, size))
 
         /**
-         *
+         * Draw samples from a Gumbel distribution.
          */
         fun gumbel(loc: Double = 0.0, scale: Double = 1.0): Double =
             callFunc(nameMethod = arrayOf("random", "gumbel"), args = arrayOf(loc, scale), kClass = Double::class)
@@ -361,7 +360,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "gumbel"), args = arrayOf(loc, scale, size))
 
         /**
-         *
+         * Draw samples from a Hypergeometric distribution.
          */
         fun hypergeometric(ngood: Int, nbad: Int, nsample: Int): Double =
             callFunc(
@@ -416,7 +415,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "hypergeometric"), args = arrayOf(ngood, nbad, nsample, size))
 
         /**
-         *
+         * Draw samples from the Laplace or double exponential distribution with specified location (or mean) and scale (decay).
          */
         fun laplace(loc: Double = 0.0, scale: Double = 1.0): Double =
             callFunc(nameMethod = arrayOf("random", "laplace"), args = arrayOf(loc, scale), kClass = Double::class)
@@ -443,7 +442,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "laplace"), args = arrayOf(loc, scale, size))
 
         /**
-         *
+         * Draw samples from a logistic distribution.
          */
         fun logistic(loc: Double = 0.0, scale: Double = 1.0): Double =
             callFunc(nameMethod = arrayOf("random", "logistic"), args = arrayOf(loc, scale), kClass = Double::class)
@@ -470,7 +469,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "logistic"), args = arrayOf(loc, scale, size))
 
         /**
-         *
+         * Draw samples from a log-normal distribution.
          */
         fun lognormal(mean: Double = 0.0, sigma: Double = 1.0): Double =
             callFunc(nameMethod = arrayOf("random", "lognormal"), args = arrayOf(mean, sigma), kClass = Double::class)
@@ -497,7 +496,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "lognormal"), args = arrayOf(mean, sigma, size))
 
         /**
-         *
+         * Draw samples from a logarithmic series distribution.
          */
         fun logseries(p: Double): Long =
             callFunc(nameMethod = arrayOf("random", "logseries"), args = arrayOf(p), kClass = Long::class)
@@ -512,7 +511,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "logseries"), args = arrayOf(p, size))
 
         /**
-         *
+         * Draw samples from a multinomial distribution.
          */
         fun multinomial(n: Int, pvals: DoubleArray, vararg size: Int? = emptyArray()): KtNDArray<Long> =
             callFunc(
@@ -521,7 +520,7 @@ class Random {
             )
 
         /**
-         *
+         * Draw random samples from a multivariate normal distribution.
          */
         fun <T : Number, E : Number> multivariateNormal(
             mean: KtNDArray<T>,
@@ -536,7 +535,7 @@ class Random {
             )
 
         /**
-         *
+         * Draw samples from a negative binomial distribution.
          */
         fun negativeBinomial(n: Int, p: Double): Long =
             callFunc(nameMethod = arrayOf("random", "negative_binomial"), args = arrayOf(n, p), kClass = Long::class)
@@ -563,7 +562,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "negative_binomial"), args = arrayOf(n, p, size))
 
         /**
-         *
+         * Draw samples from a noncentral chi-square distribution.
          */
         fun noncentralChisquare(df: Double, nonc: Double): Double =
             callFunc(
@@ -594,7 +593,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "noncentral_chisquare"), args = arrayOf(df, nonc, size))
 
         /**
-         *
+         * 	Draw samples from the noncentral F distribution.
          */
         fun noncentralF(dfnum: Double, dfden: Double, nonc: Double): Double =
             callFunc(
@@ -655,9 +654,9 @@ class Random {
 
 
         /**
-         *
+         * Draw random samples from a normal (Gaussian) distribution.
          */
-        fun normal(loc: Double = 0.0, scale: Double = 0.0): Double =
+        fun normal(loc: Double = 0.0, scale: Double = 1.0): Double =
             callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale), kClass = Double::class)
 
         fun normal(loc: DoubleArray, scale: Double = 0.0): KtNDArray<Double> =
@@ -669,20 +668,32 @@ class Random {
         fun normal(loc: DoubleArray, scale: DoubleArray): KtNDArray<Double> =
             callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale))
 
-        fun normal(loc: Double = 0.0, scale: Double = 0.0, vararg size: Int): KtNDArray<Double> =
+        fun normal(loc: Double = 0.0, scale: Double = 1.0, size: Int): KtNDArray<Double> =
             callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
 
-        fun normal(loc: DoubleArray, scale: Double = 0.0, vararg size: Int): KtNDArray<Double> =
+        fun normal(loc: Double = 0.0, scale: Double = 1.0, vararg size: Int): KtNDArray<Double> =
+            callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
+
+        fun normal(loc: DoubleArray, scale: Double = 1.0, size: Int): KtNDArray<Double> =
+            callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
+
+        fun normal(loc: DoubleArray, scale: Double = 1.0, vararg size: Int): KtNDArray<Double> =
+            callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
+
+        fun normal(loc: Double = 0.0, scale: DoubleArray, size: Int): KtNDArray<Double> =
             callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
 
         fun normal(loc: Double = 0.0, scale: DoubleArray, vararg size: Int): KtNDArray<Double> =
+            callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
+
+        fun normal(loc: DoubleArray, scale: DoubleArray, size: Int): KtNDArray<Double> =
             callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
 
         fun normal(loc: DoubleArray, scale: DoubleArray, vararg size: Int): KtNDArray<Double> =
             callFunc(nameMethod = arrayOf("random", "normal"), args = arrayOf(loc, scale, size))
 
         /**
-         *
+         * Draw samples from a Pareto II or Lomax distribution with specified shape.
          */
         fun pareto(a: Double): Double =
             callFunc(nameMethod = arrayOf("random", "pareto"), args = arrayOf(a), kClass = Double::class)
@@ -697,7 +708,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "pareto"), args = arrayOf(a, size))
 
         /**
-         *
+         * Draw samples from a Poisson distribution.
          */
         fun poisson(lam: Double = 1.0): Double =
             callFunc(nameMethod = arrayOf("random", "poisson"), args = arrayOf(lam), kClass = Double::class)
@@ -712,7 +723,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "poisson"), args = arrayOf(lam, size))
 
         /**
-         *
+         * 	Draws samples in ```[0, 1]``` from a power distribution with positive exponent a - 1.
          */
         fun power(a: Double): Double =
             callFunc(nameMethod = arrayOf("random", "power"), args = arrayOf(a), kClass = Double::class)
@@ -727,7 +738,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "power"), args = arrayOf(a, size))
 
         /**
-         *
+         * Draw samples from a Rayleigh distribution.
          */
         fun rayleigh(scale: Double = 1.0): Double =
             callFunc(nameMethod = arrayOf("random", "rayleigh"), args = arrayOf(scale), kClass = Double::class)
@@ -742,7 +753,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "rayleigh"), args = arrayOf(scale, size))
 
         /**
-         *
+         * Draw samples from a standard Cauchy distribution with mode = 0.
          */
         fun standartCauchy(): Double =
             callFunc(nameMethod = arrayOf("random", "standard_cauchy"), kClass = Double::class)
@@ -751,7 +762,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "standard_cauchy"), args = arrayOf(size))
 
         /**
-         *
+         * Draw samples from the standard exponential distribution.
          */
         fun standardExponential(): Double =
             callFunc(nameMethod = arrayOf("random", "standard_exponential"), kClass = Double::class)
@@ -760,7 +771,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "standard_exponential"), args = arrayOf(size))
 
         /**
-         *
+         * Draw samples from a standard Gamma distribution.
          */
         fun standardGamma(shape: Double): Double =
             callFunc(nameMethod = arrayOf("random", "standard_gamma"), args = arrayOf(shape), kClass = Double::class)
@@ -775,7 +786,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "standard_gamma"), args = arrayOf(shape, size))
 
         /**
-         *
+         * Draw samples from a standard Normal distribution (mean=0, stdev=1).
          */
         fun standardNormal(): Double =
             callFunc(nameMethod = arrayOf("random", "standard_normal"), kClass = Double::class)
@@ -784,7 +795,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "standard_normal"), args = arrayOf(size))
 
         /**
-         *
+         * Draw samples from a standard Student’s t distribution with df degrees of freedom.
          */
         fun standardT(df: Double): Double =
             callFunc(nameMethod = arrayOf("random", "standard_t"), args = arrayOf(df), kClass = Double::class)
@@ -799,7 +810,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "standard_t"), args = arrayOf(df, size))
 
         /**
-         *
+         * Draw samples from the triangular distribution over the interval [[left], [right]].
          */
         fun triangular(left: Double, mode: Double, right: Double): Double =
             callFunc(
@@ -854,7 +865,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "triangular"), args = arrayOf(left, mode, right, size))
 
         /**
-         *
+         * 	Draw samples from a uniform distribution.
          */
         fun uniform(low: Double = 0.0, high: Double = 1.0): Double =
             callFunc(nameMethod = arrayOf("random", "uniform"), args = arrayOf(low, high), kClass = Double::class)
@@ -881,7 +892,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "uniform"), args = arrayOf(low, high, size))
 
         /**
-         *
+         * Draw samples from a von Mises distribution.
          */
         fun vonmises(mu: Double, kappa: Double): Double =
             callFunc(nameMethod = arrayOf("random", "vonmises"), args = arrayOf(mu, kappa), kClass = Double::class)
@@ -909,7 +920,7 @@ class Random {
 
 
         /**
-         *
+         * Draw samples from a Wald, or inverse Gaussian, distribution.
          */
         fun wald(mean: Double, scale: Double): Double =
             callFunc(nameMethod = arrayOf("random", "wald"), args = arrayOf(mean, scale), kClass = Double::class)
@@ -936,7 +947,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "wald"), args = arrayOf(mean, scale, size))
 
         /**
-         *
+         * Draw samples from a Weibull distribution.
          */
         fun weibull(a: Double): Double =
             callFunc(nameMethod = arrayOf("random", "weibull"), args = arrayOf(a), kClass = Double::class)
@@ -951,7 +962,7 @@ class Random {
             callFunc(nameMethod = arrayOf("random", "weibull"), args = arrayOf(a, size))
 
         /**
-         *
+         * Draw samples from a Zipf distribution.
          */
         fun zipf(a: Double): Long =
             callFunc(nameMethod = arrayOf("random", "zipf"), args = arrayOf(a), kClass = Long::class)

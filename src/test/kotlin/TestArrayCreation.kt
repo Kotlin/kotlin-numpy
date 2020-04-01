@@ -70,7 +70,7 @@ class TestArrayCreation {
         assertTrue(intArrayOf(2, 2).contentEquals(b.shape))
 
         val s = eye<Float>(3, k = 1)
-        assertEquals(1f, s[0, 1])
+        assertEquals(1f, s[0, 1].scalar)
         assertEquals(Float::class.javaObjectType, s.dtype)
     }
 

@@ -16,6 +16,9 @@
 
 package org.jetbrains.numkt.core
 
+/**
+ * Need to convert to python None and impl slice.
+ */
 class None {
     companion object {
         operator fun rangeTo(other: Int): Slice = Slice.fromClosedSlice(null, other, 1)

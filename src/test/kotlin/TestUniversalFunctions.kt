@@ -13,10 +13,10 @@ class TestUniversalFunctions {
         println(b)
 
 //            array([ 1.0, 2.71828183, 7.38905609893065])
-        assertEquals(2.718281828459045, exp(b)[1])
+        assertEquals(2.718281828459045, exp(b)[1].scalar)
 
 
 //            array([ 0.0, 1.0, 1.4142135623730951])
-        assertEquals(1.4142135623730951, sqrt(b)[2])
+        assertEquals(1.4142135623730951, sqrt(b)[2].scalar)
     }
 }

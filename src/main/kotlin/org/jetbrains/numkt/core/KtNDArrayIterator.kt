@@ -16,35 +16,51 @@
 
 package org.jetbrains.numkt.core
 
+import org.jetbrains.numkt.Interpreter.Companion.interpreter
 import org.jetbrains.numkt.NumKtException
 import java.nio.ByteBuffer
 
-class KtNDArrayIterator<T : Any>(
+/**
+ * An iterator for an [KtNDArray]. Returns an view even for one-dimensional arrays.
+ */
+class NDIterator<T : Any>(pointer: Long) : Iterator<KtNDArray<T>> {
+    private var ret: KtNDArray<T>? = null
+    private val iterator: Long = interpreter!!.getIter(pointer)
+
+    override fun hasNext(): Boolean {
+        ret = interpreter!!.iterNext(iterator)
+        return if (ret != null)
+            true
+        else {
+            interpreter!!.iterDealloc(iterator)
+            return false
+        }
+    }
+
+    override fun next(): KtNDArray<T> = ret!!
+}
+
+/**
+ * Iterator over DirectBuffer.
+ *
+ * Iterates through a flattened array. This iterator can work with view.
+ */
+internal class FlatIterator<T : Any>(
     private val data: ByteBuffer,
     private val ndim: Int,
     private val strides: IntArray,
     private val itemsize: Int,
     private val shape: IntArray,
-    private val type: Class<T>
+    private val type: Class<T>,
+    offset: Long
 ) : Iterator<T> {
-    private val flagDirect = BooleanArray(ndim)
-    private val index = IntArray(ndim).apply {
-        for (i in 0 until ndim) {
-            if (strides[i] > 0) {
-                this[i] = 0
-                flagDirect[i] = true
-            } else {
-                this[i] = shape[i] - 1
-                strides[i] = -strides[i]
-                flagDirect[i] = false
-            }
-        }
-    }
+    private val index = IntArray(ndim)
+    private val point = offset.toInt()
 
 
     override fun hasNext(): Boolean {
         for (i in 0 until ndim) {
-            if (flagDirect[i] && index[i] >= shape[i]) {
+            if (index[i] >= shape[i]) {
                 return false
             } else if (index[i] < 0) {
                 return false
@@ -54,7 +70,7 @@ class KtNDArrayIterator<T : Any>(
     }
 
     override fun next(): T {
-        var p = 0
+        var p = point / itemsize
         val res: Any =
             when (type) {
                 Byte::class.javaObjectType -> {
@@ -108,22 +124,12 @@ class KtNDArrayIterator<T : Any>(
                 else -> throw NumKtException("Error to iterating: unknown type")
             }
         for (i in ndim - 1 downTo 0) {
-            if (flagDirect[i]) {
-                val t = index[i] + 1
-                if (t >= shape[i] && i != 0) {
-                    index[i] = 0
-                } else {
-                    index[i] = t
-                    break
-                }
+            val t = index[i] + 1
+            if (t >= shape[i] && i != 0) {
+                index[i] = 0
             } else {
-                val t = index[i] - 1
-                if (t < 0 && i != 0) {
-                    index[i] = shape[i] - 1
-                } else {
-                    index[i] = t
-                    break
-                }
+                index[i] = t
+                break
             }
         }
 

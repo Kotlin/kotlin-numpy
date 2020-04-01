@@ -21,12 +21,14 @@ int ktnumpy_init (JNIEnv *);
 
 int NpyArray_Check (PyObject *);
 int NpyScalar_Check (PyObject *);
+int NpyView_Check (PyArrayObject *);
 
 jobject npy_scalar_as_jobject (JNIEnv *, PyObject *, jclass);
 
 jobject npy_scalar_to_jobject (JNIEnv *, PyObject *);
 
 jobject get_bytebuffer (JNIEnv *, PyArrayObject *);
+jlong get_point (PyArrayObject *);
 
 jintArray get_shape (JNIEnv *, PyArrayObject *);
 jobject get_ndim (JNIEnv *, PyArrayObject *);
@@ -37,11 +39,15 @@ jobject get_jdtype (JNIEnv *, PyArrayObject *);
 
 PyObject *get_dtype (JNIEnv *, jclass);
 
-jobject get_value (JNIEnv *, PyObject *, jlongArray);
+jobject get_value (JNIEnv *, PyArrayObject *, jlongArray);
 jobject get_ndvalue (JNIEnv *, PyObject *, jobjectArray);
 
 void set_value (JNIEnv *, PyObject *, jlongArray, jobject);
 void set_ndvalue (JNIEnv *, PyObject *, jobjectArray, jobject);
+
+jlong get_iterator (JNIEnv *, PyObject *);
+jobject iter_next (JNIEnv *, PyObject *);
+void iter_dealloc (PyObject *);
 
 jobject
 invoke_call_function (JNIEnv *, jobjectArray, jobjectArray, jobject);

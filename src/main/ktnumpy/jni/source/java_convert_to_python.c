@@ -321,15 +321,35 @@ PyObject *jlist_AsPyList (JNIEnv *env, jobject jlist, jclass jcl)
 
 PyObject *ktarray_AsPyObject (JNIEnv *env, jobject jobj)
 {
+  jobject scalar = numkt_core_KtNDArray_getScalar (env, jobj);
+  if (scalar)
+    {
+      return jobject_to_pyobject (env, scalar);
+    }
   PyObject *res = (PyObject *) numkt_core_KtNDArray_getPointer (env, jobj);
   Py_XINCREF (res);
   return res;
 }
 
-PyObject *jslice_AsPySlice (JNIEnv *env, jobject jobj)
+PyObject *jslice_AsPySlice (JNIEnv *env, jobject jslice)
 {
+  PyObject *py_slice = NULL;
+  PyObject *py_start = NULL;
+  PyObject *py_stop = NULL;
+  PyObject *py_step = NULL;
 
-  return NULL;
+  py_start = jobject_to_pyobject (env, numkt_core_Slice_getStart (env, jslice));
+  py_stop = jobject_to_pyobject (env, numkt_core_Slice_getStop (env, jslice));
+  py_step = jobject_to_pyobject (env, numkt_core_Slice_getStep (env, jslice));
+
+  py_slice = PySlice_New (py_start, py_stop, py_step);
+
+  python_exception(env);
+  Py_XDECREF (py_start);
+  Py_XDECREF (py_stop);
+  Py_XDECREF (py_step);
+
+  return py_slice;
 }
 
 PyObject *jarray_AsPyTuple (JNIEnv *env, jobjectArray jobj, jclass jcl)

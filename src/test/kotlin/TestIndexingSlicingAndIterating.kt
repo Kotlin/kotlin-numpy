@@ -14,7 +14,7 @@ class TestIndexingSlicingAndIterating {
         println(a)
 
         //  a[2]
-        assertEquals(8, a[2])
+        assertEquals(8, a[2].scalar)
 
         println(a[2..5..1]) // a[2:5]
 
@@ -26,7 +26,7 @@ class TestIndexingSlicingAndIterating {
         println(a[None..None..-1])
 
 
-        for (el in a) {
+        for (el in a.flatIter()) {
             println((el.toDouble().pow(1.0 / 3.0)))
         }
     }

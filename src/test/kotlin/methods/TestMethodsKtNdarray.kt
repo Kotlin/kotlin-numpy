@@ -290,7 +290,7 @@ class TestMethodsKtNdarray {
         val b = x.flatten()
         assertEquals(b, a)
         a[3] = 0
-        assertEquals(x[1, 0], a[3])
+        assertEquals(x[1, 0].scalar, a[3].scalar)
     }
 
     @Test
