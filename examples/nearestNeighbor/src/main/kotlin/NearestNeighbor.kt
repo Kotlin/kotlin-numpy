@@ -19,18 +19,17 @@ class NearestNeighbor(private val distance: Int = 0) {
 
     fun predict(x: KtNDArray<Double>): ArrayList<Int> {
         val predictions = ArrayList<Int>()
-        val sh = x.shape
-        for (i in 0 until sh[0]) {
+        for (x_i in x) {
             if (distance == 0) {
-                val distances = sum(absolute(xTrain - x[i..(i + 1)].ravel()), axis = 1)
+                val distances = sum(absolute(xTrain - x_i), axis = 1)
                 val minIndex = argMin(distances)
 
-                predictions.add(yTrain[minIndex])
+                predictions.add(yTrain[minIndex].scalar!!)
             } else if (distance == 1) {
-                val distances = sum(square(xTrain - x[i..(i + 1)].ravel()), axis = 1)
+                val distances = sum(square(xTrain - x_i), axis = 1)
                 val minIndex = argMin(distances)
 
-                predictions.add(yTrain[minIndex])
+                predictions.add(yTrain[minIndex].scalar!!)
             }
         }
 
@@ -104,15 +103,15 @@ fun main() {
 
     var tempX = generateRandomPoints(50, 0, 1)
     var listX = arrayListOf<List<Double>>()
-    for (i in 0..49) {
-        listX.add(arrayListOf(tempX[i, 0], tempX[i, 1] + 1))
+    for (tx in tempX) {
+        listX.add(arrayListOf(tx[0].scalar!!, tx[1].scalar!! + 1))
     }
     val x3 = array<Double>(listX)
 
     tempX = generateRandomPoints(50, 1, 2)
     listX = arrayListOf()
-    for (i in 0..49) {
-        listX.add(arrayListOf(tempX[i, 0], tempX[i, 1] - 1))
+    for (tx in tempX) {
+        listX.add(arrayListOf(tx[0].scalar!!, tx[1].scalar!! - 1))
     }
     val x4 = array<Double>(listX)
 
@@ -122,17 +121,18 @@ fun main() {
 
     // accuracy
     var accuracy = 0.0
-    for (i in 0 until c4.yTest.size) {
-        val trueLabel: Int = if (c4.xTest[i..(i + 1)].ravel()[0] < 1 && c4.xTest[i..(i + 1)].ravel()[1] < 1) {
+    var i = 0
+    for (x_i in c4.xTest) {
+        val trueLabel: Int = if (x_i[0].scalar!! < 1 && x_i[1].scalar!! < 1) {
             0
-        } else if (c4.xTest[i..(i + 1)].ravel()[0] > 1 && c4.xTest[i..(i + 1)].ravel()[1] > 1) {
+        } else if (x_i[0].scalar!! > 1 && x_i[1].scalar!! > 1) {
             1
-        } else if (c4.xTest[i..(i + 1)].ravel()[0] < 1 && c4.xTest[i..(i + 1)].ravel()[1] > 1) {
+        } else if (x_i[0].scalar!! < 1 && x_i[1].scalar!! > 1) {
             2
         } else {
             3
         }
-        if (trueLabel == c4.yTest[i]) {
+        if (trueLabel == c4.yTest[i++]) {
             accuracy += 1
         }
     }

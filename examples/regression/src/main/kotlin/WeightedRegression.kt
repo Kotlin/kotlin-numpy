@@ -33,7 +33,7 @@ fun r2Score(y: KtNDArray<Double>, yHat: KtNDArray<Double>) =
 
 fun searchAccuracies(taus: KtNDArray<Double>, x: KtNDArray<Double>, y: KtNDArray<Double>): KtNDArray<Double> {
     val r = arrayListOf<Double>()
-    for (tau in taus) {
+    for (tau in taus.flatIter()) {
         r.add(r2Score(y, weightedRegression(x, y, tau = tau)))
     }
     return array(r)
