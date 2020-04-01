@@ -17,7 +17,8 @@
 #ifndef _KTNDARRAY_H_
 #define _KTNDARRAY_H_
 
-jobject new_ktndarray (JNIEnv *, PyArrayObject *);
+jobject new_ktndarray (JNIEnv *, PyArrayObject *, jobject);
 PyArrayObject *numkt_core_KtNDArray_getPointer (JNIEnv *, jobject);
+jobject numkt_core_KtNDArray_getScalar (JNIEnv *, jobject);
 
 #endif //_KTNDARRAY_H_

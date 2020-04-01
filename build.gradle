@@ -21,6 +21,9 @@ plugins {
     id 'maven-publish'
 
     id "com.jfrog.bintray" version "1.8.4"
+
+    // Documentation
+    id 'org.jetbrains.dokka' version '0.10.1'
 }
 
 ext {
@@ -132,6 +135,7 @@ bintray {
     }
 }
 
+
 boolean isMerge() {
     def branch = System.getenv("build.branch") as String
     println("Current branch: $branch")
@@ -139,4 +143,43 @@ boolean isMerge() {
         return '/master' in branch
     }
     return false
+}
+
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/dokka"
+
+    configuration {
+        moduleName = 'kotlin-numpy'
+
+        // Use to include or exclude non public members.
+        includeNonPublic = false
+
+        // Do not create index pages for empty packages
+        skipEmptyPackages = true
+
+        // Specifies the location of the project source code on the Web.
+        // If provided, Dokka generates "source" links for each declaration.
+        // Repeat for multiple mappings
+        sourceLink {
+            // Unix based directory relative path to the root of the project (where you execute gradle respectively).
+            path = "./"
+
+            // URL showing where the source code can be accessed through the web browser
+            url = "https://github.com/kotlin/kotlin-numpy/tree/master"
+            //remove src/main/kotlin if you use "./" above
+
+            // Suffix which is used to append the line number to the URL. Use #L for GitHub
+            lineSuffix = "#L"
+        }
+
+        // Used for linking to JDK documentation
+        jdkVersion = 8
+
+        // Disable linking to online kotlin-stdlib documentation
+        noStdlibLink = false
+
+        // Disable linking to online JDK documentation
+        noJdkLink = false
+    }
 }

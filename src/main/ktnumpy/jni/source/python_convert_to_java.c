@@ -493,7 +493,7 @@ jobject pyobject_to_jobject (JNIEnv *env, PyObject *py_object, jclass jcl)
     }
   else if (NpyArray_Check (py_object))
     {
-      return new_ktndarray (env, (PyArrayObject *) py_object);
+      return new_ktndarray (env, (PyArrayObject *) py_object, NULL);
     }
   else if (PyList_Check (py_object) || PyTuple_Check (py_object))
     {

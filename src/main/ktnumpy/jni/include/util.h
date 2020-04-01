@@ -34,6 +34,7 @@
   F(BOOLEAN_TYPE, "java/lang/Boolean")                        \
   F(CHAR_TYPE, "java/lang/Character")                         \
   F(KTNDARRAY_TYPE, "org/jetbrains/numkt/core/KtNDArray")                   \
+  F(KTNDITER_TYPE, "org/jetbrains/numkt/core/KtNDIter")       \
   F(STRING_TYPE, "java/lang/String")                          \
   F(NUMBER_TYPE, "java/lang/Number")                          \
   F(COLLECTION_TYPE, "java/util/Collection")                  \

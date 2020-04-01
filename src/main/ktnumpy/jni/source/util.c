@@ -94,8 +94,8 @@ PyObject *jclass_to_dtype (JNIEnv *env, jclass jcl)
     }
   else
     {
-      printf ("Error: Unknown type!\n");
-      exit (-1);
+      (*env)->ThrowNew(env, NUMKTEXCEPTION_TYPE, "Error: Unknown type!");
+      return NULL;
     }
 }
 

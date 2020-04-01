@@ -7,6 +7,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+extern PyThreadState *mainThreadState;
+
 /*
  * Class:     org_jetbrains_numkt_Interpreter
  * Method:    initializePython
@@ -44,7 +47,7 @@ JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_getField_00024kot
 /*
  * Class:     org_jetbrains_numkt_Interpreter
  * Method:    getValue_00024kotlin_numpy
- * Signature: (J[J)Ljava/lang/Object;
+ * Signature: (J[J)Lorg/jetbrains/numkt/core/KtNDArray;
  */
 JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_getValue_00024kotlin_1numpy__J_3J
     (JNIEnv *, jobject, jlong, jlongArray);
@@ -52,10 +55,9 @@ JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_getValue_00024kot
 /*
  * Class:     org_jetbrains_numkt_Interpreter
  * Method:    getValue_00024kotlin_numpy
- * Signature: (J[Lorg/jetbrains/numkt/core/Slice;)Lorg/jetbrains/numkt/core/KtNDArray;
+ * Signature: (J[Ljava/lang/Object;)Lorg/jetbrains/numkt/core/KtNDArray;
  */
-JNIEXPORT jobject JNICALL
-Java_org_jetbrains_numkt_Interpreter_getValue_00024kotlin_1numpy__J_3Lorg_jetbrains_numkt_core_Slice_2
+JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_getValue_00024kotlin_1numpy__J_3Ljava_lang_Object_2
     (JNIEnv *, jobject, jlong, jobjectArray);
 
 /*
@@ -69,11 +71,35 @@ JNIEXPORT void JNICALL Java_org_jetbrains_numkt_Interpreter_setValue_00024kotlin
 /*
  * Class:     org_jetbrains_numkt_Interpreter
  * Method:    setValue_00024kotlin_numpy
- * Signature: (J[Lorg/jetbrains/numkt/core/Slice;Ljava/lang/Object;)V
+ * Signature: (J[Ljava/lang/Object;Ljava/lang/Object;)V
  */
 JNIEXPORT void JNICALL
-Java_org_jetbrains_numkt_Interpreter_setValue_00024kotlin_1numpy__J_3Lorg_jetbrains_numkt_core_Slice_2Ljava_lang_Object_2
+Java_org_jetbrains_numkt_Interpreter_setValue_00024kotlin_1numpy__J_3Ljava_lang_Object_2Ljava_lang_Object_2
     (JNIEnv *, jobject, jlong, jobjectArray, jobject);
+
+/*
+ * Class:     org_jetbrains_numkt_Interpreter
+ * Method:    getIter_00024kotlin_numpy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_org_jetbrains_numkt_Interpreter_getIter_00024kotlin_1numpy
+    (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     org_jetbrains_numkt_Interpreter
+ * Method:    iterNext_00024kotlin_numpy
+ * Signature: (J)Lorg/jetbrains/numkt/core/KtNDArray;
+ */
+JNIEXPORT jobject JNICALL Java_org_jetbrains_numkt_Interpreter_iterNext_00024kotlin_1numpy
+    (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     org_jetbrains_numkt_Interpreter
+ * Method:    iterDealloc_00024kotlin_numpy
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_jetbrains_numkt_Interpreter_iterDealloc_00024kotlin_1numpy
+    (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     org_jetbrains_numkt_Interpreter

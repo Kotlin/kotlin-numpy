@@ -20,11 +20,11 @@ import org.jetbrains.numkt.callFunc
 import org.jetbrains.numkt.core.KtNDArray
 
 /**
- *
+ * Modified Bessel function of the first kind, order 0.
  */
 fun <T : Number> i0(x: KtNDArray<T>): KtNDArray<T> = callFunc(nameMethod = arrayOf("i0"), args = arrayOf(x))
 
 /**
- *
+ * Return the sinc function.
  */
 fun <T : Number> sinc(x: KtNDArray<T>): KtNDArray<Double> = callFunc(nameMethod = arrayOf("sinc"), args = arrayOf(x))
