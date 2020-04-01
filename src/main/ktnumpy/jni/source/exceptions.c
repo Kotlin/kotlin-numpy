@@ -234,7 +234,7 @@ int python_exception (JNIEnv *env)
                           index++;
                         }
                     }
-                  for (int i = 0; i < java_stack_length; ++i)
+                  for (size_t i = 0; i < java_stack_length; ++i)
                     {
                       jobject element = (*env)->GetObjectArrayElement (env, java_stack, i);
                       (*env)->SetObjectArrayElement (env, reverse_java_stack, index, element);

@@ -4,7 +4,6 @@ import org.jetbrains.numkt.array
 import org.jetbrains.numkt.math.*
 import kotlin.math.E
 import kotlin.math.PI
-import kotlin.math.round
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -45,7 +44,6 @@ class TestHyperbolic {
 
     @Test
     fun testArctanh() {
-//        val check = array(arrayOf(0.0, -0.5493061443340549))
         val check = array(arrayOf(0.0, -0.54931))
         val a = array(arrayOf(0.0, -0.5))
         assertEquals(check, around(arctanh(a), 5))
