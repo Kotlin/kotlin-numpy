@@ -43,10 +43,10 @@ fun uploadPyPi(username: String, password: String, repoURL: String) {
     }
 }
 
-tasks.register<Exec>("pypiUploadStable") {
+tasks.register("pypiUploadStable") {
     uploadPyPi(stablePyPiUser as String, stablePyPiPassword as String, stablePyPiURL)
 }
 
-tasks.register<Exec>("pypiUploadTest") {
+tasks.register("pypiUploadTest") {
     uploadPyPi(devPyPiUser as String, devPyPiPassword as String, testPyPiURL)
 }
