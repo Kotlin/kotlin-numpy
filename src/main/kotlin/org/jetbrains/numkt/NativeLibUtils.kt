@@ -71,7 +71,7 @@ object LibraryLoader {
         }
 
         // pip
-        val pypiURL = if (version!!.contains("dev")) "https://test.pypi.org/simple/" else "https://pypi.org/simple/"
+        val pypiURL = if (version != null && version!!.contains("dev")) "https://test.pypi.org/simple/" else "https://pypi.org/simple/"
 
         var pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
 
