@@ -33,3 +33,4 @@ class build_ktlib(build_ext):
         else:
             raise RuntimeError('Unknown platform.')
         self.copy_file(ktlib, ktnumpy)
+        self.copy_tree(self.build_lib, "build/libs/ktnumpy")

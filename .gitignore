@@ -6,3 +6,5 @@ build
 out
 target
 .DS_Store
+*.egg-info
+dist

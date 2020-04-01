@@ -662,7 +662,7 @@ invoke_call_function
 
 
   // import modules and functions
-  jsize length = (*env)->GetArrayLength (env, arr_names_func);
+  size_t length = (*env)->GetArrayLength (env, arr_names_func);
   if (length > 1)
     {
       for (size_t i = 0; i < length - 1; --i)
@@ -792,7 +792,7 @@ invoke_call_function_with_class
 
 
   // import modules and functions
-  jsize length = (*env)->GetArrayLength (env, arr_names_func);
+  size_t length = (*env)->GetArrayLength (env, arr_names_func);
   if (length > 1)
     {
       for (size_t i = 0; i < length - 1; --i)
