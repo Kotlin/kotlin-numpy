@@ -397,23 +397,23 @@ jobject get_jdtype (JNIEnv *env, PyArrayObject *ndarray)
   jobject res = NULL;
   switch (PyArray_DTYPE (ndarray)->type_num)
     {
-  case NPY_INT8: res = BYTE_TYPE;
+      case NPY_INT8: res = BYTE_TYPE;
       break;
-  case NPY_INT16: res = SHORT_TYPE;
+      case NPY_INT16: res = SHORT_TYPE;
       break;
-  case NPY_INT32: res = INT_TYPE;
+      case NPY_INT32: res = INT_TYPE;
       break;
-  case NPY_INT64: res = LONG_TYPE;
+      case NPY_INT64: res = LONG_TYPE;
       break;
-  case NPY_FLOAT32: res = FLOAT_TYPE;
+      case NPY_FLOAT32: res = FLOAT_TYPE;
       break;
-  case NPY_FLOAT64: res = DOUBLE_TYPE;
+      case NPY_FLOAT64: res = DOUBLE_TYPE;
       break;
-  case NPY_BOOL: res = BOOLEAN_TYPE;
+      case NPY_BOOL: res = BOOLEAN_TYPE;
       break;
-  case NPY_UNICODE: res = CHAR_TYPE;
+      case NPY_UNICODE: res = CHAR_TYPE;
       break;
-  default: printf ("Error: dtype to java_class\n");
+      default: printf ("Error: dtype to java_class\n");
     }
   return res;
 }
@@ -447,53 +447,29 @@ jobject get_value (JNIEnv *env, PyArrayObject *ndarray, jlongArray jlong_array)
         }
 
       jobject res = NULL;
-      int t = PyArray_TYPE (ndarray);
       void *tmp = PyArray_GetPtr (ndarray, ind);
 
-      switch (t)
+      switch (PyArray_DTYPE (ndarray)->type_num)
         {
-      case NPY_BYTE:
-        {
-          res = java_lang_Byte_new (env, *(jbyte *) tmp);
+          case NPY_INT8: res = java_lang_Byte_new (env, *(jbyte *) tmp);
           break;
-        }
-      case NPY_SHORT:
-        {
-          res = java_lang_Short_new (env, *(jshort *) tmp);
+          case NPY_INT16: res = java_lang_Short_new (env, *(jshort *) tmp);
           break;
-        }
-      case NPY_INT:
-        {
-          res = java_lang_Integer_new (env, *(jint *) tmp);
+          case NPY_INT32: res = java_lang_Integer_new (env, *(jint *) tmp);
           break;
-        }
-      case NPY_LONG:
-        {
-          res = java_lang_Long_new (env, *(jlong *) tmp);
+          case NPY_INT64: res = java_lang_Long_new (env, *(jlong *) tmp);
           break;
-        }
-      case NPY_FLOAT:
-        {
-          res = java_lang_Float_new (env, *(jfloat *) tmp);
+          case NPY_FLOAT32: res = java_lang_Float_new (env, *(jfloat *) tmp);
           break;
-        }
-      case NPY_DOUBLE:
-        {
-          res = java_lang_Double_new (env, *(jdouble *) tmp);
+          case NPY_FLOAT64: res = java_lang_Double_new (env, *(jdouble *) tmp);
           break;
-        }
-      case NPY_BOOL:
-        {
-          res = java_lang_Boolean_new (env, *(jboolean *) tmp);
+          case NPY_BOOL: res = java_lang_Boolean_new (env, *(jboolean *) tmp);
           break;
-        }
-      case NPY_UNICODE:
-        {
-          res = java_lang_Character_new (env, *(jchar *) tmp);
+          case NPY_UNICODE: res = java_lang_Character_new (env, *(jchar *) tmp);
           break;
+          default: printf ("Get value: Unknown type!\n");
         }
-      default: printf ("Get value: Unknown type!\n");
-        }
+
       result = new_ktndarray (env, NULL, res);
       (*env)->ReleaseLongArrayElements (env, jlong_array, ind, JNI_ABORT);
     }

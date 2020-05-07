@@ -15,9 +15,9 @@ class TestTrigonometric {
         val a = array(arrayOf(PI / 2))
         assertEquals(sin(a)[0].scalar, 1.0)
 
-        val check = array(arrayOf(0.0, 0.49999999999999994, 0.7071067811865475, 0.8660254037844386, 1.0))
+        val check = array(arrayOf(0.0, 0.5, 0.70711, 0.86603, 1.0))
         val b = array(arrayOf(0.0, 30.0, 45.0, 60.0, 90.0))
-        assertEquals(sin(b * PI / 180.0), check)
+        assertEquals(check, around(sin(b * PI / 180.0), 5))
     }
 
     @Test
