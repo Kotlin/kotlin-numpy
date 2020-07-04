@@ -62,7 +62,7 @@ fun <T : Number, E : Number> correlate(
     v: KtNDArray<E>,
     mode: ModeCorr = ModeCorr.VALID
 ): KtNDArray<Double> =
-    callFunc(nameMethod = arrayOf("corrcoef"), args = arrayOf(a, v, mode.str))
+    callFunc(nameMethod = arrayOf("correlate"), args = arrayOf(a, v, mode.str))
 
 /**
  * Estimate a covariance matrix, given data and weights.
