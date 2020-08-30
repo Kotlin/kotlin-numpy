@@ -526,12 +526,24 @@ class Random {
             mean: KtNDArray<T>,
             cov: KtNDArray<E>,
             size: IntArray? = null,
-            checkValid: String? = null,
-            tol: Double? = null
+            checkValid: String = "warn",
+            tol: Double = 1e-8
         ): KtNDArray<Double> =
             callFunc(
                 nameMethod = arrayOf("random", "multivariate_normal"),
-                args = arrayOf(mean, cov, size ?: None.none, checkValid ?: None.none, tol ?: None.none)
+                args = arrayOf(mean, cov, size ?: None.none, checkValid, tol)
+            )
+
+        fun <T : Number, E : Number> multivariateNormal(
+            mean: Iterable<T>,
+            cov: KtNDArray<E>,
+            size: IntArray? = null,
+            checkValid: String = "warn",
+            tol: Double = 1e-8
+        ): KtNDArray<Double> =
+            callFunc(
+                nameMethod = arrayOf("random", "multivariate_normal"),
+                args = arrayOf(mean, cov, size ?: None.none, checkValid, tol)
             )
 
         /**
