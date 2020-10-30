@@ -17,6 +17,7 @@
 package org.jetbrains.numkt
 
 import java.io.File
+import java.io.FileNotFoundException
 import java.nio.file.Files
 
 private const val pythonScriptName = "utils"
@@ -33,7 +34,7 @@ enum class OSType {
  * @property pythonHome is the location of the standard Python libraries.
  * @property pythonLibPath is absolute path to *pythonlib*.
  */
-data class PythonConf(val osType: OSType, val pythonHome: String, val pythonLibPath: String)
+data class PythonConf(val osType: OSType, val pythonHome: String, val pythonLibPath: String, val python: String)
 
 /**
  * Object that provides loading of the native *ktnumpy* and python library.
@@ -42,15 +43,9 @@ object LibraryLoader {
     private var version: String? = null
     private val nameNativeLib = System.mapLibraryName(baseNameNativeLib)
     private val tmpDir: File
-    val pythonConf by lazy {
-        val osType = getOS()
-        val pythonHome = System.getenv("PYTHONHOME") ?: getPythonEnv(pythonScriptName, "get_python_home")
-        PythonConf(
-            osType = osType,
-            pythonHome = pythonHome,
-            pythonLibPath = getPythonEnv(pythonScriptName, "get_pylib_path")
-        )
-    }
+
+    var pythonConf: PythonConf? = null
+        private set
 
     init {
         val dirScr = File("buildScr/python")
@@ -66,11 +61,51 @@ object LibraryLoader {
     }
 
     /**
+     * Sets paths to python executable and python std lib.
+     *
+     * NOTE: by default, directory specified in `PYTHONHOME` is used or directory returned from
+     * `sysconfig.get_config_var('prefix')` command.
+     *
+     * @param pythonPath PYTHONHOME, directory where python is installed
+     * @exception FileNotFoundException
+     */
+    fun setPythonConfig(pythonPath: String) {
+        val pyHome = File(pythonPath)
+        if (!pyHome.exists()) throw FileNotFoundException("No such $pyHome directory exists.")
+        println(pyHome.absolutePath)
+        val os = getOS()
+        val pythonExePath = when (os) {
+            OSType.WINDOWS -> Pair(File("$pyHome\\python.exe"), File("$pyHome\\python3.exe"))
+            OSType.LINUX, OSType.MACOS -> Pair(File("$pyHome/bin/python"), File("$pyHome/bin/python3"))
+            OSType.UNKNOWN -> throw Exception("Undefined operating system.")
+        }
+        val python = when {
+            pythonExePath.first.exists() -> pythonExePath.first.absolutePath
+            pythonExePath.second.exists() -> pythonExePath.second.absolutePath
+            else -> throw FileNotFoundException("Python executable file not found.")
+        }
+        val pythonLibPath = getPythonEnv(pythonScriptName, "get_pylib_path", python)
+        pythonConf = PythonConf(os, pyHome.absolutePath, pythonLibPath, python)
+    }
+
+    /**
      * Load *ktnumpy* and *pythonlib*.
      *
      * Pip is used to search for *ktnumpy*, if *ktnumpy* is not installed, pip installs the appropriate version.
      */
     fun loadLibraries() {
+        // initialize Python
+        if (pythonConf == null) {
+            val osType = getOS()
+            val pythonHome = System.getenv("PYTHONHOME") ?: getPythonEnv(pythonScriptName, "get_python_home")
+            pythonConf = PythonConf(
+                osType = osType,
+                pythonHome = pythonHome,
+                pythonLibPath = getPythonEnv(pythonScriptName, "get_pylib_path"),
+                "python"
+            )
+        }
+
         val locationLib: String
 
         val exceptionMessage = StringBuilder()
@@ -86,22 +121,23 @@ object LibraryLoader {
         }
 
         // pip
-        val pypiURL = if (version != null && version!!.contains("dev")) "https://test.pypi.org/simple/" else "https://pypi.org/simple/"
+        val pypiURL =
+            if (version != null && version!!.contains("dev")) "https://test.pypi.org/simple/" else "https://pypi.org/simple/"
 
-        var pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
+        var pipOut = execCommand(pythonConf!!.python, "-m", "pip", "show", "ktnumpy")
 
         if (pipOut.isEmpty() || "Package(s) not found" in pipOut) {
-            execCommand("python", "-m", "pip", "install", "-i", pypiURL, "ktnumpy==$version")
-            pipOut = execCommand("python", "-m", "pip", "show", "ktnumpy")
+            execCommand(pythonConf!!.python, "-m", "pip", "install", "-i", pypiURL, "ktnumpy==$version")
+            pipOut = execCommand(pythonConf!!.python, "-m", "pip", "show", "ktnumpy")
         }
 
         if (version != null && pipOut.substringAfter("Version: ").substringBefore("\n") != version) {
-            execCommand("python", "-m", "pip", "install", "-i", pypiURL, "--upgrade", "ktnumpy==$version")
+            execCommand(pythonConf!!.python, "-m", "pip", "install", "-i", pypiURL, "--upgrade", "ktnumpy==$version")
         }
 
-        locationLib = if (pythonConf.osType == OSType.WINDOWS) {
+        locationLib = if (pythonConf!!.osType == OSType.WINDOWS) {
             buildString {
-                append(pythonConf.pythonHome)
+                append(pythonConf!!.pythonHome)
                 append("\\Lib\\site-packages\\ktnumpy\\$nameNativeLib")
             }
         } else {
@@ -144,8 +180,8 @@ object LibraryLoader {
             .use { Files.copy(it, File(tmpDir, nameFile).apply(File::deleteOnExit).toPath()) }
     }
 
-    private fun getPythonEnv(pythonFile: String, methodName: String): String =
-        ProcessBuilder("python", "-c", "from $pythonFile import $methodName; print($methodName())")
+    private fun getPythonEnv(pythonFile: String, methodName: String, command: String = "python"): String =
+        ProcessBuilder(command, "-c", "from $pythonFile import $methodName; print($methodName())")
             .directory(tmpDir)
             .redirectError(ProcessBuilder.Redirect.INHERIT)
             .start()
