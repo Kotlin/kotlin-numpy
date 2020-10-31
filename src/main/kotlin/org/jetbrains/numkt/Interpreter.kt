@@ -48,10 +48,7 @@ internal class Interpreter private constructor() {
 
         LibraryLoader.loadLibraries()
 
-        initializePython(
-            LibraryLoader.pythonConf.pythonHome,
-            LibraryLoader.pythonConf.pythonLibPath
-        )
+        initializePython(LibraryLoader.pythonConf!!.pythonHome, LibraryLoader.pythonConf!!.pythonLibPath)
         if (error != null) {
             throw Error(error)
         }

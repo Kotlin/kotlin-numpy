@@ -15,22 +15,35 @@ This project is a Kotlin library, which is a statically typed wrapper for the [N
 * Direct access to array data using DirectBuffer. 
     * Increased performance working with array's data compared to python.
     
+## Requirements
+To use the library in your project, you will need:
+* Java 8 or above
+* Python 3.5 or above
+* NumPy 1.7 or above
+* if you are using macOS or Linux, you will need [GCC](https://gcc.gnu.org/), [Clang](https://clang.llvm.org/).
+
+>Note: Make sure you use the correct Python environment.
+>This is necessary to use the correct version of Python and NumPy.
+>
+>For the convenience of installing Python, NumPy and setting the environment,
+>it's recommended to use [Anaconda](https://www.anaconda.com/).
+    
 ## Installation
 
 In your Gradle build script:
 
-1. Add the `kotlin-numpy` repository.
-2. Add the `org.jetbrains:kotlin-numpy:0.1.0` implementation dependency.
+1. Add the `kotlin-datascience` repository.
+2. Add the `org.jetbrains:kotlin-numpy:0.1.5` implementation dependency.
 
 Groovy build script (`build.gradle`):
 
 ```groovy
 repositories {
-    maven { url "https://kotlin.bintray.com/kotlin-numpy" }
+    maven { url "https://kotlin.bintray.com/kotlin-datascience" }
 }
 
 dependencies {
-    implementation 'org.jetbrains:kotlin-numpy:0.1.4'
+    implementation 'org.jetbrains:kotlin-numpy:0.1.5'
 }
 ```
 
@@ -38,13 +51,23 @@ Kotlin build script (`build.gradle.kts`):
 
 ```kotlin
 repositories {
-    maven("https://dl.bintray.com/kotlin/kotlin-numpy")
+    maven("https://dl.bintray.com/kotlin/kotlin-datascience")
 }
 
 dependencies {
-    implementation("org.jetbrains:kotlin-numpy:0.1.4")
+    implementation("org.jetbrains:kotlin-numpy:0.1.5")
 }
 ```
+
+The library will install ktnumpy (native library for kotlin-numpy) as python package the first time kotlin-numpy
+functions are called. For this, Python will be taken in environment of which program is running. You can install
+ktnumpy yourself:
+```shell script
+pip install ktnumpy==%kotlin-numpy.version%
+```
+
+You can also run a program by manually specifying the path to Python. To do this, use `LibraryLoader.setPythonConfig`
+before calling kotlin-numpy functions.
     
 ## Usage
 
@@ -593,30 +616,19 @@ for (i in 0..14) {
 }
 ```
 
-## Requirements
-To build and run the library, you will need:
-To run library you need:
-* Java 8 or above
-* Python 3.5 or above
-* NumPy 1.7 or above.
-
->Note: Make sure you use the correct Python environment.
->This is necessary to use the correct version of Python and NumPy.
->
->For the convenience of installing Python, NumPy and setting the environment,
->it's recommended to use [Anaconda](https://www.anaconda.com/).
-
 
 ## Building
 
-To build the library, you will need [GCC](https://gcc.gnu.org/) or [Clang](https://clang.llvm.org/).
+To build the library, you will need [GCC](https://gcc.gnu.org/), [Clang](https://clang.llvm.org/) or MSVC.
 
 The build system of this project is Gradle.
 
-First, you should build the native library: run `./gradlew ktnumpyReleaseSharedLibrary`. 
-The library will appear in `./build/libs/ktnumpy/shared/release`. 
+First, you should build the native library: run `./gradlew wheelBuild`.
+The library will appear in `./build/libs/ktnumpy`.
+This will also build the wheel which will be in the dist folder.
 
-For the debug version, run: `./gradlew ktnumpyDebugSharedLibrary`.
-Accordingly, the library will appear in `./build/libs/ktnumpy/shared/debug`.
+After building the native library, run `./gradlew assemble`.
 
-After building the native library, run `./gradlew build`
+To run the test, use `./gradlew test`.
+
+To build everything and run tests, run: `./gradlew build`.
