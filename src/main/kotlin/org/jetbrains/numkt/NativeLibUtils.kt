@@ -72,7 +72,6 @@ object LibraryLoader {
     fun setPythonConfig(pythonPath: String) {
         val pyHome = File(pythonPath)
         if (!pyHome.exists()) throw FileNotFoundException("No such $pyHome directory exists.")
-        println(pyHome.absolutePath)
         val os = getOS()
         val pythonExePath = when (os) {
             OSType.WINDOWS -> Pair(File("$pyHome\\python.exe"), File("$pyHome\\python3.exe"))
