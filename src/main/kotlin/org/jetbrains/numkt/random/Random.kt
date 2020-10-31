@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 JetBrains s.r.o.
+ * Copyright 2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,14 +26,32 @@ class Random {
         /**
          * Random values in a given shape. Defaults scalar.
          */
-        fun rand(): Double =
-            callFunc(nameMethod = arrayOf("random", "rand"), kClass = Double::class)
+        fun rand(): KtNDArray<Double> =
+            callFunc(nameMethod = arrayOf("random", "rand"), args = arrayOf())
 
         /**
-         * Create an array of the given shape and populate it with random samples from a uniform distribution over [0, 1)
+         * Create an 1-d array of the given shape and populate it with random samples from a uniform distribution over [0, 1)
          */
-        fun rand(vararg d: Int): KtNDArray<Double> =
+        fun rand(d: Int): KtNDArray<Double> =
             callFunc(nameMethod = arrayOf("random", "rand"), args = arrayOf(d))
+
+        /**
+         * Create an 2-d array of the given shape and populate it with random samples from a uniform distribution over [0, 1)
+         */
+        fun rand(d1: Int, d2: Int): KtNDArray<Double> =
+            callFunc(nameMethod = arrayOf("random", "rand"), args = arrayOf(d1, d2))
+
+        /**
+         * Create an 3-d array of the given shape and populate it with random samples from a uniform distribution over [0, 1)
+         */
+        fun rand(d1: Int, d2: Int, d3: Int): KtNDArray<Double> =
+            callFunc(nameMethod = arrayOf("random", "rand"), args = arrayOf(d1, d2, d3))
+
+        /**
+         * Create an 4-d array of the given shape and populate it with random samples from a uniform distribution over [0, 1)
+         */
+        fun rand(d1: Int, d2: Int, d3: Int, d4: Int): KtNDArray<Double> =
+            callFunc(nameMethod = arrayOf("random", "rand"), args = arrayOf(d1, d2, d3, d4))
 
         /**
          * Return a sample (or samples) from the “standard normal” distribution. Defaults scalar.
@@ -67,7 +85,7 @@ class Random {
             )
 
         /**
-         * Random integers of type [Long] between [low] and [high], inclusive.
+         * Random [Long] between [low] and [high], inclusive.
          */
         fun randomIntegers(low: Int, high: Int? = null): Long =
             callFunc(
@@ -77,7 +95,7 @@ class Random {
             )
 
         /**
-         *
+         * Returns an array of [size] of random [Long] between [low] and [high], inclusive.
          */
         fun randomIntegers(low: Int, high: Int? = null, vararg size: Int): KtNDArray<Long> =
             callFunc(nameMethod = arrayOf("random", "random_integers"), args = arrayOf(low, high ?: None.none, size))
@@ -97,8 +115,8 @@ class Random {
         /**
          * Return random floats in the half-open interval [0.0, 1.0). Defaults scalar.
          */
-        fun random(): Double =
-            callFunc(nameMethod = arrayOf("random", "random"), kClass = Double::class)
+        fun random(): KtNDArray<Double> =
+            callFunc(nameMethod = arrayOf("random", "random"), args = arrayOf())
 
         /**
          *
