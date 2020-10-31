@@ -28,7 +28,7 @@ plugins {
 
 ext {
     boolean isMerge = isMerge()
-    String buildNumber = isMerge ? '' : System.getenv('buildNumber')
+    String buildNumber = (isMerge || System.getenv('buildNumber') == null) ? '' : System.getenv('buildNumber')
     buildNumber += buildNumber == '' ? '' : 'dev1'
     project.version = version + buildNumber
 }
