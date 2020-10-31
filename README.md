@@ -1,5 +1,5 @@
 [![JetBrains incubator project](https://jb.gg/badges/incubator.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
-[ ![Download](https://api.bintray.com/packages/kotlin/kotlin-numpy/kotlin-numpy/images/download.svg) ](https://bintray.com/kotlin/kotlin-numpy/kotlin-numpy/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/kotlin/kotlin-datascience/kotlin-numpy/images/download.svg) ](https://bintray.com/kotlin/kotlin-datascience/kotlin-numpy/_latestVersion)
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
 # Kotlin bindings for NumPy

@@ -120,7 +120,7 @@ bintray {
     key = project.findProperty('bintrayApiKey') ?: System.getenv('BINTRAY_API_KEY')
     publications = ['mavenProject']
     pkg {
-        repo = project.name
+        repo = "kotlin-datascience"
         name = project.name
         userOrg = 'kotlin'
         licenses = ['Apache-2.0']
