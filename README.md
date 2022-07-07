@@ -1,10 +1,15 @@
-[![JetBrains incubator project](https://jb.gg/badges/incubator.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
-[ ![Download](https://api.bintray.com/packages/kotlin/kotlin-datascience/kotlin-numpy/images/download.svg) ](https://bintray.com/kotlin/kotlin-datascience/kotlin-numpy/_latestVersion)
+[![Kotlin Experimental](https://kotl.in/badges/experimental.svg)](https://kotlinlang.org/docs/components-stability.html)
+[![JetBrains obsolete project](https://jb.gg/badges/obsolete.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
 # Kotlin bindings for NumPy
 
 This project is a Kotlin library, which is a statically typed wrapper for the [NumPy](https://numpy.org/) library.
+
+:warning: kotlin-numpy is deprecated. Binding methods from numpy to kotlin was originally an experimental project.
+During the development of kotlin-numpy, it became clear that because of the python we would not be able to fulfill our goals.
+We have rethought the approach and implement it in a new library - [Multik](https://github.com/Kotlin/multik). 
+Multik also helps with multidimensional arrays and provides different implementations.
 
 ## Features
 
